@@ -1,37 +1,53 @@
-## Welcome to GitHub Pages
+# NJAE (1.0.0)
 
-You can use the [editor on GitHub](https://github.com/xseris/NJAE/edit/master/index.md) to maintain and preview the content for your website in Markdown files.
+NJAE is simply Not Just An Editor, beacause this is not just an editor...
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+## Features
 
-### Markdown
+All features you will expect from an editortha is not just an editor...
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+### Charts
 
-```markdown
-Syntax highlighted code block
++ Unigram frequency (From 1.0.0)
++ Bigram frequency (From 1.0.0)
++ Word frequency (From 1.0.0)
 
-# Header 1
-## Header 2
-### Header 3
+### Crypto
 
-- Bulleted
-- List
++ Encode Caesar (From 1.0.0)
++ Decode Caesar (From 1.0.0)
++ Bruteforce Caesar (From 1.0.0)
 
-1. Numbered
-2. List
+### Encodings
 
-**Bold** and _Italic_ and `Code` text
++ Encode Base64 (From 1.0.0)
++ Decode Base64 (From 1.0.0)
++ ASCII to Binary (From 1.0.0)
 
-[Link](url) and ![Image](src)
-```
+### Files
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
++ Read text files (From 1.0.0)
 
-### Jekyll Themes
+### Hash
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/xseris/NJAE/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
++ Generate SHA-1 (From 1.0.0)
 
-### Support or Contact
+### Math
 
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
++ Sum lines (From 1.0.0)
++ Multiply lines (From 1.0.0)
++ Max of lines (From 1.0.0)
++ Min of lines (From 1.0.0)
+
+### Password
+
++ Analyse password strength (From 1.0.0)
+
+### Tables
+
++ CSV to table (From 1.0.0)
+
+### Web
+
++ Get page source (From 1.0.0)
++ Extract comments (From 1.0.0)
