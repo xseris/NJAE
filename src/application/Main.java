@@ -4,7 +4,13 @@ import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
 import java.util.Base64;
 
+import application.crypto.AlbamUtils;
+import application.crypto.AtbahUtils;
+import application.crypto.AtbashUtils;
 import application.crypto.CaesarUtils;
+import application.crypto.Rot135Utils;
+import application.crypto.Rot13Utils;
+import application.crypto.Rot5Utils;
 import application.files.FileUtils;
 import application.frequency.FrequencyUtils;
 import application.hash.Sha1Utils;
@@ -285,6 +291,24 @@ public class Main extends Application {
 		encodeCaesar.setOnAction(action -> textArea.setText(CaesarUtils.encode(textArea.getText())));
 		decodeCaesar.setOnAction(action -> textArea.setText(CaesarUtils.decode(textArea.getText())));
 		bruteForceCaesar.setOnAction(action -> textArea.setText(CaesarUtils.bruteForce(textArea.getText())));
+
+		encodeAtbash.setOnAction(action -> textArea.setText(AtbashUtils.encodeDecode(textArea.getText())));
+		decodeAtbash.setOnAction(action -> textArea.setText(AtbashUtils.encodeDecode(textArea.getText())));
+
+		encodeAlbam.setOnAction(action -> textArea.setText(AlbamUtils.encodeDecode(textArea.getText())));
+		decodeAlbam.setOnAction(action -> textArea.setText(AlbamUtils.encodeDecode(textArea.getText())));
+
+		encodeAtbah.setOnAction(action -> textArea.setText(AtbahUtils.encodeDecode(textArea.getText())));
+		decodeAtbah.setOnAction(action -> textArea.setText(AtbahUtils.encodeDecode(textArea.getText())));
+
+		encodeRot13.setOnAction(action -> textArea.setText(Rot13Utils.encodeDecode(textArea.getText())));
+		decodeRot13.setOnAction(action -> textArea.setText(Rot13Utils.encodeDecode(textArea.getText())));
+
+		encodeRot5.setOnAction(action -> textArea.setText(Rot5Utils.encodeDecode(textArea.getText())));
+		decodeRot5.setOnAction(action -> textArea.setText(Rot5Utils.encodeDecode(textArea.getText())));
+
+		encodeRot135.setOnAction(action -> textArea.setText(Rot135Utils.encodeDecode(textArea.getText())));
+		decodeRot135.setOnAction(action -> textArea.setText(Rot135Utils.encodeDecode(textArea.getText())));
 
 		getSource.setOnAction(action -> {
 			try {
