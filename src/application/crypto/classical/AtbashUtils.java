@@ -1,4 +1,4 @@
-package application.crypto;
+package application.crypto.classical;
 
 import java.util.HashMap;
 import java.util.Map;

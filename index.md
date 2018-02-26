@@ -4,25 +4,41 @@ NJAE is simply Not Just An Editor, beacause this is not just an editor...
 
 ## Features
 
-All features you will expect from an editortha is not just an editor...
+All features you will expect from an editor that is not just an editor...
 
 ### Charts
 
-+ Unigram frequency (From 1.0.0)
 + Bigram frequency (From 1.0.0)
++ Unigram frequency (From 1.0.0)
 + Word frequency (From 1.0.0)
 
 ### Crypto
 
-+ Encode Caesar (From 1.0.0)
-+ Decode Caesar (From 1.0.0)
 + Bruteforce Caesar (From 1.0.0)
++ Encode Albam (From 1.0.1)
++ Encode Atbah (From 1.0.1)
++ Encode Caesar (From 1.0.0)
++ Encode Rot-5 (From 1.0.1)
++ Encode Rot-13 (From 1.0.1)
++ Encode Rot-13.5 (From 1.0.1)
++ Encode Rot-47 (From 1.0.1)
++ Encode Atbash (From 1.0.1)
++ Decode Albam (From 1.0.1)
++ Decode Atbah (From 1.0.1)
++ Decode Atbash (From 1.0.1)
++ Decode Caesar (From 1.0.0)
++ Decode Rot-5 (From 1.0.1)
++ Decode Rot-13 (From 1.0.1)
++ Decode Rot-13.5 (From 1.0.1)
++ Decode Rot-47 (From 1.0.1)
 
 ### Encodings
 
++ ASCII to Binary (From 1.0.0)
++ ASCII to Hex (From 1.0.1)
 + Encode Base64 (From 1.0.0)
 + Decode Base64 (From 1.0.0)
-+ ASCII to Binary (From 1.0.0)
++ Hex to ASCII (From 1.0.1)
 
 ### Files
 
@@ -30,18 +46,28 @@ All features you will expect from an editortha is not just an editor...
 
 ### Hash
 
++ Generate MD5 (From 1.0.1)
 + Generate SHA-1 (From 1.0.0)
++ Generate SHA-256 (From 1.0.1)
++ Generate SHA-512 (From 1.0.1)
 
 ### Math
 
-+ Sum lines (From 1.0.0)
-+ Multiply lines (From 1.0.0)
 + Max of lines (From 1.0.0)
 + Min of lines (From 1.0.0)
++ Multiply lines (From 1.0.0)
++ Sum lines (From 1.0.0)
 
 ### Password
 
 + Analyse password strength (From 1.0.0)
+
+### Steganography
+
++ Encode full Baconian (From 1.0.1)
++ Encode latin Baconian (From 1.0.1)
++ Decode full Baconian (From 1.0.1)
++ Decode latin Baconian (From 1.0.1)
 
 ### Tables
 
@@ -49,5 +75,5 @@ All features you will expect from an editortha is not just an editor...
 
 ### Web
 
-+ Get page source (From 1.0.0)
 + Extract comments (From 1.0.0)
++ Get page source (From 1.0.0)

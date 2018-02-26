@@ -1,4 +1,6 @@
-package application.crypto;
+package application.crypto.classical;
+
+import application.crypto.RotationUtils;
 
 public class CaesarUtils {
 
