@@ -14,7 +14,9 @@ All features you will expect from an editor that is not just an editor...
 
 ### Crypto
 
++ Bruteforce Affine (From 1.0.1)
 + Bruteforce Caesar (From 1.0.0)
++ Encode Affine (From 1.0.1)
 + Encode Albam (From 1.0.1)
 + Encode Atbah (From 1.0.1)
 + Encode Caesar (From 1.0.0)
@@ -23,6 +25,7 @@ All features you will expect from an editor that is not just an editor...
 + Encode Rot-13.5 (From 1.0.1)
 + Encode Rot-47 (From 1.0.1)
 + Encode Atbash (From 1.0.1)
++ Decode Affine (From 1.0.1)
 + Decode Albam (From 1.0.1)
 + Decode Atbah (From 1.0.1)
 + Decode Atbash (From 1.0.1)
@@ -36,9 +39,12 @@ All features you will expect from an editor that is not just an editor...
 
 + ASCII to Binary (From 1.0.0)
 + ASCII to Hex (From 1.0.1)
++ Binary to Ascii (From 1.0.1)
++ Binary to Hex (From 1.0.1)
 + Encode Base64 (From 1.0.0)
 + Decode Base64 (From 1.0.0)
 + Hex to ASCII (From 1.0.1)
++ Hex to Binary (From 1.0.1)
 
 ### Files
 

@@ -10,4 +10,9 @@ public class HexToUtils {
 		}
 		return ret.toString();
 	}
+
+	public static String toBinary(String text) {
+		text = toAscii(text);
+		return AsciiToUtils.toBinary(text);
+	}
 }

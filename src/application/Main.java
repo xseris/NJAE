@@ -5,11 +5,13 @@ import java.security.NoSuchAlgorithmException;
 import java.util.Base64;
 
 import application.conversion.AsciiToUtils;
+import application.conversion.BinaryToUtils;
 import application.conversion.HexToUtils;
 import application.crypto.Rot135Utils;
 import application.crypto.Rot13Utils;
 import application.crypto.Rot47Utils;
 import application.crypto.Rot5Utils;
+import application.crypto.classical.AffineUtils;
 import application.crypto.classical.AlbamUtils;
 import application.crypto.classical.AtbahUtils;
 import application.crypto.classical.AtbashUtils;
@@ -37,6 +39,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.Separator;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.control.ToolBar;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -63,6 +66,10 @@ public class Main extends Application {
 		Button asciiToHex = new Button("Hex");
 
 		Button hexToAscii = new Button("Ascii");
+		Button hexToBinary = new Button("Binary");
+
+		Button binaryToAscii = new Button("Ascii");
+		Button binaryToHex = new Button("Hex");
 
 		Button sumLines = new Button("Sum Lines");
 		Button multiplyLines = new Button("Multiply Lines");
@@ -101,6 +108,9 @@ public class Main extends Application {
 		Button decodeRot135 = new Button("Decode");
 		Button encodeRot47 = new Button("Encode");
 		Button decodeRot47 = new Button("Decode");
+		Button encodeAffine = new Button("Encode");
+		Button decodeAffine = new Button("Decode");
+		Button bruteForceAffine = new Button("Brute force");
 
 		Button encodeLatinBaconian = new Button("Encode");
 		Button decodeLatinBaconian = new Button("Decode");
@@ -118,6 +128,7 @@ public class Main extends Application {
 		final MenuItem encodings = new MenuItem("Encodings");
 		final MenuItem asciiTo = new MenuItem("Ascii to");
 		final MenuItem hexTo = new MenuItem("Hex to");
+		final MenuItem binaryTo = new MenuItem("Binary to");
 
 		final Menu math = new Menu("Math");
 		final MenuItem rowMath = new MenuItem("RowMath");
@@ -143,6 +154,7 @@ public class Main extends Application {
 		final MenuItem albam = new MenuItem("Albam (Biblic cipher)");
 		final MenuItem atbah = new MenuItem("Atbah (Biblic cipher)");
 		final MenuItem atbash = new MenuItem("Atbash (Biblic cipher)");
+		final MenuItem affine = new MenuItem("Affine");
 		final Menu rotN = new Menu("Rot-N");
 		final MenuItem rot5 = new MenuItem("Rot-5");
 		final MenuItem rot13 = new MenuItem("Rot-13");
@@ -159,6 +171,7 @@ public class Main extends Application {
 		conversions.getItems().add(encodings);
 		conversions.getItems().add(asciiTo);
 		conversions.getItems().add(hexTo);
+		conversions.getItems().add(binaryTo);
 
 		math.getItems().add(rowMath);
 
@@ -177,6 +190,7 @@ public class Main extends Application {
 		classical.getItems().add(atbah);
 		classical.getItems().add(atbash);
 		classical.getItems().add(caesar);
+		classical.getItems().add(affine);
 		classical.getItems().add(rotN);
 		rotN.getItems().add(rot5);
 		rotN.getItems().add(rot13);
@@ -192,11 +206,16 @@ public class Main extends Application {
 
 		menuBar.getMenus().addAll(general, conversions, math, hash, chart, file, security, table, crypto, web);
 
+		// Text Fields
+		TextField affineA = new TextField("3");
+		TextField affineB = new TextField("5");
+
 		// Toolbars
 		ToolBar dashboardToolBar = new ToolBar(new Label("Dashboard:"), clean);
 		ToolBar encodingToolBar = new ToolBar(encBase64, decBase64);
 		ToolBar asciiToToolBar = new ToolBar(new Label("Ascii to:"), asciiToBinary, asciiToHex);
-		ToolBar hexToToolBar = new ToolBar(new Label("Hex to:"), hexToAscii);
+		ToolBar hexToToolBar = new ToolBar(new Label("Hex to:"), hexToAscii, hexToBinary);
+		ToolBar binaryToToolBar = new ToolBar(new Label("Binary to:"), binaryToAscii, binaryToHex);
 		ToolBar rowMathToolBar = new ToolBar(new Label("Row Math:"), sumLines, multiplyLines, maxOfLines, minOfLines);
 		ToolBar hashToolBar = new ToolBar(new Label("Generate hash:"), generateMd5, generateSha1, generateSha256,
 				generateSha512);
@@ -212,6 +231,8 @@ public class Main extends Application {
 		ToolBar rot13ToolBar = new ToolBar(new Label("Rot-13:"), encodeRot13, decodeRot13);
 		ToolBar rot135ToolBar = new ToolBar(new Label("Rot-13.5:"), encodeRot135, decodeRot135);
 		ToolBar rot47ToolBar = new ToolBar(new Label("Rot47:"), encodeRot47, decodeRot47);
+		ToolBar affineToolBar = new ToolBar(new Label("Affine:"), encodeAffine, decodeAffine, bruteForceAffine,
+				new Separator(), new Label("a = "), affineA, new Label("b = "), affineB);
 		ToolBar baconianToolBar = new ToolBar(new Label("Latin Baconian:"), encodeLatinBaconian, decodeLatinBaconian,
 				new Separator(), new Label("Full Baconian:"), encodeFullBaconian, decodeFullBaconian);
 		ToolBar pageToolBar = new ToolBar(new Label("Page:"), getSource, extractComments);
@@ -220,6 +241,7 @@ public class Main extends Application {
 		encodingToolBar.setId("encoding");
 		asciiToToolBar.setId("ascii");
 		hexToToolBar.setId("hex");
+		binaryToToolBar.setId("binary");
 		rowMathToolBar.setId("rowMath");
 		hashToolBar.setId("sha1");
 		frequenciesToolBar.setId("frequencies");
@@ -234,6 +256,7 @@ public class Main extends Application {
 		rot13ToolBar.setId("rot13");
 		rot135ToolBar.setId("rot135");
 		rot47ToolBar.setId("rot47");
+		affineToolBar.setId("affine");
 		baconianToolBar.setId("baconian");
 		pageToolBar.setId("page");
 
@@ -253,6 +276,7 @@ public class Main extends Application {
 		encodings.setOnAction(action -> putRemove(toolBox, encodingToolBar));
 		asciiTo.setOnAction(action -> putRemove(toolBox, asciiToToolBar));
 		hexTo.setOnAction(action -> putRemove(toolBox, hexToToolBar));
+		binaryTo.setOnAction(action -> putRemove(toolBox, binaryToToolBar));
 		rowMath.setOnAction(action -> putRemove(toolBox, rowMathToolBar));
 		generate.setOnAction(action -> putRemove(toolBox, hashToolBar));
 		frequencies.setOnAction(action -> putRemove(toolBox, frequenciesToolBar));
@@ -268,6 +292,7 @@ public class Main extends Application {
 		rot135.setOnAction(action -> putRemove(toolBox, rot135ToolBar));
 		rot47.setOnAction(action -> putRemove(toolBox, rot47ToolBar));
 		baconian.setOnAction(action -> putRemove(toolBox, baconianToolBar));
+		affine.setOnAction(action -> putRemove(toolBox, affineToolBar));
 		page.setOnAction(action -> putRemove(toolBox, pageToolBar));
 
 		// Buttons Actions
@@ -279,6 +304,9 @@ public class Main extends Application {
 		asciiToBinary.setOnAction(action -> textArea.setText(AsciiToUtils.toBinary(textArea.getText())));
 		asciiToHex.setOnAction(action -> textArea.setText(AsciiToUtils.toHex(textArea.getText())));
 		hexToAscii.setOnAction(action -> textArea.setText(HexToUtils.toAscii(textArea.getText())));
+		hexToBinary.setOnAction(action -> textArea.setText(HexToUtils.toBinary(textArea.getText())));
+		binaryToAscii.setOnAction(action -> textArea.setText(BinaryToUtils.toAscii(textArea.getText())));
+		binaryToHex.setOnAction(action -> textArea.setText(BinaryToUtils.toHex(textArea.getText())));
 		sumLines.setOnAction(action -> textArea.setText(RowMathUtils.sumLines(textArea.getText())));
 		multiplyLines.setOnAction(action -> textArea.setText(RowMathUtils.multiplyLines(textArea.getText())));
 		maxOfLines.setOnAction(action -> textArea.setText(RowMathUtils.maxOfLines(textArea.getText())));
@@ -384,6 +412,12 @@ public class Main extends Application {
 
 		encodeLatinBaconian.setOnAction(action -> textArea.setText(BaconianUtils.encodeLatin(textArea.getText())));
 		decodeLatinBaconian.setOnAction(action -> textArea.setText(BaconianUtils.decodeLatin(textArea.getText())));
+
+		encodeAffine.setOnAction(action -> textArea.setText(AffineUtils.encode(Integer.parseInt(affineA.getText()),
+				Integer.parseInt(affineB.getText()), textArea.getText())));
+		decodeAffine.setOnAction(action -> textArea.setText(AffineUtils.decode(Integer.parseInt(affineA.getText()),
+				Integer.parseInt(affineB.getText()), textArea.getText())));
+		bruteForceAffine.setOnAction(action -> textArea.setText(AffineUtils.bruteforce(textArea.getText())));
 
 		encodeFullBaconian.setOnAction(action -> textArea.setText(BaconianUtils.encodeFull(textArea.getText())));
 		decodeFullBaconian.setOnAction(action -> textArea.setText(BaconianUtils.decodeFull(textArea.getText())));
