@@ -1,4 +1,4 @@
-# NJAE (1.0.0)
+# NJAE (1.0.2)
 
 NJAE is simply Not Just An Editor, beacause this is not just an editor...
 
@@ -56,6 +56,12 @@ All features you will expect from an editor that is not just an editor...
 + Generate SHA-1 (From 1.0.0)
 + Generate SHA-256 (From 1.0.1)
 + Generate SHA-512 (From 1.0.1)
+
+### Images
+
++ Open Image (From 1.0.2)
++ Zoom Image (From 1.0.2)
++ Rotate Image (From 1.0.2)
 
 ### Math
 

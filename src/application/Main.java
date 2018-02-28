@@ -1,5 +1,6 @@
 package application;
 
+import java.io.FileNotFoundException;
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
 import java.util.Base64;
@@ -24,6 +25,8 @@ import application.math.RowMathUtils;
 import application.pojo.Password;
 import application.table.TableUtils;
 import application.web.PageUtils;
+import image.ImageRotationUtils;
+import image.ImageUtils;
 import javafx.application.Application;
 import javafx.geometry.Rectangle2D;
 import javafx.stage.Screen;
@@ -38,6 +41,8 @@ import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.Separator;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToolBar;
@@ -120,6 +125,12 @@ public class Main extends Application {
 		Button getSource = new Button("Get page source");
 		Button extractComments = new Button("Extract comments");
 
+		Button openImage = new Button("Open");
+		Button rotate90Left = new Button("Left 90°");
+		Button rotate90Right = new Button("Right 90°");
+		Button rotate180 = new Button("180°");
+		Button rotateCustom = new Button("Rotate");
+
 		// Menu
 		final Menu general = new Menu("General");
 		final MenuItem menu11 = new MenuItem("Dashboard");
@@ -166,12 +177,13 @@ public class Main extends Application {
 		final Menu web = new Menu("Web");
 		final MenuItem page = new MenuItem("Page");
 
+		final Menu image = new Menu("Image");
+		final MenuItem manage = new MenuItem("Manage");
+		final MenuItem rotate = new MenuItem("Rotate");
+
 		general.getItems().add(menu11);
 
-		conversions.getItems().add(encodings);
-		conversions.getItems().add(asciiTo);
-		conversions.getItems().add(hexTo);
-		conversions.getItems().add(binaryTo);
+		conversions.getItems().addAll(encodings, asciiTo, hexTo, binaryTo);
 
 		math.getItems().add(rowMath);
 
@@ -186,29 +198,24 @@ public class Main extends Application {
 		table.getItems().add(importTable);
 
 		crypto.getItems().add(classical);
-		classical.getItems().add(albam);
-		classical.getItems().add(atbah);
-		classical.getItems().add(atbash);
-		classical.getItems().add(caesar);
-		classical.getItems().add(affine);
-		classical.getItems().add(rotN);
-		rotN.getItems().add(rot5);
-		rotN.getItems().add(rot13);
-		rotN.getItems().add(rot135);
-		rotN.getItems().add(rot47);
+		classical.getItems().addAll(albam, atbah, atbash, caesar, affine, rotN);
+		rotN.getItems().addAll(rot5, rot13, rot135, rot47);
 
 		crypto.getItems().add(steganography);
 		steganography.getItems().add(baconian);
 
 		web.getItems().add(page);
 
+		image.getItems().addAll(manage, rotate);
+
 		MenuBar menuBar = new MenuBar();
 
-		menuBar.getMenus().addAll(general, conversions, math, hash, chart, file, security, table, crypto, web);
+		menuBar.getMenus().addAll(general, conversions, math, hash, chart, file, security, table, crypto, web, image);
 
 		// Text Fields
 		TextField affineA = new TextField("3");
 		TextField affineB = new TextField("5");
+		TextField rotateField = new TextField("45");
 
 		// Toolbars
 		ToolBar dashboardToolBar = new ToolBar(new Label("Dashboard:"), clean);
@@ -236,6 +243,9 @@ public class Main extends Application {
 		ToolBar baconianToolBar = new ToolBar(new Label("Latin Baconian:"), encodeLatinBaconian, decodeLatinBaconian,
 				new Separator(), new Label("Full Baconian:"), encodeFullBaconian, decodeFullBaconian);
 		ToolBar pageToolBar = new ToolBar(new Label("Page:"), getSource, extractComments);
+		ToolBar manageImageToolBar = new ToolBar(new Label("Image:"), openImage);
+		ToolBar rotateImageToolBar = new ToolBar(new Label("Rotate:"), rotate90Left, rotate90Right, rotate180,
+				new Separator(), new Label("Custom : "), rotateField, rotateCustom);
 
 		dashboardToolBar.setId("dashboard");
 		encodingToolBar.setId("encoding");
@@ -259,17 +269,35 @@ public class Main extends Application {
 		affineToolBar.setId("affine");
 		baconianToolBar.setId("baconian");
 		pageToolBar.setId("page");
+		manageImageToolBar.setId("manageImage");
+		rotateImageToolBar.setId("rotateImage");
 
 		VBox toolBox = new VBox();
 		toolBox.autosize();
-		VBox vboxInfo = new VBox();
-		vboxInfo.setMinSize(600, 600);
+		VBox textboxInfo = new VBox();
+		textboxInfo.setMinSize(600, 600);
 
-		HBox hbox = new HBox(textArea, vboxInfo);
-		hbox.autosize();
+		HBox graphBox = new HBox();
+		graphBox.setMinSize(600, 600);
 
-		VBox vbox = new VBox(menuBar, toolBox, hbox);
-		vbox.autosize();
+		VBox tableBox = new VBox();
+		graphBox.setMinSize(600, 600);
+
+		// Tabs
+		TabPane tabPane = new TabPane();
+		Tab textTab = new Tab("Text Editor", new HBox(textArea, new Separator(), textboxInfo));
+		Tab chartTab = new Tab("Chart");
+		Tab tableTab = new Tab("Table", tableBox);
+		Tab imageTab = new Tab("Images");
+
+		textTab.setClosable(false);
+		tableTab.setClosable(false);
+		imageTab.setClosable(false);
+		chartTab.setClosable(false);
+
+		tabPane.getTabs().addAll(textTab, chartTab, tableTab, imageTab);
+
+		VBox vbox = new VBox(menuBar, toolBox, tabPane);
 
 		// Menu Actions
 		menu11.setOnAction(action -> putRemove(toolBox, dashboardToolBar));
@@ -294,6 +322,8 @@ public class Main extends Application {
 		baconian.setOnAction(action -> putRemove(toolBox, baconianToolBar));
 		affine.setOnAction(action -> putRemove(toolBox, affineToolBar));
 		page.setOnAction(action -> putRemove(toolBox, pageToolBar));
+		image.setOnAction(action -> putRemove(toolBox, manageImageToolBar));
+		rotate.setOnAction(action -> putRemove(toolBox, rotateImageToolBar));
 
 		// Buttons Actions
 		clean.setOnAction(action -> textArea.setText(""));
@@ -359,30 +389,20 @@ public class Main extends Application {
 			}
 		});
 		unigramChart.setOnAction(action -> {
-			if (!vboxInfo.getChildren().isEmpty()) {
-				vboxInfo.getChildren().clear();
-			}
-			vboxInfo.getChildren().add(FrequencyUtils.unigrams(textArea.getText()));
+			chartTab.setContent(FrequencyUtils.unigrams(textArea.getText()));
 		});
 		bigramChart.setOnAction(action -> {
-			if (!vboxInfo.getChildren().isEmpty()) {
-				vboxInfo.getChildren().clear();
-			}
-			vboxInfo.getChildren().add(FrequencyUtils.bigrams(textArea.getText()));
+			chartTab.setContent(FrequencyUtils.bigrams(textArea.getText()));
 		});
 		wordChart.setOnAction(action -> {
-			if (!vboxInfo.getChildren().isEmpty()) {
-				vboxInfo.getChildren().clear();
-			}
-			vboxInfo.getChildren().add(FrequencyUtils.words(textArea.getText()));
+			chartTab.setContent(FrequencyUtils.words(textArea.getText()));
 		});
 
 		generateTable.setOnAction(action -> {
-			if (!hbox.getChildren().isEmpty()) {
-				hbox.getChildren().clear();
+			if (!tableBox.getChildren().isEmpty()) {
+				tableBox.getChildren().clear();
 			}
-			hbox.getChildren().add(TableUtils.generateCsvTable("test", 100, true, textArea.getText()));
-			hbox.getChildren().add(vboxInfo);
+			tableBox.getChildren().add(TableUtils.generateCsvTable("test", 100, true, textArea.getText()));
 		});
 
 		encodeCaesar.setOnAction(action -> textArea.setText(CaesarUtils.encode(textArea.getText())));
@@ -426,15 +446,14 @@ public class Main extends Application {
 			try {
 				textArea.setText(PageUtils.getHTML(textArea.getText()));
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		});
 		extractComments.setOnAction(action -> textArea.setText(PageUtils.extractComments(textArea.getText())));
 
 		passwordStrength.setOnAction(action -> {
-			if (!vboxInfo.getChildren().isEmpty()) {
-				vboxInfo.getChildren().clear();
+			if (!textboxInfo.getChildren().isEmpty()) {
+				textboxInfo.getChildren().clear();
 			}
 			Password password = new Password(textArea.getText());
 			ProgressIndicator pi = new ProgressIndicator(password.getStrength());
@@ -446,10 +465,24 @@ public class Main extends Application {
 			HBox specialBox = new HBox(new Label("Special chars: "), new Label(String.valueOf(password.getSpecials())));
 			HBox lengthBox = new HBox(new Label("length: "), new Label(String.valueOf(password.getLength())));
 
-			vboxInfo.getChildren().addAll(barBox, upperBox, lowerBox, digitBox, specialBox, lengthBox);
+			textboxInfo.getChildren().addAll(barBox, upperBox, lowerBox, digitBox, specialBox, lengthBox);
 		});
 
 		openFile.setOnAction(action -> textArea.setText(FileUtils.readFile()));
+
+		openImage.setOnAction(action -> {
+			try {
+				imageTab.setContent(ImageUtils.openImage());
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			}
+		});
+
+		rotate90Left.setOnAction(action -> ImageRotationUtils.rotate90Left(imageTab.getContent()));
+		rotate90Right.setOnAction(action -> ImageRotationUtils.rotate90Right(imageTab.getContent()));
+		rotate180.setOnAction(action -> ImageRotationUtils.rotate180(imageTab.getContent()));
+		rotateCustom
+				.setOnAction(action -> ImageRotationUtils.rotateCustom(imageTab.getContent(), rotateField.getText()));
 
 		Scene scene = new Scene(vbox, primaryScreenBounds.getWidth(), primaryScreenBounds.getHeight());
 		primaryStage.setScene(scene);

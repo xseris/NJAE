@@ -25,6 +25,7 @@ public class GraphUtils {
 		}
 
 		bc.getData().add(series1);
+		bc.autosize();
 		return bc;
 	}
 
