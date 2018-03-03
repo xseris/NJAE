@@ -5,6 +5,7 @@ import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
 import java.util.Base64;
 
+import application.builder.buttons.EncodingButtons;
 import application.conversion.AsciiToUtils;
 import application.conversion.BinaryToUtils;
 import application.conversion.HexToUtils;
@@ -21,10 +22,13 @@ import application.crypto.steganography.BaconianUtils;
 import application.files.FileUtils;
 import application.frequency.FrequencyUtils;
 import application.hash.HashUtils;
+import application.history.ImageHistory;
 import application.math.RowMathUtils;
 import application.pojo.Password;
 import application.table.TableUtils;
 import application.web.PageUtils;
+import image.ImageChannelsUtils;
+import image.ImageGrayScaleUtils;
 import image.ImageRotationUtils;
 import image.ImageUtils;
 import javafx.application.Application;
@@ -46,10 +50,15 @@ import javafx.scene.control.TabPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToolBar;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
 public class Main extends Application {
+
+	static ImageHistory imageHistory = new ImageHistory();
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
@@ -63,18 +72,6 @@ public class Main extends Application {
 
 		// Buttons
 		Button clean = new Button("Clean Dashboard");
-
-		Button encBase64 = new Button("Encode Base 64");
-		Button decBase64 = new Button("Decode Base 64");
-
-		Button asciiToBinary = new Button("Binary");
-		Button asciiToHex = new Button("Hex");
-
-		Button hexToAscii = new Button("Ascii");
-		Button hexToBinary = new Button("Binary");
-
-		Button binaryToAscii = new Button("Ascii");
-		Button binaryToHex = new Button("Hex");
 
 		Button sumLines = new Button("Sum Lines");
 		Button multiplyLines = new Button("Multiply Lines");
@@ -126,10 +123,20 @@ public class Main extends Application {
 		Button extractComments = new Button("Extract comments");
 
 		Button openImage = new Button("Open");
-		Button rotate90Left = new Button("Left 90Â°");
-		Button rotate90Right = new Button("Right 90Â°");
-		Button rotate180 = new Button("180Â°");
+		Button rotate90Left = new Button("Left 90°");
+		Button rotate90Right = new Button("Right 90°");
+		Button rotate180 = new Button("180°");
 		Button rotateCustom = new Button("Rotate");
+		Button redChannel = new Button("Red");
+		Button greenChannel = new Button("Green");
+		Button blueChannel = new Button("Blue");
+		Button grayAvg = new Button("Average");
+		Button grayLumin = new Button("Luminescence");
+		Button grayDesat = new Button("Desaturation");
+		Button grayDecompMin = new Button("Min");
+		Button grayDecompMax = new Button("Max");
+		Button imageUndo = new Button("Undo");
+		Button imageRedo = new Button("Redo");
 
 		// Menu
 		final Menu general = new Menu("General");
@@ -161,7 +168,7 @@ public class Main extends Application {
 
 		final Menu crypto = new Menu("Cryptography");
 		final Menu classical = new Menu("Classical");
-		final MenuItem caesar = new MenuItem("Caesar (100 B.C. â€“ 44 B.C.)");
+		final MenuItem caesar = new MenuItem("Caesar (100 B.C. - 44 B.C.)");
 		final MenuItem albam = new MenuItem("Albam (Biblic cipher)");
 		final MenuItem atbah = new MenuItem("Atbah (Biblic cipher)");
 		final MenuItem atbash = new MenuItem("Atbash (Biblic cipher)");
@@ -180,6 +187,9 @@ public class Main extends Application {
 		final Menu image = new Menu("Image");
 		final MenuItem manage = new MenuItem("Manage");
 		final MenuItem rotate = new MenuItem("Rotate");
+		final MenuItem channel = new MenuItem("Channels");
+		final MenuItem grayscale = new MenuItem("Grayscale");
+		final MenuItem imgHistory = new MenuItem("History");
 
 		general.getItems().add(menu11);
 
@@ -206,7 +216,7 @@ public class Main extends Application {
 
 		web.getItems().add(page);
 
-		image.getItems().addAll(manage, rotate);
+		image.getItems().addAll(manage, rotate, channel, grayscale, imgHistory);
 
 		MenuBar menuBar = new MenuBar();
 
@@ -219,10 +229,13 @@ public class Main extends Application {
 
 		// Toolbars
 		ToolBar dashboardToolBar = new ToolBar(new Label("Dashboard:"), clean);
-		ToolBar encodingToolBar = new ToolBar(encBase64, decBase64);
-		ToolBar asciiToToolBar = new ToolBar(new Label("Ascii to:"), asciiToBinary, asciiToHex);
-		ToolBar hexToToolBar = new ToolBar(new Label("Hex to:"), hexToAscii, hexToBinary);
-		ToolBar binaryToToolBar = new ToolBar(new Label("Binary to:"), binaryToAscii, binaryToHex);
+		ToolBar encodingToolBar = new ToolBar(EncodingButtons.encBase64, EncodingButtons.decBase64);
+		ToolBar asciiToToolBar = new ToolBar(new Label("Ascii to:"), EncodingButtons.asciiToBinary,
+				EncodingButtons.asciiToHex);
+		ToolBar hexToToolBar = new ToolBar(new Label("Hex to:"), EncodingButtons.hexToAscii,
+				EncodingButtons.hexToBinary);
+		ToolBar binaryToToolBar = new ToolBar(new Label("Binary to:"), EncodingButtons.binaryToAscii,
+				EncodingButtons.binaryToHex);
 		ToolBar rowMathToolBar = new ToolBar(new Label("Row Math:"), sumLines, multiplyLines, maxOfLines, minOfLines);
 		ToolBar hashToolBar = new ToolBar(new Label("Generate hash:"), generateMd5, generateSha1, generateSha256,
 				generateSha512);
@@ -246,6 +259,10 @@ public class Main extends Application {
 		ToolBar manageImageToolBar = new ToolBar(new Label("Image:"), openImage);
 		ToolBar rotateImageToolBar = new ToolBar(new Label("Rotate:"), rotate90Left, rotate90Right, rotate180,
 				new Separator(), new Label("Custom : "), rotateField, rotateCustom);
+		ToolBar channelImageToolBar = new ToolBar(new Label("Extract channel:"), redChannel, greenChannel, blueChannel);
+		ToolBar grayScaleImageToolBar = new ToolBar(new Label("To gray scale:"), grayAvg, grayLumin, grayDesat,
+				new Separator(), new Label("Decomposition: "), grayDecompMin, grayDecompMax);
+		ToolBar historyImageToolBar = new ToolBar(new Label("Image History:"), imageUndo, imageRedo);
 
 		dashboardToolBar.setId("dashboard");
 		encodingToolBar.setId("encoding");
@@ -271,6 +288,9 @@ public class Main extends Application {
 		pageToolBar.setId("page");
 		manageImageToolBar.setId("manageImage");
 		rotateImageToolBar.setId("rotateImage");
+		channelImageToolBar.setId("channelImage");
+		grayScaleImageToolBar.setId("grayScaleImage");
+		historyImageToolBar.setId("historyImage");
 
 		VBox toolBox = new VBox();
 		toolBox.autosize();
@@ -322,21 +342,26 @@ public class Main extends Application {
 		baconian.setOnAction(action -> putRemove(toolBox, baconianToolBar));
 		affine.setOnAction(action -> putRemove(toolBox, affineToolBar));
 		page.setOnAction(action -> putRemove(toolBox, pageToolBar));
-		image.setOnAction(action -> putRemove(toolBox, manageImageToolBar));
+		manage.setOnAction(action -> putRemove(toolBox, manageImageToolBar));
 		rotate.setOnAction(action -> putRemove(toolBox, rotateImageToolBar));
+		channel.setOnAction(action -> putRemove(toolBox, channelImageToolBar));
+		grayscale.setOnAction(action -> putRemove(toolBox, grayScaleImageToolBar));
+		imgHistory.setOnAction(action -> putRemove(toolBox, historyImageToolBar));
 
 		// Buttons Actions
 		clean.setOnAction(action -> textArea.setText(""));
-		encBase64.setOnAction(
+		EncodingButtons.encBase64.setOnAction(
 				action -> textArea.setText(Base64.getEncoder().encodeToString(textArea.getText().getBytes())));
-		decBase64.setOnAction(
+		EncodingButtons.decBase64.setOnAction(
 				action -> textArea.setText(new String(Base64.getDecoder().decode(textArea.getText().getBytes()))));
-		asciiToBinary.setOnAction(action -> textArea.setText(AsciiToUtils.toBinary(textArea.getText())));
-		asciiToHex.setOnAction(action -> textArea.setText(AsciiToUtils.toHex(textArea.getText())));
-		hexToAscii.setOnAction(action -> textArea.setText(HexToUtils.toAscii(textArea.getText())));
-		hexToBinary.setOnAction(action -> textArea.setText(HexToUtils.toBinary(textArea.getText())));
-		binaryToAscii.setOnAction(action -> textArea.setText(BinaryToUtils.toAscii(textArea.getText())));
-		binaryToHex.setOnAction(action -> textArea.setText(BinaryToUtils.toHex(textArea.getText())));
+		EncodingButtons.asciiToBinary
+				.setOnAction(action -> textArea.setText(AsciiToUtils.toBinary(textArea.getText())));
+		EncodingButtons.asciiToHex.setOnAction(action -> textArea.setText(AsciiToUtils.toHex(textArea.getText())));
+		EncodingButtons.hexToAscii.setOnAction(action -> textArea.setText(HexToUtils.toAscii(textArea.getText())));
+		EncodingButtons.hexToBinary.setOnAction(action -> textArea.setText(HexToUtils.toBinary(textArea.getText())));
+		EncodingButtons.binaryToAscii
+				.setOnAction(action -> textArea.setText(BinaryToUtils.toAscii(textArea.getText())));
+		EncodingButtons.binaryToHex.setOnAction(action -> textArea.setText(BinaryToUtils.toHex(textArea.getText())));
 		sumLines.setOnAction(action -> textArea.setText(RowMathUtils.sumLines(textArea.getText())));
 		multiplyLines.setOnAction(action -> textArea.setText(RowMathUtils.multiplyLines(textArea.getText())));
 		maxOfLines.setOnAction(action -> textArea.setText(RowMathUtils.maxOfLines(textArea.getText())));
@@ -473,16 +498,62 @@ public class Main extends Application {
 		openImage.setOnAction(action -> {
 			try {
 				imageTab.setContent(ImageUtils.openImage());
+				updateImageHistroy(imageTab.getContent());
 			} catch (FileNotFoundException e) {
 				e.printStackTrace();
 			}
 		});
 
-		rotate90Left.setOnAction(action -> ImageRotationUtils.rotate90Left(imageTab.getContent()));
-		rotate90Right.setOnAction(action -> ImageRotationUtils.rotate90Right(imageTab.getContent()));
-		rotate180.setOnAction(action -> ImageRotationUtils.rotate180(imageTab.getContent()));
-		rotateCustom
-				.setOnAction(action -> ImageRotationUtils.rotateCustom(imageTab.getContent(), rotateField.getText()));
+		rotate90Left.setOnAction(action -> {
+			ImageRotationUtils.rotate90Left(imageTab.getContent());
+			updateImageHistroy(imageTab.getContent());
+		});
+		rotate90Right.setOnAction(action -> {
+			ImageRotationUtils.rotate90Right(imageTab.getContent());
+			updateImageHistroy(imageTab.getContent());
+		});
+		rotate180.setOnAction(action -> {
+			ImageRotationUtils.rotate180(imageTab.getContent());
+			updateImageHistroy(imageTab.getContent());
+		});
+		rotateCustom.setOnAction(action -> {
+			ImageRotationUtils.rotateCustom(imageTab.getContent(), rotateField.getText());
+			updateImageHistroy(imageTab.getContent());
+		});
+		redChannel.setOnAction(action -> {
+			ImageChannelsUtils.getRedChannel(imageTab.getContent());
+			updateImageHistroy(imageTab.getContent());
+		});
+		greenChannel.setOnAction(action -> {
+			ImageChannelsUtils.getGreenChannel(imageTab.getContent());
+			updateImageHistroy(imageTab.getContent());
+		});
+		blueChannel.setOnAction(action -> {
+			ImageChannelsUtils.getBlueChannel(imageTab.getContent());
+			updateImageHistroy(imageTab.getContent());
+		});
+		grayAvg.setOnAction(action -> {
+			ImageGrayScaleUtils.toAverage(imageTab.getContent());
+			updateImageHistroy(imageTab.getContent());
+		});
+		grayLumin.setOnAction(action -> {
+			ImageGrayScaleUtils.toLuminescence(imageTab.getContent());
+			updateImageHistroy(imageTab.getContent());
+		});
+		grayDesat.setOnAction(action -> {
+			ImageGrayScaleUtils.toDesaturation(imageTab.getContent());
+			updateImageHistroy(imageTab.getContent());
+		});
+		grayDecompMin.setOnAction(action -> {
+			ImageGrayScaleUtils.toDecompositionMin(imageTab.getContent());
+			updateImageHistroy(imageTab.getContent());
+		});
+		grayDecompMax.setOnAction(action -> {
+			ImageGrayScaleUtils.toDecompositionMax(imageTab.getContent());
+			updateImageHistroy(imageTab.getContent());
+		});
+		imageUndo.setOnAction(action -> undoImageHistroy(imageTab.getContent()));
+		imageRedo.setOnAction(action -> redoImageHistroy(imageTab.getContent()));
 
 		Scene scene = new Scene(vbox, primaryScreenBounds.getWidth(), primaryScreenBounds.getHeight());
 		primaryStage.setScene(scene);
@@ -509,5 +580,31 @@ public class Main extends Application {
 
 	public static void main(String[] args) {
 		Application.launch(args);
+	}
+
+	public static void updateImageHistroy(Node container) {
+		Pane contentPane = (Pane) container;
+		ImageView imageView = (ImageView) contentPane.getChildren().get(0);
+		Image im = imageView.getImage();
+		ImageHistory newHistory = new ImageHistory();
+		newHistory.setPrev(imageHistory);
+		newHistory.setCurrent(im);
+		imageHistory = newHistory;
+	}
+
+	public static void undoImageHistroy(Node container) {
+		Pane contentPane = (Pane) container;
+		ImageView imageView = (ImageView) contentPane.getChildren().get(0);
+		imageView.setImage(imageHistory.getPrev().getCurrent());
+		imageHistory.getPrev().setNext(imageHistory);
+		imageHistory = imageHistory.getPrev();
+	}
+
+	public static void redoImageHistroy(Node container) {
+		Pane contentPane = (Pane) container;
+		ImageView imageView = (ImageView) contentPane.getChildren().get(0);
+
+		imageView.setImage(imageHistory.getNext().getCurrent());
+		imageHistory = imageHistory.getNext();
 	}
 }
