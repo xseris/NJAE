@@ -7,7 +7,8 @@ import javafx.scene.control.Separator;
 import javafx.scene.control.ToolBar;
 
 public class ImageToolbars {
-	public static ToolBar manageImageToolBar = new ToolBar(new Label("Image:"), ImageButtons.openImage);
+	public static ToolBar manageImageToolBar = new ToolBar(new Label("Open:"), ImageButtons.openImage,
+			ImageButtons.openFromUrl, new Separator(), ImageButtons.save);
 	public static ToolBar rotateImageToolBar = new ToolBar(new Label("Rotate:"), ImageButtons.rotate90Left,
 			ImageButtons.rotate90Right, ImageButtons.rotate180, new Separator(), new Label("Custom : "),
 			ImageFields.rotateField, ImageButtons.rotateCustom);

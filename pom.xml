@@ -4,6 +4,15 @@
 	<groupId>it.graybeard</groupId>
 	<artifactId>njae</artifactId>
 	<version>1.0.2-SNAPSHOT</version>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.fxmisc.richtext</groupId>
+			<artifactId>richtextfx</artifactId>
+			<version>0.8.2</version>
+		</dependency>
+	</dependencies>
+
 	<build>
 		<sourceDirectory>src</sourceDirectory>
 		<resources>

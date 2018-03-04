@@ -8,7 +8,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import graph.GraphUtils;
+import application.graph.GraphUtils;
 import javafx.scene.chart.BarChart;
 
 public class FrequencyUtils {

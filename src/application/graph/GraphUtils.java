@@ -1,4 +1,4 @@
-package graph;
+package application.graph;
 
 import java.util.Map;
 import java.util.Map.Entry;

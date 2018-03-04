@@ -60,8 +60,19 @@ All features you will expect from an editor that is not just an editor...
 ### Images
 
 + Open Image (From 1.0.2)
++ Get from URL (From 1.0.2)
++ Save Image (From 1.0.2)
++ Extract red channel (From 1.0.2)
++ Extract green channel (From 1.0.2)
++ Extract blue channel (From 1.0.2)
++ Grayscale average (From 1.0.2)
++ Grayscale luminescence (From 1.0.2)
++ Grayscale single channel (From 1.0.2)
++ Grayscale desaturation (From 1.0.2)
++ Grayscale docomposition (From 1.0.2)
 + Zoom Image (From 1.0.2)
 + Rotate Image (From 1.0.2)
++ History (From 1.0.2)
 
 ### Math
 

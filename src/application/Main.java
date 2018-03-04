@@ -32,14 +32,14 @@ import application.files.FileUtils;
 import application.frequency.FrequencyUtils;
 import application.hash.HashUtils;
 import application.history.ImageHistory;
+import application.image.ImageChannelsUtils;
+import application.image.ImageGrayScaleUtils;
+import application.image.ImageRotationUtils;
+import application.image.ImageUtils;
 import application.math.RowMathUtils;
 import application.pojo.Password;
 import application.table.TableUtils;
 import application.web.PageUtils;
-import image.ImageChannelsUtils;
-import image.ImageGrayScaleUtils;
-import image.ImageRotationUtils;
-import image.ImageUtils;
 import javafx.application.Application;
 import javafx.geometry.Rectangle2D;
 import javafx.stage.Screen;
@@ -453,6 +453,13 @@ public class Main extends Application {
 				e.printStackTrace();
 			}
 		});
+
+		ImageButtons.openFromUrl.setOnAction(action -> {
+			imageTab.setContent(ImageUtils.fromUrl(textArea.getText()));
+			updateImageHistroy(imageTab.getContent());
+		});
+
+		ImageButtons.save.setOnAction(action -> ImageUtils.save(imageTab.getContent()));
 
 		ImageButtons.rotate90Left.setOnAction(action -> {
 			ImageRotationUtils.rotate90Left(imageTab.getContent());

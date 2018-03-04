@@ -3,7 +3,9 @@ package application.builder.buttons;
 import javafx.scene.control.Button;
 
 public class ImageButtons {
-	public static Button openImage = new Button("Open");
+	public static Button openImage = new Button("From Fs");
+	public static Button openFromUrl = new Button("From Url");
+	public static Button save = new Button("Save");
 	public static Button rotate90Left = new Button("Left 90");
 	public static Button rotate90Right = new Button("Right 90");
 	public static Button rotate180 = new Button("180");

@@ -1,29 +1,107 @@
-package image;
+package application.image;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
 
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
-import javafx.geometry.Insets;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.geometry.Point2D;
 import javafx.geometry.Rectangle2D;
-import javafx.scene.Scene;
-import javafx.scene.control.Hyperlink;
-import javafx.scene.control.Tooltip;
+import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.Priority;
-import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 
 public class ImageUtils {
 
 	private static final int MIN_PIXELS = 40;
+
+	public static void save(Node container) {
+		Pane contentPane = (Pane) container;
+		ImageView imageView = (ImageView) contentPane.getChildren().get(0);
+		Image sourceImage = imageView.getImage();
+
+		FileChooser fileChooser = new FileChooser();
+		fileChooser.setTitle("Save Image");
+
+		File file = fileChooser.showSaveDialog(null);
+		if (file != null) {
+			try {
+				ImageIO.write(SwingFXUtils.fromFXImage(sourceImage, null), "png", file);
+			} catch (IOException ex) {
+			}
+		}
+	}
+
+	public static Pane fromUrl(String url) {
+		Image image = new Image(url);
+
+		double width = image.getWidth();
+		double height = image.getHeight();
+
+		ImageView imageView = new ImageView(image);
+		imageView.setPreserveRatio(true);
+		reset(imageView, width, height);
+
+		ObjectProperty<Point2D> mouseDown = new SimpleObjectProperty<>();
+
+		imageView.setOnMousePressed(e -> {
+
+			Point2D mousePress = imageViewToImage(imageView, new Point2D(e.getX(), e.getY()));
+			mouseDown.set(mousePress);
+		});
+
+		imageView.setOnMouseDragged(e -> {
+			Point2D dragPoint = imageViewToImage(imageView, new Point2D(e.getX(), e.getY()));
+			shift(imageView, dragPoint.subtract(mouseDown.get()));
+			mouseDown.set(imageViewToImage(imageView, new Point2D(e.getX(), e.getY())));
+		});
+
+		imageView.setOnScroll(e -> {
+			double delta = e.getDeltaY();
+			Rectangle2D viewport = imageView.getViewport();
+
+			double scale = clamp(Math.pow(1.01, delta),
+
+					// don't scale so we're zoomed in to fewer than MIN_PIXELS in any direction:
+					Math.min(MIN_PIXELS / viewport.getWidth(), MIN_PIXELS / viewport.getHeight()),
+
+					// don't scale so that we're bigger than image dimensions:
+					Math.max(width / viewport.getWidth(), height / viewport.getHeight())
+
+			);
+
+			Point2D mouse = imageViewToImage(imageView, new Point2D(e.getX(), e.getY()));
+
+			double newWidth = viewport.getWidth() * scale;
+			double newHeight = viewport.getHeight() * scale;
+
+			double newMinX = clamp(mouse.getX() - (mouse.getX() - viewport.getMinX()) * scale, 0, width - newWidth);
+			double newMinY = clamp(mouse.getY() - (mouse.getY() - viewport.getMinY()) * scale, 0, height - newHeight);
+
+			imageView.setViewport(new Rectangle2D(newMinX, newMinY, newWidth, newHeight));
+		});
+
+		imageView.setOnMouseClicked(e -> {
+			if (e.getClickCount() == 2) {
+				reset(imageView, width, height);
+			}
+		});
+
+		Pane container = new Pane(imageView);
+		container.setMinSize(image.getWidth(), image.getHeight());
+		container.setPrefSize(image.getWidth(), image.getHeight());
+		imageView.fitWidthProperty().bind(container.widthProperty());
+		imageView.fitHeightProperty().bind(container.heightProperty());
+		return container;
+	}
 
 	public static Pane openImage() throws FileNotFoundException {
 		FileChooser fileChooser = new FileChooser();
