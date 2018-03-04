@@ -112,4 +112,64 @@ public class ImageGrayScaleUtils {
 		imageView.setImage(result);
 	}
 
+	public static void toSingleRed(Node container) {
+		Pane contentPane = (Pane) container;
+		ImageView imageView = (ImageView) contentPane.getChildren().get(0);
+		Image sourceImage = imageView.getImage();
+
+		PixelReader pr = sourceImage.getPixelReader();
+		int width = (int) sourceImage.getWidth();
+		int height = (int) sourceImage.getHeight();
+		WritableImage result = new WritableImage(width, height);
+		PixelWriter pw = result.getPixelWriter();
+		for (int x = 0; x < width; x++) {
+			for (int y = 0; y < height; y++) {
+				Color col = pr.getColor(x, y);
+				double newColor = col.getRed();
+				pw.setColor(x, y, new Color(newColor, newColor, newColor, 1.0));
+			}
+		}
+		imageView.setImage(result);
+	}
+
+	public static void toSingleGreen(Node container) {
+		Pane contentPane = (Pane) container;
+		ImageView imageView = (ImageView) contentPane.getChildren().get(0);
+		Image sourceImage = imageView.getImage();
+
+		PixelReader pr = sourceImage.getPixelReader();
+		int width = (int) sourceImage.getWidth();
+		int height = (int) sourceImage.getHeight();
+		WritableImage result = new WritableImage(width, height);
+		PixelWriter pw = result.getPixelWriter();
+		for (int x = 0; x < width; x++) {
+			for (int y = 0; y < height; y++) {
+				Color col = pr.getColor(x, y);
+				double newColor = col.getGreen();
+				pw.setColor(x, y, new Color(newColor, newColor, newColor, 1.0));
+			}
+		}
+		imageView.setImage(result);
+	}
+
+	public static void toSingleBlue(Node container) {
+		Pane contentPane = (Pane) container;
+		ImageView imageView = (ImageView) contentPane.getChildren().get(0);
+		Image sourceImage = imageView.getImage();
+
+		PixelReader pr = sourceImage.getPixelReader();
+		int width = (int) sourceImage.getWidth();
+		int height = (int) sourceImage.getHeight();
+		WritableImage result = new WritableImage(width, height);
+		PixelWriter pw = result.getPixelWriter();
+		for (int x = 0; x < width; x++) {
+			for (int y = 0; y < height; y++) {
+				Color col = pr.getColor(x, y);
+				double newColor = col.getBlue();
+				pw.setColor(x, y, new Color(newColor, newColor, newColor, 1.0));
+			}
+		}
+		imageView.setImage(result);
+	}
+
 }
