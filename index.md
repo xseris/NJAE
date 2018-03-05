@@ -1,4 +1,4 @@
-# NJAE (1.0.2)
+# NJAE (1.0.3)
 
 NJAE is simply Not Just An Editor, beacause this is not just an editor...
 
@@ -35,6 +35,15 @@ All features you will expect from an editor that is not just an editor...
 + Decode Rot-13.5 (From 1.0.1)
 + Decode Rot-47 (From 1.0.1)
 
+### Dashboard
+
++ Camelcase (From 1.0.3)
++ Capitalization (From 1.0.3)
++ Kebabcase (From 1.0.3)
++ Lowercase (From 1.0.3)
++ Snakecase (From 1.0.3)
++ Uppercase (From 1.0.3)
+
 ### Encodings
 
 + ASCII to Binary (From 1.0.0)
@@ -59,23 +68,28 @@ All features you will expect from an editor that is not just an editor...
 
 ### Images
 
-+ Open Image (From 1.0.2)
-+ Get from URL (From 1.0.2)
-+ Save Image (From 1.0.2)
-+ Extract red channel (From 1.0.2)
-+ Extract green channel (From 1.0.2)
 + Extract blue channel (From 1.0.2)
++ Extract green channel (From 1.0.2)
++ Extract red channel (From 1.0.2)
++ Get from URL (From 1.0.2)
 + Grayscale average (From 1.0.2)
++ Grayscale decomposition (From 1.0.2)
++ Grayscale desaturation (From 1.0.2)
 + Grayscale luminescence (From 1.0.2)
 + Grayscale single channel (From 1.0.2)
-+ Grayscale desaturation (From 1.0.2)
-+ Grayscale docomposition (From 1.0.2)
-+ Zoom Image (From 1.0.2)
-+ Rotate Image (From 1.0.2)
 + History (From 1.0.2)
++ Open Image (From 1.0.2)
++ Rotate Image (From 1.0.2)
++ Save Image (From 1.0.2)
++ Zoom Image (From 1.0.2)
 
 ### Math
 
++ Base 10 to base 2 (From 1.0.3)
++ Base 10 to base n (From 1.0.3)
++ Base 2 to base 10 (From 1.0.3)
++ Base 2 to base n (From 1.0.3)
++ Base a to base b (From 1.0.3)
 + Max of lines (From 1.0.0)
 + Min of lines (From 1.0.0)
 + Multiply lines (From 1.0.0)

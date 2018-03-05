@@ -6,15 +6,19 @@ import java.security.NoSuchAlgorithmException;
 import java.util.Base64;
 
 import application.builder.buttons.CryptoButtons;
+import application.builder.buttons.DashboardButtons;
 import application.builder.buttons.EncodingButtons;
 import application.builder.buttons.HashButtons;
 import application.builder.buttons.ImageButtons;
 import application.builder.buttons.MathButtons;
 import application.builder.buttons.StegoButtons;
 import application.builder.fields.ImageFields;
+import application.builder.fields.MathFields;
 import application.builder.toolbars.CryptoToolbars;
+import application.builder.toolbars.DashboardToolbars;
 import application.builder.toolbars.EncodingToolbars;
 import application.builder.toolbars.ImageToolbars;
+import application.builder.toolbars.MathToolbars;
 import application.conversion.AsciiToUtils;
 import application.conversion.BinaryToUtils;
 import application.conversion.HexToUtils;
@@ -28,6 +32,7 @@ import application.crypto.classical.AtbahUtils;
 import application.crypto.classical.AtbashUtils;
 import application.crypto.classical.CaesarUtils;
 import application.crypto.steganography.BaconianUtils;
+import application.dashboard.NotationUtils;
 import application.files.FileUtils;
 import application.frequency.FrequencyUtils;
 import application.hash.HashUtils;
@@ -36,6 +41,7 @@ import application.image.ImageChannelsUtils;
 import application.image.ImageGrayScaleUtils;
 import application.image.ImageRotationUtils;
 import application.image.ImageUtils;
+import application.math.ConversionMathUtils;
 import application.math.RowMathUtils;
 import application.pojo.Password;
 import application.table.TableUtils;
@@ -80,8 +86,6 @@ public class Main extends Application {
 		TextArea textArea = new TextArea();
 
 		// Buttons
-		Button clean = new Button("Clean Dashboard");
-
 		Button unigramChart = new Button("Show unigram chart");
 		Button bigramChart = new Button("Show bigram chart");
 		Button wordChart = new Button("Show word chart");
@@ -98,6 +102,7 @@ public class Main extends Application {
 		// Menu
 		final Menu general = new Menu("General");
 		final MenuItem menu11 = new MenuItem("Dashboard");
+		final MenuItem notations = new MenuItem("Notations");
 
 		final Menu conversions = new Menu("Conversions");
 		final MenuItem encodings = new MenuItem("Encodings");
@@ -106,7 +111,8 @@ public class Main extends Application {
 		final MenuItem binaryTo = new MenuItem("Binary to");
 
 		final Menu math = new Menu("Math");
-		final MenuItem rowMath = new MenuItem("RowMath");
+		final MenuItem rowMath = new MenuItem("Row Math");
+		final MenuItem conversionMath = new MenuItem("Base conversion");
 
 		final Menu hash = new Menu("Hash");
 		final MenuItem generate = new MenuItem("Generate");
@@ -148,11 +154,11 @@ public class Main extends Application {
 		final MenuItem grayscale = new MenuItem("Grayscale");
 		final MenuItem imgHistory = new MenuItem("History");
 
-		general.getItems().add(menu11);
+		general.getItems().addAll(menu11, notations);
 
 		conversions.getItems().addAll(encodings, asciiTo, hexTo, binaryTo);
 
-		math.getItems().add(rowMath);
+		math.getItems().addAll(rowMath, conversionMath);
 
 		hash.getItems().add(generate);
 
@@ -184,9 +190,6 @@ public class Main extends Application {
 		TextField affineB = new TextField("5");
 
 		// Toolbars
-		ToolBar dashboardToolBar = new ToolBar(new Label("Dashboard:"), clean);
-		ToolBar rowMathToolBar = new ToolBar(new Label("Row Math:"), MathButtons.sumLines, MathButtons.multiplyLines,
-				MathButtons.maxOfLines, MathButtons.minOfLines);
 		ToolBar hashToolBar = new ToolBar(new Label("Generate hash:"), HashButtons.generateMd5,
 				HashButtons.generateSha1, HashButtons.generateSha256, HashButtons.generateSha512);
 		ToolBar frequenciesToolBar = new ToolBar(new Label("Frequency Charts:"), unigramChart, bigramChart, wordChart);
@@ -203,12 +206,14 @@ public class Main extends Application {
 				StegoButtons.encodeFullBaconian, StegoButtons.decodeFullBaconian);
 		ToolBar pageToolBar = new ToolBar(new Label("Page:"), getSource, extractComments);
 
-		dashboardToolBar.setId("dashboard");
+		DashboardToolbars.dashboardToolBar.setId("dashboard");
+		DashboardToolbars.notationsToolBar.setId("notations");
 		EncodingToolbars.encodingToolBar.setId("encoding");
 		EncodingToolbars.asciiToToolBar.setId("ascii");
 		EncodingToolbars.hexToToolBar.setId("hex");
 		EncodingToolbars.binaryToToolBar.setId("binary");
-		rowMathToolBar.setId("rowMath");
+		MathToolbars.rowMathToolBar.setId("rowMath");
+		MathToolbars.conversionMathToolBar.setId("conversionMath");
 		hashToolBar.setId("sha1");
 		frequenciesToolBar.setId("frequencies");
 		filesToolBar.setId("files");
@@ -259,12 +264,14 @@ public class Main extends Application {
 		VBox vbox = new VBox(menuBar, toolBox, tabPane);
 
 		// Menu Actions
-		menu11.setOnAction(action -> putRemove(toolBox, dashboardToolBar));
+		menu11.setOnAction(action -> putRemove(toolBox, DashboardToolbars.dashboardToolBar));
+		notations.setOnAction(action -> putRemove(toolBox, DashboardToolbars.notationsToolBar));
 		encodings.setOnAction(action -> putRemove(toolBox, EncodingToolbars.encodingToolBar));
 		asciiTo.setOnAction(action -> putRemove(toolBox, EncodingToolbars.asciiToToolBar));
 		hexTo.setOnAction(action -> putRemove(toolBox, EncodingToolbars.hexToToolBar));
 		binaryTo.setOnAction(action -> putRemove(toolBox, EncodingToolbars.binaryToToolBar));
-		rowMath.setOnAction(action -> putRemove(toolBox, rowMathToolBar));
+		rowMath.setOnAction(action -> putRemove(toolBox, MathToolbars.rowMathToolBar));
+		conversionMath.setOnAction(action -> putRemove(toolBox, MathToolbars.conversionMathToolBar));
 		generate.setOnAction(action -> putRemove(toolBox, hashToolBar));
 		frequencies.setOnAction(action -> putRemove(toolBox, frequenciesToolBar));
 		file.setOnAction(action -> putRemove(toolBox, filesToolBar));
@@ -288,7 +295,20 @@ public class Main extends Application {
 		imgHistory.setOnAction(action -> putRemove(toolBox, ImageToolbars.historyImageToolBar));
 
 		// Buttons Actions
-		clean.setOnAction(action -> textArea.setText(""));
+		DashboardButtons.clean.setOnAction(action -> textArea.setText(""));
+		DashboardButtons.toLowerCase
+				.setOnAction(action -> textArea.setText(NotationUtils.toLowerCase(textArea.getText())));
+		DashboardButtons.toUpperCase
+				.setOnAction(action -> textArea.setText(NotationUtils.toUpperCase(textArea.getText())));
+		DashboardButtons.capitalization
+				.setOnAction(action -> textArea.setText(NotationUtils.capitalization(textArea.getText())));
+		DashboardButtons.camelCase
+				.setOnAction(action -> textArea.setText(NotationUtils.toCamelCase(textArea.getText())));
+		DashboardButtons.snakeCase
+				.setOnAction(action -> textArea.setText(NotationUtils.toSnakeCase(textArea.getText())));
+		DashboardButtons.kebabCase
+				.setOnAction(action -> textArea.setText(NotationUtils.toKebabCase(textArea.getText())));
+
 		EncodingButtons.encBase64.setOnAction(
 				action -> textArea.setText(Base64.getEncoder().encodeToString(textArea.getText().getBytes())));
 		EncodingButtons.decBase64.setOnAction(
@@ -301,11 +321,23 @@ public class Main extends Application {
 		EncodingButtons.binaryToAscii
 				.setOnAction(action -> textArea.setText(BinaryToUtils.toAscii(textArea.getText())));
 		EncodingButtons.binaryToHex.setOnAction(action -> textArea.setText(BinaryToUtils.toHex(textArea.getText())));
+
 		MathButtons.sumLines.setOnAction(action -> textArea.setText(RowMathUtils.sumLines(textArea.getText())));
 		MathButtons.multiplyLines
 				.setOnAction(action -> textArea.setText(RowMathUtils.multiplyLines(textArea.getText())));
 		MathButtons.maxOfLines.setOnAction(action -> textArea.setText(RowMathUtils.maxOfLines(textArea.getText())));
 		MathButtons.minOfLines.setOnAction(action -> textArea.setText(RowMathUtils.minOfLines(textArea.getText())));
+		MathButtons.base2To10
+				.setOnAction(action -> textArea.setText(ConversionMathUtils.base2To10(textArea.getText())));
+		MathButtons.base2ToN.setOnAction(action -> textArea
+				.setText(ConversionMathUtils.base2ToN(textArea.getText(), MathFields.base2To.getText())));
+		MathButtons.base10To2
+				.setOnAction(action -> textArea.setText(ConversionMathUtils.base10To2(textArea.getText())));
+		MathButtons.base10ToN.setOnAction(action -> textArea
+				.setText(ConversionMathUtils.base10ToN(textArea.getText(), MathFields.base10To.getText())));
+		MathButtons.baseAToB.setOnAction(action -> textArea.setText(ConversionMathUtils.baseAtoB(textArea.getText(),
+				MathFields.baseATo.getText(), MathFields.baseBTo.getText())));
+
 		HashButtons.generateSha1.setOnAction(action -> {
 			try {
 				textArea.setText(HashUtils.generateSha1(textArea.getText()));
