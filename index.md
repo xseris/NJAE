@@ -41,6 +41,7 @@ All features you will expect from an editor that is not just an editor...
 + Capitalization (From 1.0.3)
 + Kebabcase (From 1.0.3)
 + Lowercase (From 1.0.3)
++ Remove spaces (From 1.0.3)
 + Snakecase (From 1.0.3)
 + Uppercase (From 1.0.3)
 
@@ -69,8 +70,13 @@ All features you will expect from an editor that is not just an editor...
 ### Images
 
 + Extract blue channel (From 1.0.2)
++ Extract Cb [BT.601] (From 1.0.3)
++ Extract Cr [BT.601] (From 1.0.3)
 + Extract green channel (From 1.0.2)
 + Extract red channel (From 1.0.2)
++ Extract U [BT.601] (From 1.0.3)
++ Extract V [BT.601] (From 1.0.3)
++ Extract Y [BT.601] (From 1.0.3)
 + Get from URL (From 1.0.2)
 + Grayscale average (From 1.0.2)
 + Grayscale decomposition (From 1.0.2)
@@ -78,9 +84,16 @@ All features you will expect from an editor that is not just an editor...
 + Grayscale luminescence (From 1.0.2)
 + Grayscale single channel (From 1.0.2)
 + History (From 1.0.2)
++ Info height (From 1.0.3)
++ Info size (From 1.0.3)
++ Info width (From 1.0.3)
++ Logarithmic Transformation (From 1.0.3)
++ Negative Transformation (From 1.0.3)
 + Open Image (From 1.0.2)
++ Power Transformation (From 1.0.3)
 + Rotate Image (From 1.0.2)
 + Save Image (From 1.0.2)
++ Thresholding (From 1.0.3)
 + Zoom Image (From 1.0.2)
 
 ### Math

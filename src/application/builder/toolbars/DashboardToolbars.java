@@ -6,7 +6,7 @@ import javafx.scene.control.ToolBar;
 
 public class DashboardToolbars {
 
-	public static ToolBar dashboardToolBar = new ToolBar(new Label("Dashboard:"), DashboardButtons.clean);
+	public static ToolBar dashboardToolBar = new ToolBar(new Label("Dashboard:"), DashboardButtons.clean,DashboardButtons.removeSpaces);
 
 	public static ToolBar notationsToolBar = new ToolBar(new Label("Notations:"), DashboardButtons.toLowerCase,
 			DashboardButtons.toUpperCase, DashboardButtons.capitalization, DashboardButtons.camelCase,

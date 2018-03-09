@@ -12,8 +12,9 @@ import application.builder.buttons.HashButtons;
 import application.builder.buttons.ImageButtons;
 import application.builder.buttons.MathButtons;
 import application.builder.buttons.StegoButtons;
-import application.builder.fields.ImageFields;
 import application.builder.fields.MathFields;
+import application.builder.sliders.ImageSliders;
+import application.builder.tabs.Tabs;
 import application.builder.toolbars.CryptoToolbars;
 import application.builder.toolbars.DashboardToolbars;
 import application.builder.toolbars.EncodingToolbars;
@@ -36,10 +37,8 @@ import application.dashboard.NotationUtils;
 import application.files.FileUtils;
 import application.frequency.FrequencyUtils;
 import application.hash.HashUtils;
-import application.history.ImageHistory;
-import application.image.ImageChannelsUtils;
-import application.image.ImageGrayScaleUtils;
-import application.image.ImageRotationUtils;
+import application.history.ImageHistoryUtils;
+import application.image.ImageInfoUtils;
 import application.image.ImageUtils;
 import application.math.ConversionMathUtils;
 import application.math.RowMathUtils;
@@ -65,18 +64,17 @@ import javafx.scene.control.TabPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToolBar;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
 public class Main extends Application {
 
-	static ImageHistory imageHistory = new ImageHistory();
-
 	@Override
 	public void start(Stage primaryStage) throws Exception {
+
+		ImageSliders.init();
+		ImageButtons.init();
+		Tabs.init();
 
 		primaryStage.setTitle("Not Just An Editor");
 
@@ -150,9 +148,14 @@ public class Main extends Application {
 		final Menu image = new Menu("Image");
 		final MenuItem manage = new MenuItem("Manage");
 		final MenuItem rotate = new MenuItem("Rotate");
+		final MenuItem imgHistory = new MenuItem("History");
+		final Menu extraction = new Menu("Extract");
 		final MenuItem channel = new MenuItem("Channels");
 		final MenuItem grayscale = new MenuItem("Grayscale");
-		final MenuItem imgHistory = new MenuItem("History");
+		final MenuItem yuv = new MenuItem("YUV");
+		final MenuItem ycbcr = new MenuItem("Y'CbCr");
+		final Menu processing = new Menu("Processing");
+		final MenuItem pointProcessing = new MenuItem("Point");
 
 		general.getItems().addAll(menu11, notations);
 
@@ -179,7 +182,9 @@ public class Main extends Application {
 
 		web.getItems().add(page);
 
-		image.getItems().addAll(manage, rotate, channel, grayscale, imgHistory);
+		image.getItems().addAll(manage, rotate, extraction, imgHistory, processing);
+		extraction.getItems().addAll(channel, grayscale, yuv, ycbcr);
+		processing.getItems().add(pointProcessing);
 
 		MenuBar menuBar = new MenuBar();
 
@@ -235,6 +240,9 @@ public class Main extends Application {
 		ImageToolbars.channelImageToolBar.setId("channelImage");
 		ImageToolbars.grayScaleImageToolBar.setId("grayScaleImage");
 		ImageToolbars.historyImageToolBar.setId("historyImage");
+		ImageToolbars.yuvImageToolBar.setId("yuvImage");
+		ImageToolbars.yCbCrImageToolBar.setId("yCbCrImage");
+		ImageToolbars.pointPocessingImageToolBar.setId("pointProcessingImage");
 
 		VBox toolBox = new VBox();
 		toolBox.autosize();
@@ -252,14 +260,16 @@ public class Main extends Application {
 		Tab textTab = new Tab("Text Editor", new HBox(textArea, new Separator(), textboxInfo));
 		Tab chartTab = new Tab("Chart");
 		Tab tableTab = new Tab("Table", tableBox);
-		Tab imageTab = new Tab("Images");
+
+		Tab imageInfoTab = new Tab("ImageInfo");
 
 		textTab.setClosable(false);
 		tableTab.setClosable(false);
-		imageTab.setClosable(false);
-		chartTab.setClosable(false);
 
-		tabPane.getTabs().addAll(textTab, chartTab, tableTab, imageTab);
+		chartTab.setClosable(false);
+		imageInfoTab.setClosable(false);
+
+		tabPane.getTabs().addAll(textTab, chartTab, tableTab, Tabs.imageTab, imageInfoTab);
 
 		VBox vbox = new VBox(menuBar, toolBox, tabPane);
 
@@ -293,9 +303,14 @@ public class Main extends Application {
 		channel.setOnAction(action -> putRemove(toolBox, ImageToolbars.channelImageToolBar));
 		grayscale.setOnAction(action -> putRemove(toolBox, ImageToolbars.grayScaleImageToolBar));
 		imgHistory.setOnAction(action -> putRemove(toolBox, ImageToolbars.historyImageToolBar));
+		yuv.setOnAction(action -> putRemove(toolBox, ImageToolbars.yuvImageToolBar));
+		ycbcr.setOnAction(action -> putRemove(toolBox, ImageToolbars.yCbCrImageToolBar));
+		pointProcessing.setOnAction(action -> putRemove(toolBox, ImageToolbars.pointPocessingImageToolBar));
 
 		// Buttons Actions
 		DashboardButtons.clean.setOnAction(action -> textArea.setText(""));
+		DashboardButtons.removeSpaces
+				.setOnAction(action -> textArea.setText(textArea.getText().replaceAll("\n", "").replaceAll(" ", "")));
 		DashboardButtons.toLowerCase
 				.setOnAction(action -> textArea.setText(NotationUtils.toLowerCase(textArea.getText())));
 		DashboardButtons.toUpperCase
@@ -479,82 +494,22 @@ public class Main extends Application {
 
 		ImageButtons.openImage.setOnAction(action -> {
 			try {
-				imageTab.setContent(ImageUtils.openImage());
-				updateImageHistroy(imageTab.getContent());
+				Tabs.imageTab.setContent(ImageUtils.openImage());
+				ImageHistoryUtils.updateImageHistroy(Tabs.imageTab.getContent());
 			} catch (FileNotFoundException e) {
 				e.printStackTrace();
 			}
 		});
 
 		ImageButtons.openFromUrl.setOnAction(action -> {
-			imageTab.setContent(ImageUtils.fromUrl(textArea.getText()));
-			updateImageHistroy(imageTab.getContent());
+			Tabs.imageTab.setContent(ImageUtils.fromUrl(textArea.getText()));
+			ImageHistoryUtils.updateImageHistroy(Tabs.imageTab.getContent());
 		});
 
-		ImageButtons.save.setOnAction(action -> ImageUtils.save(imageTab.getContent()));
+		ImageButtons.save.setOnAction(action -> ImageUtils.save(Tabs.imageTab.getContent()));
 
-		ImageButtons.rotate90Left.setOnAction(action -> {
-			ImageRotationUtils.rotate90Left(imageTab.getContent());
-			updateImageHistroy(imageTab.getContent());
-		});
-		ImageButtons.rotate90Right.setOnAction(action -> {
-			ImageRotationUtils.rotate90Right(imageTab.getContent());
-			updateImageHistroy(imageTab.getContent());
-		});
-		ImageButtons.rotate180.setOnAction(action -> {
-			ImageRotationUtils.rotate180(imageTab.getContent());
-			updateImageHistroy(imageTab.getContent());
-		});
-		ImageButtons.rotateCustom.setOnAction(action -> {
-			ImageRotationUtils.rotateCustom(imageTab.getContent(), ImageFields.rotateField.getText());
-			updateImageHistroy(imageTab.getContent());
-		});
-		ImageButtons.redChannel.setOnAction(action -> {
-			ImageChannelsUtils.getRedChannel(imageTab.getContent());
-			updateImageHistroy(imageTab.getContent());
-		});
-		ImageButtons.greenChannel.setOnAction(action -> {
-			ImageChannelsUtils.getGreenChannel(imageTab.getContent());
-			updateImageHistroy(imageTab.getContent());
-		});
-		ImageButtons.blueChannel.setOnAction(action -> {
-			ImageChannelsUtils.getBlueChannel(imageTab.getContent());
-			updateImageHistroy(imageTab.getContent());
-		});
-		ImageButtons.grayAvg.setOnAction(action -> {
-			ImageGrayScaleUtils.toAverage(imageTab.getContent());
-			updateImageHistroy(imageTab.getContent());
-		});
-		ImageButtons.grayLumin.setOnAction(action -> {
-			ImageGrayScaleUtils.toLuminescence(imageTab.getContent());
-			updateImageHistroy(imageTab.getContent());
-		});
-		ImageButtons.grayDesat.setOnAction(action -> {
-			ImageGrayScaleUtils.toDesaturation(imageTab.getContent());
-			updateImageHistroy(imageTab.getContent());
-		});
-		ImageButtons.grayDecompMin.setOnAction(action -> {
-			ImageGrayScaleUtils.toDecompositionMin(imageTab.getContent());
-			updateImageHistroy(imageTab.getContent());
-		});
-		ImageButtons.grayDecompMax.setOnAction(action -> {
-			ImageGrayScaleUtils.toDecompositionMax(imageTab.getContent());
-			updateImageHistroy(imageTab.getContent());
-		});
-		ImageButtons.singleColorRed.setOnAction(action -> {
-			ImageGrayScaleUtils.toSingleRed(imageTab.getContent());
-			updateImageHistroy(imageTab.getContent());
-		});
-		ImageButtons.singleColorGreen.setOnAction(action -> {
-			ImageGrayScaleUtils.toSingleGreen(imageTab.getContent());
-			updateImageHistroy(imageTab.getContent());
-		});
-		ImageButtons.singleColorBlue.setOnAction(action -> {
-			ImageGrayScaleUtils.toSingleBlue(imageTab.getContent());
-			updateImageHistroy(imageTab.getContent());
-		});
-		ImageButtons.imageUndo.setOnAction(action -> undoImageHistroy(imageTab.getContent()));
-		ImageButtons.imageRedo.setOnAction(action -> redoImageHistroy(imageTab.getContent()));
+		ImageButtons.info.setOnAction(
+				action -> imageInfoTab.setContent(ImageInfoUtils.generateInfo(Tabs.imageTab.getContent())));
 
 		Scene scene = new Scene(vbox, primaryScreenBounds.getWidth(), primaryScreenBounds.getHeight());
 		primaryStage.setScene(scene);
@@ -583,29 +538,4 @@ public class Main extends Application {
 		Application.launch(args);
 	}
 
-	public static void updateImageHistroy(Node container) {
-		Pane contentPane = (Pane) container;
-		ImageView imageView = (ImageView) contentPane.getChildren().get(0);
-		Image im = imageView.getImage();
-		ImageHistory newHistory = new ImageHistory();
-		newHistory.setPrev(imageHistory);
-		newHistory.setCurrent(im);
-		imageHistory = newHistory;
-	}
-
-	public static void undoImageHistroy(Node container) {
-		Pane contentPane = (Pane) container;
-		ImageView imageView = (ImageView) contentPane.getChildren().get(0);
-		imageView.setImage(imageHistory.getPrev().getCurrent());
-		imageHistory.getPrev().setNext(imageHistory);
-		imageHistory = imageHistory.getPrev();
-	}
-
-	public static void redoImageHistroy(Node container) {
-		Pane contentPane = (Pane) container;
-		ImageView imageView = (ImageView) contentPane.getChildren().get(0);
-
-		imageView.setImage(imageHistory.getNext().getCurrent());
-		imageHistory = imageHistory.getNext();
-	}
 }
