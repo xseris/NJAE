@@ -27,6 +27,23 @@ public class ImageToolbars {
 			ImageButtons.yCbCrbt601cb, ImageButtons.yCbCrbt601cr);
 	public static ToolBar pointPocessingImageToolBar = new ToolBar(new Label("Point processing"), ImageButtons.negative,
 			new Separator(), new Label("Thresholding"), ImageSliders.slider, ImageButtons.thresholding, new Separator(),
-			new Label("Tranfsormations"), ImageButtons.logarithmic, ImageSliders.power,ImageButtons.power);
+			new Label("Tranfsormations"), ImageButtons.logarithmic, ImageSliders.power, ImageButtons.power);
+
+	public static ToolBar linearFilterImageToolBar = new ToolBar(new Label("Linear filters"), new Separator(),
+			new Label("Size:"), ImageFields.filterSize, new Label("Radius:"), ImageFields.filterRadius, new Separator(),
+			new Label("Apply"), ImageButtons.linearRectangularFilter, ImageButtons.linearCircularFilter,
+			ImageButtons.linearPyramidalFilter, ImageButtons.linearConeFilter);
+
+	public static void init() {
+		manageImageToolBar.setId("manageImage");
+		rotateImageToolBar.setId("rotateImage");
+		channelImageToolBar.setId("channelImage");
+		grayScaleImageToolBar.setId("grayScaleImage");
+		historyImageToolBar.setId("historyImage");
+		yuvImageToolBar.setId("yuvImage");
+		yCbCrImageToolBar.setId("yCbCrImage");
+		pointPocessingImageToolBar.setId("pointProcessingImage");
+		linearFilterImageToolBar.setId("linearFilterImage");
+	}
 
 }

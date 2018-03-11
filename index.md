@@ -11,6 +11,10 @@ All features you will expect from an editor that is not just an editor...
 + Bigram frequency (From 1.0.0)
 + Unigram frequency (From 1.0.0)
 + Word frequency (From 1.0.0)
++ Red histogram (From 1.0.3)
++ Blue histogram (From 1.0.3)
++ Green histogram (From 1.0.3)
++ Full histogram (From 1.0.3)
 
 ### Crypto
 
@@ -39,6 +43,8 @@ All features you will expect from an editor that is not just an editor...
 
 + Camelcase (From 1.0.3)
 + Capitalization (From 1.0.3)
++ Grep (From 1.0.3)
++ History (From 1.0.3)
 + Kebabcase (From 1.0.3)
 + Lowercase (From 1.0.3)
 + Remove spaces (From 1.0.3)
@@ -69,6 +75,7 @@ All features you will expect from an editor that is not just an editor...
 
 ### Images
 
++ Blur Filtering (From 1.0.3)
 + Extract blue channel (From 1.0.2)
 + Extract Cb [BT.601] (From 1.0.3)
 + Extract Cr [BT.601] (From 1.0.3)
@@ -84,7 +91,11 @@ All features you will expect from an editor that is not just an editor...
 + Grayscale luminescence (From 1.0.2)
 + Grayscale single channel (From 1.0.2)
 + History (From 1.0.2)
++ Info file name (From 1.0.3)
++ Info file size (From 1.0.3)
++ Info file path  (From 1.0.3)
 + Info height (From 1.0.3)
++ Info pixels (From 1.0.3)
 + Info size (From 1.0.3)
 + Info width (From 1.0.3)
 + Logarithmic Transformation (From 1.0.3)

@@ -3,8 +3,8 @@ package application;
 import java.io.FileNotFoundException;
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
-import java.util.Base64;
 
+import application.builder.buttons.ChartButtons;
 import application.builder.buttons.CryptoButtons;
 import application.builder.buttons.DashboardButtons;
 import application.builder.buttons.EncodingButtons;
@@ -15,28 +15,18 @@ import application.builder.buttons.StegoButtons;
 import application.builder.fields.MathFields;
 import application.builder.sliders.ImageSliders;
 import application.builder.tabs.Tabs;
+import application.builder.texareas.TextAreas;
+import application.builder.toolbars.ChartToolbars;
 import application.builder.toolbars.CryptoToolbars;
 import application.builder.toolbars.DashboardToolbars;
 import application.builder.toolbars.EncodingToolbars;
 import application.builder.toolbars.ImageToolbars;
 import application.builder.toolbars.MathToolbars;
-import application.conversion.AsciiToUtils;
-import application.conversion.BinaryToUtils;
-import application.conversion.HexToUtils;
-import application.crypto.Rot135Utils;
-import application.crypto.Rot13Utils;
-import application.crypto.Rot47Utils;
-import application.crypto.Rot5Utils;
 import application.crypto.classical.AffineUtils;
-import application.crypto.classical.AlbamUtils;
-import application.crypto.classical.AtbahUtils;
-import application.crypto.classical.AtbashUtils;
-import application.crypto.classical.CaesarUtils;
 import application.crypto.steganography.BaconianUtils;
-import application.dashboard.NotationUtils;
 import application.files.FileUtils;
-import application.frequency.FrequencyUtils;
 import application.hash.HashUtils;
+import application.history.DashboardHistoryUtils;
 import application.history.ImageHistoryUtils;
 import application.image.ImageInfoUtils;
 import application.image.ImageUtils;
@@ -61,7 +51,6 @@ import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.Separator;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToolBar;
 import javafx.scene.layout.HBox;
@@ -73,20 +62,22 @@ public class Main extends Application {
 	public void start(Stage primaryStage) throws Exception {
 
 		ImageSliders.init();
+		ChartButtons.init();
+		CryptoButtons.init();
+		DashboardButtons.init();
+		EncodingButtons.init();
 		ImageButtons.init();
+		CryptoToolbars.init();
+		DashboardToolbars.init();
+		EncodingToolbars.init();
+		ImageToolbars.init();
 		Tabs.init();
 
 		primaryStage.setTitle("Not Just An Editor");
 
 		Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
 
-		// TextAreas
-		TextArea textArea = new TextArea();
-
 		// Buttons
-		Button unigramChart = new Button("Show unigram chart");
-		Button bigramChart = new Button("Show bigram chart");
-		Button wordChart = new Button("Show word chart");
 
 		Button openFile = new Button("Open file");
 
@@ -101,6 +92,7 @@ public class Main extends Application {
 		final Menu general = new Menu("General");
 		final MenuItem menu11 = new MenuItem("Dashboard");
 		final MenuItem notations = new MenuItem("Notations");
+		final MenuItem textFilters = new MenuItem("Filters");
 
 		final Menu conversions = new Menu("Conversions");
 		final MenuItem encodings = new MenuItem("Encodings");
@@ -117,6 +109,7 @@ public class Main extends Application {
 
 		final Menu chart = new Menu("Charts");
 		final MenuItem frequencies = new MenuItem("Frequencies");
+		final MenuItem histograms = new MenuItem("Image Histograms");
 
 		final Menu file = new Menu("Files");
 		final MenuItem files = new MenuItem("Open");
@@ -156,8 +149,9 @@ public class Main extends Application {
 		final MenuItem ycbcr = new MenuItem("Y'CbCr");
 		final Menu processing = new Menu("Processing");
 		final MenuItem pointProcessing = new MenuItem("Point");
+		final MenuItem linearFilters = new MenuItem("Linear Filters");
 
-		general.getItems().addAll(menu11, notations);
+		general.getItems().addAll(menu11, notations, textFilters);
 
 		conversions.getItems().addAll(encodings, asciiTo, hexTo, binaryTo);
 
@@ -165,7 +159,7 @@ public class Main extends Application {
 
 		hash.getItems().add(generate);
 
-		chart.getItems().add(frequencies);
+		chart.getItems().addAll(frequencies, histograms);
 
 		file.getItems().add(files);
 
@@ -184,7 +178,7 @@ public class Main extends Application {
 
 		image.getItems().addAll(manage, rotate, extraction, imgHistory, processing);
 		extraction.getItems().addAll(channel, grayscale, yuv, ycbcr);
-		processing.getItems().add(pointProcessing);
+		processing.getItems().addAll(pointProcessing, linearFilters);
 
 		MenuBar menuBar = new MenuBar();
 
@@ -197,7 +191,6 @@ public class Main extends Application {
 		// Toolbars
 		ToolBar hashToolBar = new ToolBar(new Label("Generate hash:"), HashButtons.generateMd5,
 				HashButtons.generateSha1, HashButtons.generateSha256, HashButtons.generateSha512);
-		ToolBar frequenciesToolBar = new ToolBar(new Label("Frequency Charts:"), unigramChart, bigramChart, wordChart);
 		ToolBar filesToolBar = new ToolBar(new Label("File:"), openFile);
 		ToolBar passwordToolBar = new ToolBar(passwordStrength);
 		ToolBar tableToolBar = new ToolBar(generateTable);
@@ -211,71 +204,46 @@ public class Main extends Application {
 				StegoButtons.encodeFullBaconian, StegoButtons.decodeFullBaconian);
 		ToolBar pageToolBar = new ToolBar(new Label("Page:"), getSource, extractComments);
 
-		DashboardToolbars.dashboardToolBar.setId("dashboard");
-		DashboardToolbars.notationsToolBar.setId("notations");
-		EncodingToolbars.encodingToolBar.setId("encoding");
-		EncodingToolbars.asciiToToolBar.setId("ascii");
-		EncodingToolbars.hexToToolBar.setId("hex");
-		EncodingToolbars.binaryToToolBar.setId("binary");
 		MathToolbars.rowMathToolBar.setId("rowMath");
 		MathToolbars.conversionMathToolBar.setId("conversionMath");
 		hashToolBar.setId("sha1");
-		frequenciesToolBar.setId("frequencies");
+		ChartToolbars.frequenciesToolBar.setId("frequencies");
+		ChartToolbars.imageHistogramsToolBar.setId("histograms");
 		filesToolBar.setId("files");
 		passwordToolBar.setId("password");
 		tableToolBar.setId("table");
-		CryptoToolbars.caesarToolBar.setId("caesar");
-		CryptoToolbars.albamToolBar.setId("albam");
-		CryptoToolbars.atbahToolBar.setId("atbah");
-		CryptoToolbars.atbashToolBar.setId("atbash");
-		CryptoToolbars.rot5ToolBar.setId("rot5");
-		CryptoToolbars.rot13ToolBar.setId("rot13");
-		CryptoToolbars.rot135ToolBar.setId("rot135");
-		CryptoToolbars.rot47ToolBar.setId("rot47");
+
 		affineToolBar.setId("affine");
 		baconianToolBar.setId("baconian");
 		pageToolBar.setId("page");
-		ImageToolbars.manageImageToolBar.setId("manageImage");
-		ImageToolbars.rotateImageToolBar.setId("rotateImage");
-		ImageToolbars.channelImageToolBar.setId("channelImage");
-		ImageToolbars.grayScaleImageToolBar.setId("grayScaleImage");
-		ImageToolbars.historyImageToolBar.setId("historyImage");
-		ImageToolbars.yuvImageToolBar.setId("yuvImage");
-		ImageToolbars.yCbCrImageToolBar.setId("yCbCrImage");
-		ImageToolbars.pointPocessingImageToolBar.setId("pointProcessingImage");
 
 		VBox toolBox = new VBox();
 		toolBox.autosize();
 		VBox textboxInfo = new VBox();
 		textboxInfo.setMinSize(600, 600);
 
-		HBox graphBox = new HBox();
-		graphBox.setMinSize(600, 600);
-
 		VBox tableBox = new VBox();
-		graphBox.setMinSize(600, 600);
+		tableBox.setMinSize(600, 600);
 
 		// Tabs
 		TabPane tabPane = new TabPane();
-		Tab textTab = new Tab("Text Editor", new HBox(textArea, new Separator(), textboxInfo));
-		Tab chartTab = new Tab("Chart");
+		Tab textTab = new Tab("Text Editor", new HBox(TextAreas.textArea, new Separator(), textboxInfo));
 		Tab tableTab = new Tab("Table", tableBox);
 
 		Tab imageInfoTab = new Tab("ImageInfo");
 
 		textTab.setClosable(false);
 		tableTab.setClosable(false);
-
-		chartTab.setClosable(false);
 		imageInfoTab.setClosable(false);
 
-		tabPane.getTabs().addAll(textTab, chartTab, tableTab, Tabs.imageTab, imageInfoTab);
+		tabPane.getTabs().addAll(textTab, Tabs.chartTab, tableTab, Tabs.imageTab, imageInfoTab);
 
 		VBox vbox = new VBox(menuBar, toolBox, tabPane);
 
 		// Menu Actions
 		menu11.setOnAction(action -> putRemove(toolBox, DashboardToolbars.dashboardToolBar));
 		notations.setOnAction(action -> putRemove(toolBox, DashboardToolbars.notationsToolBar));
+		textFilters.setOnAction(action -> putRemove(toolBox, DashboardToolbars.filteringToolBar));
 		encodings.setOnAction(action -> putRemove(toolBox, EncodingToolbars.encodingToolBar));
 		asciiTo.setOnAction(action -> putRemove(toolBox, EncodingToolbars.asciiToToolBar));
 		hexTo.setOnAction(action -> putRemove(toolBox, EncodingToolbars.hexToToolBar));
@@ -283,7 +251,8 @@ public class Main extends Application {
 		rowMath.setOnAction(action -> putRemove(toolBox, MathToolbars.rowMathToolBar));
 		conversionMath.setOnAction(action -> putRemove(toolBox, MathToolbars.conversionMathToolBar));
 		generate.setOnAction(action -> putRemove(toolBox, hashToolBar));
-		frequencies.setOnAction(action -> putRemove(toolBox, frequenciesToolBar));
+		frequencies.setOnAction(action -> putRemove(toolBox, ChartToolbars.frequenciesToolBar));
+		histograms.setOnAction(action -> putRemove(toolBox, ChartToolbars.imageHistogramsToolBar));
 		file.setOnAction(action -> putRemove(toolBox, filesToolBar));
 		passwords.setOnAction(action -> putRemove(toolBox, passwordToolBar));
 		importTable.setOnAction(action -> putRemove(toolBox, tableToolBar));
@@ -306,56 +275,53 @@ public class Main extends Application {
 		yuv.setOnAction(action -> putRemove(toolBox, ImageToolbars.yuvImageToolBar));
 		ycbcr.setOnAction(action -> putRemove(toolBox, ImageToolbars.yCbCrImageToolBar));
 		pointProcessing.setOnAction(action -> putRemove(toolBox, ImageToolbars.pointPocessingImageToolBar));
+		linearFilters.setOnAction(action -> putRemove(toolBox, ImageToolbars.linearFilterImageToolBar));
 
 		// Buttons Actions
-		DashboardButtons.clean.setOnAction(action -> textArea.setText(""));
-		DashboardButtons.removeSpaces
-				.setOnAction(action -> textArea.setText(textArea.getText().replaceAll("\n", "").replaceAll(" ", "")));
-		DashboardButtons.toLowerCase
-				.setOnAction(action -> textArea.setText(NotationUtils.toLowerCase(textArea.getText())));
-		DashboardButtons.toUpperCase
-				.setOnAction(action -> textArea.setText(NotationUtils.toUpperCase(textArea.getText())));
-		DashboardButtons.capitalization
-				.setOnAction(action -> textArea.setText(NotationUtils.capitalization(textArea.getText())));
-		DashboardButtons.camelCase
-				.setOnAction(action -> textArea.setText(NotationUtils.toCamelCase(textArea.getText())));
-		DashboardButtons.snakeCase
-				.setOnAction(action -> textArea.setText(NotationUtils.toSnakeCase(textArea.getText())));
-		DashboardButtons.kebabCase
-				.setOnAction(action -> textArea.setText(NotationUtils.toKebabCase(textArea.getText())));
 
-		EncodingButtons.encBase64.setOnAction(
-				action -> textArea.setText(Base64.getEncoder().encodeToString(textArea.getText().getBytes())));
-		EncodingButtons.decBase64.setOnAction(
-				action -> textArea.setText(new String(Base64.getDecoder().decode(textArea.getText().getBytes()))));
-		EncodingButtons.asciiToBinary
-				.setOnAction(action -> textArea.setText(AsciiToUtils.toBinary(textArea.getText())));
-		EncodingButtons.asciiToHex.setOnAction(action -> textArea.setText(AsciiToUtils.toHex(textArea.getText())));
-		EncodingButtons.hexToAscii.setOnAction(action -> textArea.setText(HexToUtils.toAscii(textArea.getText())));
-		EncodingButtons.hexToBinary.setOnAction(action -> textArea.setText(HexToUtils.toBinary(textArea.getText())));
-		EncodingButtons.binaryToAscii
-				.setOnAction(action -> textArea.setText(BinaryToUtils.toAscii(textArea.getText())));
-		EncodingButtons.binaryToHex.setOnAction(action -> textArea.setText(BinaryToUtils.toHex(textArea.getText())));
-
-		MathButtons.sumLines.setOnAction(action -> textArea.setText(RowMathUtils.sumLines(textArea.getText())));
-		MathButtons.multiplyLines
-				.setOnAction(action -> textArea.setText(RowMathUtils.multiplyLines(textArea.getText())));
-		MathButtons.maxOfLines.setOnAction(action -> textArea.setText(RowMathUtils.maxOfLines(textArea.getText())));
-		MathButtons.minOfLines.setOnAction(action -> textArea.setText(RowMathUtils.minOfLines(textArea.getText())));
-		MathButtons.base2To10
-				.setOnAction(action -> textArea.setText(ConversionMathUtils.base2To10(textArea.getText())));
-		MathButtons.base2ToN.setOnAction(action -> textArea
-				.setText(ConversionMathUtils.base2ToN(textArea.getText(), MathFields.base2To.getText())));
-		MathButtons.base10To2
-				.setOnAction(action -> textArea.setText(ConversionMathUtils.base10To2(textArea.getText())));
-		MathButtons.base10ToN.setOnAction(action -> textArea
-				.setText(ConversionMathUtils.base10ToN(textArea.getText(), MathFields.base10To.getText())));
-		MathButtons.baseAToB.setOnAction(action -> textArea.setText(ConversionMathUtils.baseAtoB(textArea.getText(),
-				MathFields.baseATo.getText(), MathFields.baseBTo.getText())));
+		MathButtons.sumLines.setOnAction(action -> {
+			TextAreas.textArea.setText(RowMathUtils.sumLines(TextAreas.textArea.getText()));
+			DashboardHistoryUtils.updateDashboardHistroy(TextAreas.textArea.getText());
+		});
+		MathButtons.multiplyLines.setOnAction(action -> {
+			TextAreas.textArea.setText(RowMathUtils.multiplyLines(TextAreas.textArea.getText()));
+			DashboardHistoryUtils.updateDashboardHistroy(TextAreas.textArea.getText());
+		});
+		MathButtons.maxOfLines.setOnAction(action -> {
+			TextAreas.textArea.setText(RowMathUtils.maxOfLines(TextAreas.textArea.getText()));
+			DashboardHistoryUtils.updateDashboardHistroy(TextAreas.textArea.getText());
+		});
+		MathButtons.minOfLines.setOnAction(action -> {
+			TextAreas.textArea.setText(RowMathUtils.minOfLines(TextAreas.textArea.getText()));
+			DashboardHistoryUtils.updateDashboardHistroy(TextAreas.textArea.getText());
+		});
+		MathButtons.base2To10.setOnAction(action -> {
+			TextAreas.textArea.setText(ConversionMathUtils.base2To10(TextAreas.textArea.getText()));
+			DashboardHistoryUtils.updateDashboardHistroy(TextAreas.textArea.getText());
+		});
+		MathButtons.base2ToN.setOnAction(action -> {
+			TextAreas.textArea
+					.setText(ConversionMathUtils.base2ToN(TextAreas.textArea.getText(), MathFields.base2To.getText()));
+			DashboardHistoryUtils.updateDashboardHistroy(TextAreas.textArea.getText());
+		});
+		MathButtons.base10To2.setOnAction(action -> {
+			TextAreas.textArea.setText(ConversionMathUtils.base10To2(TextAreas.textArea.getText()));
+			DashboardHistoryUtils.updateDashboardHistroy(TextAreas.textArea.getText());
+		});
+		MathButtons.base10ToN.setOnAction(action -> {
+			TextAreas.textArea.setText(
+					ConversionMathUtils.base10ToN(TextAreas.textArea.getText(), MathFields.base10To.getText()));
+			DashboardHistoryUtils.updateDashboardHistroy(TextAreas.textArea.getText());
+		});
+		MathButtons.baseAToB.setOnAction(action -> {
+			TextAreas.textArea.setText(ConversionMathUtils.baseAtoB(TextAreas.textArea.getText(),
+					MathFields.baseATo.getText(), MathFields.baseBTo.getText()));
+			DashboardHistoryUtils.updateDashboardHistroy(TextAreas.textArea.getText());
+		});
 
 		HashButtons.generateSha1.setOnAction(action -> {
 			try {
-				textArea.setText(HashUtils.generateSha1(textArea.getText()));
+				TextAreas.textArea.setText(HashUtils.generateSha1(TextAreas.textArea.getText()));
 			} catch (UnsupportedEncodingException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -367,7 +333,8 @@ public class Main extends Application {
 
 		HashButtons.generateSha256.setOnAction(action -> {
 			try {
-				textArea.setText(HashUtils.generateSha256(textArea.getText()));
+				TextAreas.textArea.setText(HashUtils.generateSha256(TextAreas.textArea.getText()));
+				DashboardHistoryUtils.updateDashboardHistroy(TextAreas.textArea.getText());
 			} catch (UnsupportedEncodingException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -379,7 +346,8 @@ public class Main extends Application {
 
 		HashButtons.generateSha512.setOnAction(action -> {
 			try {
-				textArea.setText(HashUtils.generateSha512(textArea.getText()));
+				TextAreas.textArea.setText(HashUtils.generateSha512(TextAreas.textArea.getText()));
+				DashboardHistoryUtils.updateDashboardHistroy(TextAreas.textArea.getText());
 			} catch (UnsupportedEncodingException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -391,7 +359,8 @@ public class Main extends Application {
 
 		HashButtons.generateMd5.setOnAction(action -> {
 			try {
-				textArea.setText(HashUtils.generateMd5(textArea.getText()));
+				TextAreas.textArea.setText(HashUtils.generateMd5(TextAreas.textArea.getText()));
+				DashboardHistoryUtils.updateDashboardHistroy(TextAreas.textArea.getText());
 			} catch (UnsupportedEncodingException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -400,84 +369,65 @@ public class Main extends Application {
 				e.printStackTrace();
 			}
 		});
-		unigramChart.setOnAction(action -> {
-			chartTab.setContent(FrequencyUtils.unigrams(textArea.getText()));
-		});
-		bigramChart.setOnAction(action -> {
-			chartTab.setContent(FrequencyUtils.bigrams(textArea.getText()));
-		});
-		wordChart.setOnAction(action -> {
-			chartTab.setContent(FrequencyUtils.words(textArea.getText()));
-		});
 
 		generateTable.setOnAction(action -> {
 			if (!tableBox.getChildren().isEmpty()) {
 				tableBox.getChildren().clear();
 			}
-			tableBox.getChildren().add(TableUtils.generateCsvTable("test", 100, true, textArea.getText()));
+			tableBox.getChildren().add(TableUtils.generateCsvTable("test", 100, true, TextAreas.textArea.getText()));
 		});
 
-		CryptoButtons.encodeCaesar.setOnAction(action -> textArea.setText(CaesarUtils.encode(textArea.getText())));
-		CryptoButtons.decodeCaesar.setOnAction(action -> textArea.setText(CaesarUtils.decode(textArea.getText())));
-		CryptoButtons.bruteForceCaesar
-				.setOnAction(action -> textArea.setText(CaesarUtils.bruteForce(textArea.getText())));
+		StegoButtons.encodeLatinBaconian.setOnAction(action -> {
+			TextAreas.textArea.setText(BaconianUtils.encodeLatin(TextAreas.textArea.getText()));
+			DashboardHistoryUtils.updateDashboardHistroy(TextAreas.textArea.getText());
+		});
+		StegoButtons.decodeLatinBaconian.setOnAction(action -> {
+			TextAreas.textArea.setText(BaconianUtils.decodeLatin(TextAreas.textArea.getText()));
+			DashboardHistoryUtils.updateDashboardHistroy(TextAreas.textArea.getText());
+		});
 
-		CryptoButtons.encodeAtbash
-				.setOnAction(action -> textArea.setText(AtbashUtils.encodeDecode(textArea.getText())));
-		CryptoButtons.decodeAtbash
-				.setOnAction(action -> textArea.setText(AtbashUtils.encodeDecode(textArea.getText())));
+		CryptoButtons.encodeAffine.setOnAction(action -> {
+			TextAreas.textArea.setText(AffineUtils.encode(Integer.parseInt(affineA.getText()),
+					Integer.parseInt(affineB.getText()), TextAreas.textArea.getText()));
+			DashboardHistoryUtils.updateDashboardHistroy(TextAreas.textArea.getText());
+		});
+		CryptoButtons.decodeAffine.setOnAction(action -> {
+			TextAreas.textArea.setText(AffineUtils.decode(Integer.parseInt(affineA.getText()),
+					Integer.parseInt(affineB.getText()), TextAreas.textArea.getText()));
+			DashboardHistoryUtils.updateDashboardHistroy(TextAreas.textArea.getText());
+		});
+		CryptoButtons.bruteForceAffine.setOnAction(action -> {
+			TextAreas.textArea.setText(AffineUtils.bruteforce(TextAreas.textArea.getText()));
+			DashboardHistoryUtils.updateDashboardHistroy(TextAreas.textArea.getText());
+		});
 
-		CryptoButtons.encodeAlbam.setOnAction(action -> textArea.setText(AlbamUtils.encodeDecode(textArea.getText())));
-		CryptoButtons.decodeAlbam.setOnAction(action -> textArea.setText(AlbamUtils.encodeDecode(textArea.getText())));
-
-		CryptoButtons.encodeAtbah.setOnAction(action -> textArea.setText(AtbahUtils.encodeDecode(textArea.getText())));
-		CryptoButtons.decodeAtbah.setOnAction(action -> textArea.setText(AtbahUtils.encodeDecode(textArea.getText())));
-
-		CryptoButtons.encodeRot13.setOnAction(action -> textArea.setText(Rot13Utils.encodeDecode(textArea.getText())));
-		CryptoButtons.decodeRot13.setOnAction(action -> textArea.setText(Rot13Utils.encodeDecode(textArea.getText())));
-
-		CryptoButtons.encodeRot5.setOnAction(action -> textArea.setText(Rot5Utils.encodeDecode(textArea.getText())));
-		CryptoButtons.decodeRot5.setOnAction(action -> textArea.setText(Rot5Utils.encodeDecode(textArea.getText())));
-
-		CryptoButtons.encodeRot135
-				.setOnAction(action -> textArea.setText(Rot135Utils.encodeDecode(textArea.getText())));
-		CryptoButtons.decodeRot135
-				.setOnAction(action -> textArea.setText(Rot135Utils.encodeDecode(textArea.getText())));
-
-		CryptoButtons.encodeRot47.setOnAction(action -> textArea.setText(Rot47Utils.encodeDecode(textArea.getText())));
-		CryptoButtons.decodeRot47.setOnAction(action -> textArea.setText(Rot47Utils.encodeDecode(textArea.getText())));
-
-		StegoButtons.encodeLatinBaconian
-				.setOnAction(action -> textArea.setText(BaconianUtils.encodeLatin(textArea.getText())));
-		StegoButtons.decodeLatinBaconian
-				.setOnAction(action -> textArea.setText(BaconianUtils.decodeLatin(textArea.getText())));
-
-		CryptoButtons.encodeAffine.setOnAction(action -> textArea.setText(AffineUtils
-				.encode(Integer.parseInt(affineA.getText()), Integer.parseInt(affineB.getText()), textArea.getText())));
-		CryptoButtons.decodeAffine.setOnAction(action -> textArea.setText(AffineUtils
-				.decode(Integer.parseInt(affineA.getText()), Integer.parseInt(affineB.getText()), textArea.getText())));
-		CryptoButtons.bruteForceAffine
-				.setOnAction(action -> textArea.setText(AffineUtils.bruteforce(textArea.getText())));
-
-		StegoButtons.encodeFullBaconian
-				.setOnAction(action -> textArea.setText(BaconianUtils.encodeFull(textArea.getText())));
-		StegoButtons.decodeFullBaconian
-				.setOnAction(action -> textArea.setText(BaconianUtils.decodeFull(textArea.getText())));
+		StegoButtons.encodeFullBaconian.setOnAction(action -> {
+			TextAreas.textArea.setText(BaconianUtils.encodeFull(TextAreas.textArea.getText()));
+			DashboardHistoryUtils.updateDashboardHistroy(TextAreas.textArea.getText());
+		});
+		StegoButtons.decodeFullBaconian.setOnAction(action -> {
+			TextAreas.textArea.setText(BaconianUtils.decodeFull(TextAreas.textArea.getText()));
+			DashboardHistoryUtils.updateDashboardHistroy(TextAreas.textArea.getText());
+		});
 
 		getSource.setOnAction(action -> {
 			try {
-				textArea.setText(PageUtils.getHTML(textArea.getText()));
+				TextAreas.textArea.setText(PageUtils.getHTML(TextAreas.textArea.getText()));
+				DashboardHistoryUtils.updateDashboardHistroy(TextAreas.textArea.getText());
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		});
-		extractComments.setOnAction(action -> textArea.setText(PageUtils.extractComments(textArea.getText())));
+		extractComments.setOnAction(action -> {
+			TextAreas.textArea.setText(PageUtils.extractComments(TextAreas.textArea.getText()));
+			DashboardHistoryUtils.updateDashboardHistroy(TextAreas.textArea.getText());
+		});
 
 		passwordStrength.setOnAction(action -> {
 			if (!textboxInfo.getChildren().isEmpty()) {
 				textboxInfo.getChildren().clear();
 			}
-			Password password = new Password(textArea.getText());
+			Password password = new Password(TextAreas.textArea.getText());
 			ProgressIndicator pi = new ProgressIndicator(password.getStrength());
 
 			HBox barBox = new HBox(new Label("Strength: "), pi);
@@ -490,7 +440,10 @@ public class Main extends Application {
 			textboxInfo.getChildren().addAll(barBox, upperBox, lowerBox, digitBox, specialBox, lengthBox);
 		});
 
-		openFile.setOnAction(action -> textArea.setText(FileUtils.readFile()));
+		openFile.setOnAction(action -> {
+			TextAreas.textArea.setText(FileUtils.readFile());
+			DashboardHistoryUtils.updateDashboardHistroy(TextAreas.textArea.getText());
+		});
 
 		ImageButtons.openImage.setOnAction(action -> {
 			try {
@@ -502,7 +455,7 @@ public class Main extends Application {
 		});
 
 		ImageButtons.openFromUrl.setOnAction(action -> {
-			Tabs.imageTab.setContent(ImageUtils.fromUrl(textArea.getText()));
+			Tabs.imageTab.setContent(ImageUtils.fromUrl(TextAreas.textArea.getText()));
 			ImageHistoryUtils.updateImageHistroy(Tabs.imageTab.getContent());
 		});
 
@@ -513,7 +466,7 @@ public class Main extends Application {
 
 		Scene scene = new Scene(vbox, primaryScreenBounds.getWidth(), primaryScreenBounds.getHeight());
 		primaryStage.setScene(scene);
-		textArea.setPrefSize(scene.getWidth(), scene.getHeight());
+		TextAreas.textArea.setPrefSize(scene.getWidth(), scene.getHeight());
 		primaryStage.show();
 	}
 

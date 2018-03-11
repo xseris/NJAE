@@ -13,4 +13,11 @@ public class EncodingToolbars {
 	public static ToolBar binaryToToolBar = new ToolBar(new Label("Binary to:"), EncodingButtons.binaryToAscii,
 			EncodingButtons.binaryToHex);
 
+	public static void init() {
+		encodingToolBar.setId("encoding");
+		asciiToToolBar.setId("ascii");
+		hexToToolBar.setId("hex");
+		binaryToToolBar.setId("binary");
+	}
+
 }

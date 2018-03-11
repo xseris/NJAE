@@ -6,6 +6,7 @@ import application.builder.tabs.Tabs;
 import application.history.ImageHistoryUtils;
 import application.image.ImageChannelsUtils;
 import application.image.ImageGrayScaleUtils;
+import application.image.ImageLinearFilterUtils;
 import application.image.ImagePointProcessingUtils;
 import application.image.ImageRotationUtils;
 import application.image.ImageYCbCrBT601Utils;
@@ -47,109 +48,124 @@ public class ImageButtons {
 	public static Button power = new Button("Power");
 	public static Button logarithmic = new Button("Logarithmic");
 
+	public static Button linearRectangularFilter = new Button("Rectangular");
+	public static Button linearCircularFilter = new Button("Circular");
+	public static Button linearPyramidalFilter = new Button("Pyramidal");
+	public static Button linearConeFilter = new Button("Cone");
+
 	public static void init() {
 
-		ImageButtons.rotate90Left.setOnAction(action -> {
+		rotate90Left.setOnAction(action -> {
 			ImageRotationUtils.rotate90Left(Tabs.imageTab.getContent());
 			ImageHistoryUtils.updateImageHistroy(Tabs.imageTab.getContent());
 		});
-		ImageButtons.rotate90Right.setOnAction(action -> {
+		rotate90Right.setOnAction(action -> {
 			ImageRotationUtils.rotate90Right(Tabs.imageTab.getContent());
 			ImageHistoryUtils.updateImageHistroy(Tabs.imageTab.getContent());
 		});
-		ImageButtons.rotate180.setOnAction(action -> {
+		rotate180.setOnAction(action -> {
 			ImageRotationUtils.rotate180(Tabs.imageTab.getContent());
 			ImageHistoryUtils.updateImageHistroy(Tabs.imageTab.getContent());
 		});
-		ImageButtons.rotateCustom.setOnAction(action -> {
+		rotateCustom.setOnAction(action -> {
 			ImageRotationUtils.rotateCustom(Tabs.imageTab.getContent(), ImageFields.rotateField.getText());
 			ImageHistoryUtils.updateImageHistroy(Tabs.imageTab.getContent());
 		});
-		ImageButtons.redChannel.setOnAction(action -> {
+		redChannel.setOnAction(action -> {
 			ImageChannelsUtils.getRedChannel(Tabs.imageTab.getContent());
 			ImageHistoryUtils.updateImageHistroy(Tabs.imageTab.getContent());
 		});
-		ImageButtons.greenChannel.setOnAction(action -> {
+		greenChannel.setOnAction(action -> {
 			ImageChannelsUtils.getGreenChannel(Tabs.imageTab.getContent());
 			ImageHistoryUtils.updateImageHistroy(Tabs.imageTab.getContent());
 		});
-		ImageButtons.blueChannel.setOnAction(action -> {
+		blueChannel.setOnAction(action -> {
 			ImageChannelsUtils.getBlueChannel(Tabs.imageTab.getContent());
 			ImageHistoryUtils.updateImageHistroy(Tabs.imageTab.getContent());
 		});
-		ImageButtons.grayAvg.setOnAction(action -> {
+		grayAvg.setOnAction(action -> {
 			ImageGrayScaleUtils.toAverage(Tabs.imageTab.getContent());
 			ImageHistoryUtils.updateImageHistroy(Tabs.imageTab.getContent());
 		});
-		ImageButtons.grayLumin.setOnAction(action -> {
+		grayLumin.setOnAction(action -> {
 			ImageGrayScaleUtils.toLuminescence(Tabs.imageTab.getContent());
 			ImageHistoryUtils.updateImageHistroy(Tabs.imageTab.getContent());
 		});
-		ImageButtons.grayDesat.setOnAction(action -> {
+		grayDesat.setOnAction(action -> {
 			ImageGrayScaleUtils.toDesaturation(Tabs.imageTab.getContent());
 			ImageHistoryUtils.updateImageHistroy(Tabs.imageTab.getContent());
 		});
-		ImageButtons.grayDecompMin.setOnAction(action -> {
+		grayDecompMin.setOnAction(action -> {
 			ImageGrayScaleUtils.toDecompositionMin(Tabs.imageTab.getContent());
 			ImageHistoryUtils.updateImageHistroy(Tabs.imageTab.getContent());
 		});
-		ImageButtons.grayDecompMax.setOnAction(action -> {
+		grayDecompMax.setOnAction(action -> {
 			ImageGrayScaleUtils.toDecompositionMax(Tabs.imageTab.getContent());
 			ImageHistoryUtils.updateImageHistroy(Tabs.imageTab.getContent());
 		});
-		ImageButtons.singleColorRed.setOnAction(action -> {
+		singleColorRed.setOnAction(action -> {
 			ImageGrayScaleUtils.toSingleRed(Tabs.imageTab.getContent());
 			ImageHistoryUtils.updateImageHistroy(Tabs.imageTab.getContent());
 		});
-		ImageButtons.singleColorGreen.setOnAction(action -> {
+		singleColorGreen.setOnAction(action -> {
 			ImageGrayScaleUtils.toSingleGreen(Tabs.imageTab.getContent());
 			ImageHistoryUtils.updateImageHistroy(Tabs.imageTab.getContent());
 		});
-		ImageButtons.singleColorBlue.setOnAction(action -> {
+		singleColorBlue.setOnAction(action -> {
 			ImageGrayScaleUtils.toSingleBlue(Tabs.imageTab.getContent());
 			ImageHistoryUtils.updateImageHistroy(Tabs.imageTab.getContent());
 		});
-		ImageButtons.yuvbt601y.setOnAction(action -> {
+		yuvbt601y.setOnAction(action -> {
 			ImageYUVBT601Utils.getYBT601(Tabs.imageTab.getContent());
 			ImageHistoryUtils.updateImageHistroy(Tabs.imageTab.getContent());
 		});
-		ImageButtons.yuvbt601u.setOnAction(action -> {
+		yuvbt601u.setOnAction(action -> {
 			ImageYUVBT601Utils.getUBT601(Tabs.imageTab.getContent());
 			ImageHistoryUtils.updateImageHistroy(Tabs.imageTab.getContent());
 		});
-		ImageButtons.yuvbt601v.setOnAction(action -> {
+		yuvbt601v.setOnAction(action -> {
 			ImageYUVBT601Utils.getVBT601(Tabs.imageTab.getContent());
 			ImageHistoryUtils.updateImageHistroy(Tabs.imageTab.getContent());
 		});
-		ImageButtons.yCbCrbt601y.setOnAction(action -> {
+		yCbCrbt601y.setOnAction(action -> {
 			ImageYCbCrBT601Utils.getYBT601(Tabs.imageTab.getContent());
 			ImageHistoryUtils.updateImageHistroy(Tabs.imageTab.getContent());
 		});
-		ImageButtons.yCbCrbt601cb.setOnAction(action -> {
+		yCbCrbt601cb.setOnAction(action -> {
 			ImageYCbCrBT601Utils.getCbBT601(Tabs.imageTab.getContent());
 			ImageHistoryUtils.updateImageHistroy(Tabs.imageTab.getContent());
 		});
-		ImageButtons.yCbCrbt601cr.setOnAction(action -> {
+		yCbCrbt601cr.setOnAction(action -> {
 			ImageYCbCrBT601Utils.getCrBT601(Tabs.imageTab.getContent());
 			ImageHistoryUtils.updateImageHistroy(Tabs.imageTab.getContent());
 		});
-		ImageButtons.negative.setOnAction(action -> {
+		negative.setOnAction(action -> {
 			ImagePointProcessingUtils.negative(Tabs.imageTab.getContent());
 			ImageHistoryUtils.updateImageHistroy(Tabs.imageTab.getContent());
 		});
-		ImageButtons.thresholding.setOnAction(action -> {
+		thresholding.setOnAction(action -> {
 			ImagePointProcessingUtils.thresholding(Tabs.imageTab.getContent(), ImageSliders.slider.getValue());
 			ImageHistoryUtils.updateImageHistroy(Tabs.imageTab.getContent());
 		});
-		ImageButtons.logarithmic.setOnAction(action -> {
+		logarithmic.setOnAction(action -> {
 			ImagePointProcessingUtils.logTransformation(Tabs.imageTab.getContent());
 			ImageHistoryUtils.updateImageHistroy(Tabs.imageTab.getContent());
 		});
-		ImageButtons.power.setOnAction(action -> {
+		power.setOnAction(action -> {
 			ImagePointProcessingUtils.powTransformation(Tabs.imageTab.getContent(), ImageSliders.power.getValue());
 			ImageHistoryUtils.updateImageHistroy(Tabs.imageTab.getContent());
 		});
-		ImageButtons.imageUndo.setOnAction(action -> ImageHistoryUtils.undoImageHistroy(Tabs.imageTab.getContent()));
-		ImageButtons.imageRedo.setOnAction(action -> ImageHistoryUtils.redoImageHistroy(Tabs.imageTab.getContent()));
+		linearRectangularFilter.setOnAction(action -> {
+			ImageLinearFilterUtils.rectangular(Tabs.imageTab.getContent(),
+					Integer.parseInt(ImageFields.filterSize.getText()));
+			ImageHistoryUtils.updateImageHistroy(Tabs.imageTab.getContent());
+		});
+		linearCircularFilter.setOnAction(action -> {
+			ImageLinearFilterUtils.circular(Tabs.imageTab.getContent(),
+					Integer.parseInt(ImageFields.filterRadius.getText()));
+			ImageHistoryUtils.updateImageHistroy(Tabs.imageTab.getContent());
+		});
+		imageUndo.setOnAction(action -> ImageHistoryUtils.undoImageHistroy(Tabs.imageTab.getContent()));
+		imageRedo.setOnAction(action -> ImageHistoryUtils.redoImageHistroy(Tabs.imageTab.getContent()));
 	}
 }
