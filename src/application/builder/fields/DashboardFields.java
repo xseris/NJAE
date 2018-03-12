@@ -4,5 +4,7 @@ import javafx.scene.control.TextField;
 
 public class DashboardFields {
 	public static TextField searchField = new TextField("");
+	public static TextField replaceField1 = new TextField("");
+	public static TextField replaceField2 = new TextField("");
 
 }

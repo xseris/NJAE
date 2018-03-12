@@ -1,6 +1,5 @@
 package application;
 
-import java.io.FileNotFoundException;
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
 
@@ -8,6 +7,7 @@ import application.builder.buttons.ChartButtons;
 import application.builder.buttons.CryptoButtons;
 import application.builder.buttons.DashboardButtons;
 import application.builder.buttons.EncodingButtons;
+import application.builder.buttons.FileButtons;
 import application.builder.buttons.HashButtons;
 import application.builder.buttons.ImageButtons;
 import application.builder.buttons.MathButtons;
@@ -24,12 +24,9 @@ import application.builder.toolbars.ImageToolbars;
 import application.builder.toolbars.MathToolbars;
 import application.crypto.classical.AffineUtils;
 import application.crypto.steganography.BaconianUtils;
-import application.files.FileUtils;
 import application.hash.HashUtils;
 import application.history.DashboardHistoryUtils;
-import application.history.ImageHistoryUtils;
 import application.image.ImageInfoUtils;
-import application.image.ImageUtils;
 import application.math.ConversionMathUtils;
 import application.math.RowMathUtils;
 import application.pojo.Password;
@@ -66,6 +63,7 @@ public class Main extends Application {
 		CryptoButtons.init();
 		DashboardButtons.init();
 		EncodingButtons.init();
+		FileButtons.init();
 		ImageButtons.init();
 		CryptoToolbars.init();
 		DashboardToolbars.init();
@@ -78,8 +76,6 @@ public class Main extends Application {
 		Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
 
 		// Buttons
-
-		Button openFile = new Button("Open file");
 
 		Button passwordStrength = new Button("Password strength");
 
@@ -191,7 +187,7 @@ public class Main extends Application {
 		// Toolbars
 		ToolBar hashToolBar = new ToolBar(new Label("Generate hash:"), HashButtons.generateMd5,
 				HashButtons.generateSha1, HashButtons.generateSha256, HashButtons.generateSha512);
-		ToolBar filesToolBar = new ToolBar(new Label("File:"), openFile);
+		ToolBar filesToolBar = new ToolBar(new Label("File:"), FileButtons.openFile, FileButtons.saveToFile);
 		ToolBar passwordToolBar = new ToolBar(passwordStrength);
 		ToolBar tableToolBar = new ToolBar(generateTable);
 
@@ -439,27 +435,6 @@ public class Main extends Application {
 
 			textboxInfo.getChildren().addAll(barBox, upperBox, lowerBox, digitBox, specialBox, lengthBox);
 		});
-
-		openFile.setOnAction(action -> {
-			TextAreas.textArea.setText(FileUtils.readFile());
-			DashboardHistoryUtils.updateDashboardHistroy(TextAreas.textArea.getText());
-		});
-
-		ImageButtons.openImage.setOnAction(action -> {
-			try {
-				Tabs.imageTab.setContent(ImageUtils.openImage());
-				ImageHistoryUtils.updateImageHistroy(Tabs.imageTab.getContent());
-			} catch (FileNotFoundException e) {
-				e.printStackTrace();
-			}
-		});
-
-		ImageButtons.openFromUrl.setOnAction(action -> {
-			Tabs.imageTab.setContent(ImageUtils.fromUrl(TextAreas.textArea.getText()));
-			ImageHistoryUtils.updateImageHistroy(Tabs.imageTab.getContent());
-		});
-
-		ImageButtons.save.setOnAction(action -> ImageUtils.save(Tabs.imageTab.getContent()));
 
 		ImageButtons.info.setOnAction(
 				action -> imageInfoTab.setContent(ImageInfoUtils.generateInfo(Tabs.imageTab.getContent())));

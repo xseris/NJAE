@@ -48,6 +48,7 @@ All features you will expect from an editor that is not just an editor...
 + Kebabcase (From 1.0.3)
 + Lowercase (From 1.0.3)
 + Remove spaces (From 1.0.3)
++ Replace regex (From 1.0.3)
 + Snakecase (From 1.0.3)
 + Uppercase (From 1.0.3)
 
@@ -65,6 +66,7 @@ All features you will expect from an editor that is not just an editor...
 ### Files
 
 + Read text files (From 1.0.0)
++ Save text files (From 1.0.3)
 
 ### Hash
 

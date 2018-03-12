@@ -1,8 +1,10 @@
 package application.files;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 
 import javafx.stage.FileChooser;
@@ -29,6 +31,22 @@ public class FileUtils {
 		}
 
 		return sb.toString();
+	}
+
+	public static void save(String text) {
+
+		FileChooser fileChooser = new FileChooser();
+		fileChooser.setTitle("Save File");
+
+		File file = fileChooser.showSaveDialog(null);
+		if (file != null) {
+			try {
+				BufferedWriter writer = new BufferedWriter(new FileWriter(file.getPath()));
+				writer.write(text);
+				writer.close();
+			} catch (IOException ex) {
+			}
+		}
 	}
 
 }

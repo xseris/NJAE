@@ -1,14 +1,18 @@
 package application.builder.buttons;
 
+import java.io.FileNotFoundException;
+
 import application.builder.fields.ImageFields;
 import application.builder.sliders.ImageSliders;
 import application.builder.tabs.Tabs;
+import application.builder.texareas.TextAreas;
 import application.history.ImageHistoryUtils;
 import application.image.ImageChannelsUtils;
 import application.image.ImageGrayScaleUtils;
 import application.image.ImageLinearFilterUtils;
 import application.image.ImagePointProcessingUtils;
 import application.image.ImageRotationUtils;
+import application.image.ImageUtils;
 import application.image.ImageYCbCrBT601Utils;
 import application.image.ImageYUVBT601Utils;
 import javafx.scene.control.Button;
@@ -165,6 +169,23 @@ public class ImageButtons {
 					Integer.parseInt(ImageFields.filterRadius.getText()));
 			ImageHistoryUtils.updateImageHistroy(Tabs.imageTab.getContent());
 		});
+
+		openImage.setOnAction(action -> {
+			try {
+				Tabs.imageTab.setContent(ImageUtils.openImage());
+				ImageHistoryUtils.updateImageHistroy(Tabs.imageTab.getContent());
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			}
+		});
+
+		openFromUrl.setOnAction(action -> {
+			Tabs.imageTab.setContent(ImageUtils.fromUrl(TextAreas.textArea.getText()));
+			ImageHistoryUtils.updateImageHistroy(Tabs.imageTab.getContent());
+		});
+
+		save.setOnAction(action -> ImageUtils.save(Tabs.imageTab.getContent()));
+
 		imageUndo.setOnAction(action -> ImageHistoryUtils.undoImageHistroy(Tabs.imageTab.getContent()));
 		imageRedo.setOnAction(action -> ImageHistoryUtils.redoImageHistroy(Tabs.imageTab.getContent()));
 	}

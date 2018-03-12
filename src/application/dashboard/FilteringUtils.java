@@ -12,5 +12,9 @@ public class FilteringUtils {
 		}
 		return ret.toString();
 	}
+	
+	public static String replace(String text, String word, String with) {
+		return text.replaceAll(word, with);
+	}
 
 }

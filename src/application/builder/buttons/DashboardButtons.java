@@ -19,6 +19,7 @@ public class DashboardButtons {
 	public static Button kebabCase = new Button("Kebab Case");
 
 	public static Button grep = new Button("Filter");
+	public static Button replace = new Button("Replace");
 
 	public static Button dashboardUndo = new Button("Undo");
 	public static Button dashboardRedo = new Button("Redo");
@@ -60,6 +61,11 @@ public class DashboardButtons {
 		grep.setOnAction(action -> {
 			TextAreas.textArea
 					.setText(FilteringUtils.grep(TextAreas.textArea.getText(), DashboardFields.searchField.getText()));
+			DashboardHistoryUtils.updateDashboardHistroy(TextAreas.textArea.getText());
+		});
+		replace.setOnAction(action -> {
+			TextAreas.textArea.setText(FilteringUtils.replace(TextAreas.textArea.getText(),
+					DashboardFields.replaceField1.getText(), DashboardFields.replaceField2.getText()));
 			DashboardHistoryUtils.updateDashboardHistroy(TextAreas.textArea.getText());
 		});
 
