@@ -7,6 +7,7 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+import application.builder.labels.CurrentLabels;
 import application.current.CurrentFiles;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -110,6 +111,7 @@ public class ImageUtils {
 		fileChooser.getExtensionFilters().addAll(new ExtensionFilter("Image Files", "*.png", "*.jpg", "*.gif"));
 		File selectedFile = fileChooser.showOpenDialog(null);
 		CurrentFiles.currentImage = selectedFile;
+		CurrentLabels.currImage.setText(selectedFile.getPath());
 
 		FileInputStream input = new FileInputStream(selectedFile.getPath());
 		Image image = new Image(input);

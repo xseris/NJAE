@@ -7,6 +7,7 @@ import javafx.scene.control.Button;
 
 public class FileButtons {
 	public static Button openFile = new Button("Open file");
+	public static Button preloadFile = new Button("Preload file");
 	public static Button saveToFile = new Button("Save to file");
 
 	public static void init() {
@@ -16,7 +17,8 @@ public class FileButtons {
 			DashboardHistoryUtils.updateDashboardHistroy(TextAreas.textArea.getText());
 		});
 
-		saveToFile.setOnAction(action -> FileUtils.save(TextAreas.textArea.getText()));
+		preloadFile.setOnAction(action -> FileUtils.preload());
 
+		saveToFile.setOnAction(action -> FileUtils.save(TextAreas.textArea.getText()));
 	}
 }

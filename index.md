@@ -50,6 +50,11 @@ All features you will expect from an editor that is not just an editor...
 + Remove spaces (From 1.0.3)
 + Replace regex (From 1.0.3)
 + Snakecase (From 1.0.3)
++ Sort lines (From 1.0.4)
++ Truncate lines number (From 1.0.4)
++ Truncate lines by length (From 1.0.4)
++ Truncate lines by words (From 1.0.4)
++ Unique lines (From 1.0.4)
 + Uppercase (From 1.0.3)
 
 ### Encodings
@@ -65,8 +70,10 @@ All features you will expect from an editor that is not just an editor...
 
 ### Files
 
++ Preload file (From 1.0.4)
 + Read text files (From 1.0.0)
 + Save text files (From 1.0.3)
++ Show current file (From 1.0.4)
 
 ### Hash
 

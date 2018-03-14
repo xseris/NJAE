@@ -2,6 +2,7 @@ package application.builder.buttons;
 
 import application.builder.fields.DashboardFields;
 import application.builder.texareas.TextAreas;
+import application.dashboard.ArrangingUtils;
 import application.dashboard.FilteringUtils;
 import application.dashboard.NotationUtils;
 import application.history.DashboardHistoryUtils;
@@ -20,6 +21,13 @@ public class DashboardButtons {
 
 	public static Button grep = new Button("Filter");
 	public static Button replace = new Button("Replace");
+	public static Button unique = new Button("Unique lines");
+	public static Button sortAsc = new Button("Ascending");
+	public static Button sortDesc = new Button("Descending");
+
+	public static Button truncateLength = new Button("By Lenght");
+	public static Button truncateWords = new Button("By Words");
+	public static Button truncateLines = new Button("By Lines");
 
 	public static Button dashboardUndo = new Button("Undo");
 	public static Button dashboardRedo = new Button("Redo");
@@ -66,6 +74,33 @@ public class DashboardButtons {
 		replace.setOnAction(action -> {
 			TextAreas.textArea.setText(FilteringUtils.replace(TextAreas.textArea.getText(),
 					DashboardFields.replaceField1.getText(), DashboardFields.replaceField2.getText()));
+			DashboardHistoryUtils.updateDashboardHistroy(TextAreas.textArea.getText());
+		});
+		unique.setOnAction(action -> {
+			TextAreas.textArea.setText(FilteringUtils.unique(TextAreas.textArea.getText()));
+			DashboardHistoryUtils.updateDashboardHistroy(TextAreas.textArea.getText());
+		});
+		sortAsc.setOnAction(action -> {
+			TextAreas.textArea.setText(FilteringUtils.sortAsc(TextAreas.textArea.getText()));
+			DashboardHistoryUtils.updateDashboardHistroy(TextAreas.textArea.getText());
+		});
+		sortDesc.setOnAction(action -> {
+			TextAreas.textArea.setText(FilteringUtils.sortDesc(TextAreas.textArea.getText()));
+			DashboardHistoryUtils.updateDashboardHistroy(TextAreas.textArea.getText());
+		});
+		truncateLength.setOnAction(action -> {
+			TextAreas.textArea.setText(ArrangingUtils.truncateByLength(TextAreas.textArea.getText(),
+					Integer.parseInt(DashboardFields.truncateField.getText())));
+			DashboardHistoryUtils.updateDashboardHistroy(TextAreas.textArea.getText());
+		});
+		truncateWords.setOnAction(action -> {
+			TextAreas.textArea.setText(ArrangingUtils.truncateByWords(TextAreas.textArea.getText(),
+					Integer.parseInt(DashboardFields.truncateField.getText())));
+			DashboardHistoryUtils.updateDashboardHistroy(TextAreas.textArea.getText());
+		});
+		truncateLines.setOnAction(action -> {
+			TextAreas.textArea.setText(ArrangingUtils.truncateByLines(TextAreas.textArea.getText(),
+					Integer.parseInt(DashboardFields.truncateField.getText())));
 			DashboardHistoryUtils.updateDashboardHistroy(TextAreas.textArea.getText());
 		});
 

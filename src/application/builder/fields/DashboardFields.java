@@ -7,4 +7,6 @@ public class DashboardFields {
 	public static TextField replaceField1 = new TextField("");
 	public static TextField replaceField2 = new TextField("");
 
+	public static TextField truncateField = new TextField("5");
+
 }

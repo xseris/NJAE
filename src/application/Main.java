@@ -8,11 +8,13 @@ import application.builder.buttons.CryptoButtons;
 import application.builder.buttons.DashboardButtons;
 import application.builder.buttons.EncodingButtons;
 import application.builder.buttons.FileButtons;
+import application.builder.buttons.FileToolbars;
 import application.builder.buttons.HashButtons;
 import application.builder.buttons.ImageButtons;
 import application.builder.buttons.MathButtons;
 import application.builder.buttons.StegoButtons;
 import application.builder.fields.MathFields;
+import application.builder.labels.CurrentLabels;
 import application.builder.sliders.ImageSliders;
 import application.builder.tabs.Tabs;
 import application.builder.texareas.TextAreas;
@@ -68,6 +70,7 @@ public class Main extends Application {
 		CryptoToolbars.init();
 		DashboardToolbars.init();
 		EncodingToolbars.init();
+		FileToolbars.init();
 		ImageToolbars.init();
 		Tabs.init();
 
@@ -89,6 +92,7 @@ public class Main extends Application {
 		final MenuItem menu11 = new MenuItem("Dashboard");
 		final MenuItem notations = new MenuItem("Notations");
 		final MenuItem textFilters = new MenuItem("Filters");
+		final MenuItem textArrangemets = new MenuItem("Arrangements");
 
 		final Menu conversions = new Menu("Conversions");
 		final MenuItem encodings = new MenuItem("Encodings");
@@ -108,7 +112,7 @@ public class Main extends Application {
 		final MenuItem histograms = new MenuItem("Image Histograms");
 
 		final Menu file = new Menu("Files");
-		final MenuItem files = new MenuItem("Open");
+		final MenuItem manageFiles = new MenuItem("Manage");
 
 		final Menu security = new Menu("Security");
 		final MenuItem passwords = new MenuItem("Passwords");
@@ -147,7 +151,7 @@ public class Main extends Application {
 		final MenuItem pointProcessing = new MenuItem("Point");
 		final MenuItem linearFilters = new MenuItem("Linear Filters");
 
-		general.getItems().addAll(menu11, notations, textFilters);
+		general.getItems().addAll(menu11, notations, textFilters, textArrangemets);
 
 		conversions.getItems().addAll(encodings, asciiTo, hexTo, binaryTo);
 
@@ -157,7 +161,7 @@ public class Main extends Application {
 
 		chart.getItems().addAll(frequencies, histograms);
 
-		file.getItems().add(files);
+		file.getItems().add(manageFiles);
 
 		security.getItems().add(passwords);
 
@@ -187,7 +191,6 @@ public class Main extends Application {
 		// Toolbars
 		ToolBar hashToolBar = new ToolBar(new Label("Generate hash:"), HashButtons.generateMd5,
 				HashButtons.generateSha1, HashButtons.generateSha256, HashButtons.generateSha512);
-		ToolBar filesToolBar = new ToolBar(new Label("File:"), FileButtons.openFile, FileButtons.saveToFile);
 		ToolBar passwordToolBar = new ToolBar(passwordStrength);
 		ToolBar tableToolBar = new ToolBar(generateTable);
 
@@ -205,7 +208,6 @@ public class Main extends Application {
 		hashToolBar.setId("sha1");
 		ChartToolbars.frequenciesToolBar.setId("frequencies");
 		ChartToolbars.imageHistogramsToolBar.setId("histograms");
-		filesToolBar.setId("files");
 		passwordToolBar.setId("password");
 		tableToolBar.setId("table");
 
@@ -234,12 +236,18 @@ public class Main extends Application {
 
 		tabPane.getTabs().addAll(textTab, Tabs.chartTab, tableTab, Tabs.imageTab, imageInfoTab);
 
-		VBox vbox = new VBox(menuBar, toolBox, tabPane);
+		HBox fileInfo = new HBox();
+		fileInfo.setMinHeight(25);
+		fileInfo.getChildren().addAll(new Label("Current file:"), CurrentLabels.currFile,
+				new Label("\t\tCurrent image:"), CurrentLabels.currImage);
+
+		VBox vbox = new VBox(menuBar, toolBox, tabPane, fileInfo);
 
 		// Menu Actions
 		menu11.setOnAction(action -> putRemove(toolBox, DashboardToolbars.dashboardToolBar));
 		notations.setOnAction(action -> putRemove(toolBox, DashboardToolbars.notationsToolBar));
 		textFilters.setOnAction(action -> putRemove(toolBox, DashboardToolbars.filteringToolBar));
+		textArrangemets.setOnAction(action -> putRemove(toolBox, DashboardToolbars.arrangingToolBar));
 		encodings.setOnAction(action -> putRemove(toolBox, EncodingToolbars.encodingToolBar));
 		asciiTo.setOnAction(action -> putRemove(toolBox, EncodingToolbars.asciiToToolBar));
 		hexTo.setOnAction(action -> putRemove(toolBox, EncodingToolbars.hexToToolBar));
@@ -249,7 +257,7 @@ public class Main extends Application {
 		generate.setOnAction(action -> putRemove(toolBox, hashToolBar));
 		frequencies.setOnAction(action -> putRemove(toolBox, ChartToolbars.frequenciesToolBar));
 		histograms.setOnAction(action -> putRemove(toolBox, ChartToolbars.imageHistogramsToolBar));
-		file.setOnAction(action -> putRemove(toolBox, filesToolBar));
+		file.setOnAction(action -> putRemove(toolBox, FileToolbars.filesToolBar));
 		passwords.setOnAction(action -> putRemove(toolBox, passwordToolBar));
 		importTable.setOnAction(action -> putRemove(toolBox, tableToolBar));
 		caesar.setOnAction(action -> putRemove(toolBox, CryptoToolbars.caesarToolBar));
@@ -435,9 +443,6 @@ public class Main extends Application {
 
 			textboxInfo.getChildren().addAll(barBox, upperBox, lowerBox, digitBox, specialBox, lengthBox);
 		});
-
-		ImageButtons.info.setOnAction(
-				action -> imageInfoTab.setContent(ImageInfoUtils.generateInfo(Tabs.imageTab.getContent())));
 
 		Scene scene = new Scene(vbox, primaryScreenBounds.getWidth(), primaryScreenBounds.getHeight());
 		primaryStage.setScene(scene);

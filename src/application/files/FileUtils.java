@@ -7,6 +7,8 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import application.builder.labels.CurrentLabels;
+import application.current.CurrentFiles;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 
@@ -30,6 +32,9 @@ public class FileUtils {
 			e.printStackTrace();
 		}
 
+		CurrentFiles.currentFile = selectedFile;
+		CurrentLabels.currFile.setText(selectedFile.getPath());
+
 		return sb.toString();
 	}
 
@@ -47,6 +52,15 @@ public class FileUtils {
 			} catch (IOException ex) {
 			}
 		}
+	}
+
+	public static void preload() {
+		FileChooser fileChooser = new FileChooser();
+		fileChooser.setTitle("Open Resource File");
+		fileChooser.getExtensionFilters().addAll(new ExtensionFilter("Text Files", "*.txt"));
+		File selectedFile = fileChooser.showOpenDialog(null);
+		CurrentFiles.currentFile = selectedFile;
+		CurrentLabels.currFile.setText(selectedFile.getPath());
 	}
 
 }
