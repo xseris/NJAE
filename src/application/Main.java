@@ -8,7 +8,6 @@ import application.builder.buttons.CryptoButtons;
 import application.builder.buttons.DashboardButtons;
 import application.builder.buttons.EncodingButtons;
 import application.builder.buttons.FileButtons;
-import application.builder.buttons.FileToolbars;
 import application.builder.buttons.HashButtons;
 import application.builder.buttons.ImageButtons;
 import application.builder.buttons.MathButtons;
@@ -22,15 +21,14 @@ import application.builder.toolbars.ChartToolbars;
 import application.builder.toolbars.CryptoToolbars;
 import application.builder.toolbars.DashboardToolbars;
 import application.builder.toolbars.EncodingToolbars;
+import application.builder.toolbars.FileToolbars;
 import application.builder.toolbars.ImageToolbars;
 import application.builder.toolbars.MathToolbars;
 import application.crypto.classical.AffineUtils;
 import application.crypto.steganography.BaconianUtils;
 import application.hash.HashUtils;
 import application.history.DashboardHistoryUtils;
-import application.image.ImageInfoUtils;
 import application.math.ConversionMathUtils;
-import application.math.RowMathUtils;
 import application.pojo.Password;
 import application.table.TableUtils;
 import application.web.PageUtils;
@@ -67,6 +65,7 @@ public class Main extends Application {
 		EncodingButtons.init();
 		FileButtons.init();
 		ImageButtons.init();
+		MathButtons.init();
 		CryptoToolbars.init();
 		DashboardToolbars.init();
 		EncodingToolbars.init();
@@ -113,6 +112,7 @@ public class Main extends Application {
 
 		final Menu file = new Menu("Files");
 		final MenuItem manageFiles = new MenuItem("Manage");
+		final MenuItem samplingFiles = new MenuItem("Sampling");
 
 		final Menu security = new Menu("Security");
 		final MenuItem passwords = new MenuItem("Passwords");
@@ -161,7 +161,7 @@ public class Main extends Application {
 
 		chart.getItems().addAll(frequencies, histograms);
 
-		file.getItems().add(manageFiles);
+		file.getItems().addAll(manageFiles, samplingFiles);
 
 		security.getItems().add(passwords);
 
@@ -257,7 +257,8 @@ public class Main extends Application {
 		generate.setOnAction(action -> putRemove(toolBox, hashToolBar));
 		frequencies.setOnAction(action -> putRemove(toolBox, ChartToolbars.frequenciesToolBar));
 		histograms.setOnAction(action -> putRemove(toolBox, ChartToolbars.imageHistogramsToolBar));
-		file.setOnAction(action -> putRemove(toolBox, FileToolbars.filesToolBar));
+		manageFiles.setOnAction(action -> putRemove(toolBox, FileToolbars.filesToolBar));
+		samplingFiles.setOnAction(action -> putRemove(toolBox, FileToolbars.samplingToolBar));
 		passwords.setOnAction(action -> putRemove(toolBox, passwordToolBar));
 		importTable.setOnAction(action -> putRemove(toolBox, tableToolBar));
 		caesar.setOnAction(action -> putRemove(toolBox, CryptoToolbars.caesarToolBar));
@@ -283,22 +284,6 @@ public class Main extends Application {
 
 		// Buttons Actions
 
-		MathButtons.sumLines.setOnAction(action -> {
-			TextAreas.textArea.setText(RowMathUtils.sumLines(TextAreas.textArea.getText()));
-			DashboardHistoryUtils.updateDashboardHistroy(TextAreas.textArea.getText());
-		});
-		MathButtons.multiplyLines.setOnAction(action -> {
-			TextAreas.textArea.setText(RowMathUtils.multiplyLines(TextAreas.textArea.getText()));
-			DashboardHistoryUtils.updateDashboardHistroy(TextAreas.textArea.getText());
-		});
-		MathButtons.maxOfLines.setOnAction(action -> {
-			TextAreas.textArea.setText(RowMathUtils.maxOfLines(TextAreas.textArea.getText()));
-			DashboardHistoryUtils.updateDashboardHistroy(TextAreas.textArea.getText());
-		});
-		MathButtons.minOfLines.setOnAction(action -> {
-			TextAreas.textArea.setText(RowMathUtils.minOfLines(TextAreas.textArea.getText()));
-			DashboardHistoryUtils.updateDashboardHistroy(TextAreas.textArea.getText());
-		});
 		MathButtons.base2To10.setOnAction(action -> {
 			TextAreas.textArea.setText(ConversionMathUtils.base2To10(TextAreas.textArea.getText()));
 			DashboardHistoryUtils.updateDashboardHistroy(TextAreas.textArea.getText());

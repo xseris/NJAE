@@ -70,10 +70,13 @@ All features you will expect from an editor that is not just an editor...
 
 ### Files
 
++ Head sampling (From 1.0.4)
 + Preload file (From 1.0.4)
++ Random lines by words (From 1.0.4)
 + Read text files (From 1.0.0)
 + Save text files (From 1.0.3)
 + Show current file (From 1.0.4)
++ Tail lines by words (From 1.0.4)
 
 ### Hash
 
@@ -113,11 +116,13 @@ All features you will expect from an editor that is not just an editor...
 + Power Transformation (From 1.0.3)
 + Rotate Image (From 1.0.2)
 + Save Image (From 1.0.2)
++ Show current image (From 1.0.4)
 + Thresholding (From 1.0.3)
 + Zoom Image (From 1.0.2)
 
 ### Math
 
++ Average of lines (From 1.0.4)
 + Base 10 to base 2 (From 1.0.3)
 + Base 10 to base n (From 1.0.3)
 + Base 2 to base 10 (From 1.0.3)
