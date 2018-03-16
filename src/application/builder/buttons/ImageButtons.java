@@ -1,16 +1,20 @@
 package application.builder.buttons;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 
 import application.builder.fields.ImageFields;
 import application.builder.sliders.ImageSliders;
 import application.builder.tabs.Tabs;
 import application.builder.texareas.TextAreas;
+import application.current.CurrentFiles;
 import application.history.ImageHistoryUtils;
 import application.image.ImageChannelsUtils;
+import application.image.ImageCombineUtils;
 import application.image.ImageGrayScaleUtils;
 import application.image.ImageLinearFilterUtils;
 import application.image.ImagePointProcessingUtils;
+import application.image.ImageQRUtils;
 import application.image.ImageRotationUtils;
 import application.image.ImageUtils;
 import application.image.ImageYCbCrBT601Utils;
@@ -51,11 +55,16 @@ public class ImageButtons {
 	public static Button thresholding = new Button("Apply");
 	public static Button power = new Button("Power");
 	public static Button logarithmic = new Button("Logarithmic");
+	public static Button emphatize = new Button("Emphatize");
 
 	public static Button linearRectangularFilter = new Button("Rectangular");
 	public static Button linearCircularFilter = new Button("Circular");
 	public static Button linearPyramidalFilter = new Button("Pyramidal");
 	public static Button linearConeFilter = new Button("Cone");
+
+	public static Button readQr = new Button("Read");
+
+	public static Button subtract = new Button("Subtract");
 
 	public static void init() {
 
@@ -147,6 +156,10 @@ public class ImageButtons {
 			ImagePointProcessingUtils.negative(Tabs.imageTab.getContent());
 			ImageHistoryUtils.updateImageHistroy(Tabs.imageTab.getContent());
 		});
+		emphatize.setOnAction(action -> {
+			ImagePointProcessingUtils.emphatize(Tabs.imageTab.getContent());
+			ImageHistoryUtils.updateImageHistroy(Tabs.imageTab.getContent());
+		});
 		thresholding.setOnAction(action -> {
 			ImagePointProcessingUtils.thresholding(Tabs.imageTab.getContent(), ImageSliders.slider.getValue());
 			ImageHistoryUtils.updateImageHistroy(Tabs.imageTab.getContent());
@@ -167,6 +180,23 @@ public class ImageButtons {
 		linearCircularFilter.setOnAction(action -> {
 			ImageLinearFilterUtils.circular(Tabs.imageTab.getContent(),
 					Integer.parseInt(ImageFields.filterRadius.getText()));
+			ImageHistoryUtils.updateImageHistroy(Tabs.imageTab.getContent());
+		});
+
+		readQr.setOnAction(action -> {
+			try {
+				TextAreas.textArea.setText(ImageQRUtils.decodeQRCode(CurrentFiles.currentImage));
+			} catch (IOException e) {
+				TextAreas.textArea.setText("Some error occured on decoding image");
+			}
+		});
+
+		subtract.setOnAction(action -> {
+			try {
+				ImageCombineUtils.subtract((Tabs.imageTab.getContent()));
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			}
 			ImageHistoryUtils.updateImageHistroy(Tabs.imageTab.getContent());
 		});
 

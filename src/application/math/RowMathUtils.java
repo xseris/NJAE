@@ -61,4 +61,26 @@ public class RowMathUtils {
 		return String.valueOf(ret);
 	}
 
+	public static String mcdOfLines(String text) {
+		String[] lines = text.split("\n");
+		BigInteger ret = new BigInteger(lines[0]);
+		BigInteger mcd = ret;
+		for (String line : lines) {
+			BigInteger num = new BigInteger(line);
+			mcd = MathUtils.mcd(mcd, num);
+		}
+		return String.valueOf(mcd);
+	}
+
+	public static String mcmOfLines(String text) {
+		String[] lines = text.split("\n");
+		BigInteger ret = new BigInteger(lines[0]);
+		BigInteger mcm = ret;
+		for (String line : lines) {
+			BigInteger num = new BigInteger(line);
+			mcm = MathUtils.mcm(mcm, num);
+		}
+		return String.valueOf(mcm);
+	}
+
 }

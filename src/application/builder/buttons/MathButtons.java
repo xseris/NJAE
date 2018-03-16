@@ -11,6 +11,8 @@ public class MathButtons {
 	public static Button averageLines = new Button("Average Lines");
 	public static Button maxOfLines = new Button("Max of Lines");
 	public static Button minOfLines = new Button("Min of Lines");
+	public static Button mcdOfLines = new Button("Mcd of Lines");
+	public static Button mcmOfLines = new Button("Mcm of Lines");
 
 	public static Button base2To10 = new Button("To 10");
 	public static Button base2ToN = new Button("To n");
@@ -37,6 +39,14 @@ public class MathButtons {
 		});
 		minOfLines.setOnAction(action -> {
 			TextAreas.textArea.setText(RowMathUtils.minOfLines(TextAreas.textArea.getText()));
+			DashboardHistoryUtils.updateDashboardHistroy(TextAreas.textArea.getText());
+		});
+		mcdOfLines.setOnAction(action -> {
+			TextAreas.textArea.setText(RowMathUtils.mcdOfLines(TextAreas.textArea.getText()));
+			DashboardHistoryUtils.updateDashboardHistroy(TextAreas.textArea.getText());
+		});
+		mcmOfLines.setOnAction(action -> {
+			TextAreas.textArea.setText(RowMathUtils.mcmOfLines(TextAreas.textArea.getText()));
 			DashboardHistoryUtils.updateDashboardHistroy(TextAreas.textArea.getText());
 		});
 	}

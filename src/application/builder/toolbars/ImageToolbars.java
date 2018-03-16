@@ -27,12 +27,17 @@ public class ImageToolbars {
 			ImageButtons.yCbCrbt601cb, ImageButtons.yCbCrbt601cr);
 	public static ToolBar pointPocessingImageToolBar = new ToolBar(new Label("Point processing"), ImageButtons.negative,
 			new Separator(), new Label("Thresholding"), ImageSliders.slider, ImageButtons.thresholding, new Separator(),
-			new Label("Tranfsormations"), ImageButtons.logarithmic, ImageSliders.power, ImageButtons.power);
+			new Label("Tranfsormations"), ImageButtons.logarithmic, ImageSliders.power, ImageButtons.power,
+			new Separator(), ImageButtons.emphatize);
 
 	public static ToolBar linearFilterImageToolBar = new ToolBar(new Label("Linear filters"), new Separator(),
 			new Label("Size:"), ImageFields.filterSize, new Label("Radius:"), ImageFields.filterRadius, new Separator(),
 			new Label("Apply"), ImageButtons.linearRectangularFilter, ImageButtons.linearCircularFilter,
 			ImageButtons.linearPyramidalFilter, ImageButtons.linearConeFilter);
+
+	public static ToolBar qrImageToolBar = new ToolBar(new Label("QR Code:"), ImageButtons.readQr);
+
+	public static ToolBar combineImageToolBar = new ToolBar(new Label("Combine: "), ImageButtons.subtract);
 
 	public static void init() {
 		manageImageToolBar.setId("manageImage");
@@ -44,6 +49,8 @@ public class ImageToolbars {
 		yCbCrImageToolBar.setId("yCbCrImage");
 		pointPocessingImageToolBar.setId("pointProcessingImage");
 		linearFilterImageToolBar.setId("linearFilterImage");
+		qrImageToolBar.setId("qrCodeImage");
+		combineImageToolBar.setId("subtractImage");
 	}
 
 }

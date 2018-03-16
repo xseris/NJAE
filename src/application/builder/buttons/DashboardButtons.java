@@ -29,6 +29,10 @@ public class DashboardButtons {
 	public static Button truncateWords = new Button("By Words");
 	public static Button truncateLines = new Button("By Lines");
 
+	public static Button reverseText = new Button("Text");
+	public static Button reverseWords = new Button("Words");
+	public static Button reverseLines = new Button("Lines");
+
 	public static Button dashboardUndo = new Button("Undo");
 	public static Button dashboardRedo = new Button("Redo");
 
@@ -101,6 +105,19 @@ public class DashboardButtons {
 		truncateLines.setOnAction(action -> {
 			TextAreas.textArea.setText(ArrangingUtils.truncateByLines(TextAreas.textArea.getText(),
 					Integer.parseInt(DashboardFields.truncateField.getText())));
+			DashboardHistoryUtils.updateDashboardHistroy(TextAreas.textArea.getText());
+		});
+
+		reverseText.setOnAction(action -> {
+			TextAreas.textArea.setText(ArrangingUtils.reverseText(TextAreas.textArea.getText()));
+			DashboardHistoryUtils.updateDashboardHistroy(TextAreas.textArea.getText());
+		});
+		reverseWords.setOnAction(action -> {
+			TextAreas.textArea.setText(ArrangingUtils.reverseWords(TextAreas.textArea.getText()));
+			DashboardHistoryUtils.updateDashboardHistroy(TextAreas.textArea.getText());
+		});
+		reverseLines.setOnAction(action -> {
+			TextAreas.textArea.setText(ArrangingUtils.reverseLines(TextAreas.textArea.getText()));
 			DashboardHistoryUtils.updateDashboardHistroy(TextAreas.textArea.getText());
 		});
 

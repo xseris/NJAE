@@ -23,7 +23,9 @@ public class DashboardToolbars {
 			DashboardButtons.sortDesc);
 
 	public static ToolBar arrangingToolBar = new ToolBar(new Label("Truncate: "), DashboardFields.truncateField,
-			DashboardButtons.truncateLength, DashboardButtons.truncateWords, DashboardButtons.truncateLines);
+			DashboardButtons.truncateLength, DashboardButtons.truncateWords, DashboardButtons.truncateLines,
+			new Separator(), new Label("Reverse: "), DashboardButtons.reverseWords, DashboardButtons.reverseText,
+			DashboardButtons.reverseLines);
 
 	public static void init() {
 		dashboardToolBar.setId("dashboard");

@@ -1,4 +1,4 @@
-# NJAE (1.0.3)
+# NJAE (1.0.4)
 
 NJAE is simply Not Just An Editor, beacause this is not just an editor...
 
@@ -49,6 +49,9 @@ All features you will expect from an editor that is not just an editor...
 + Lowercase (From 1.0.3)
 + Remove spaces (From 1.0.3)
 + Replace regex (From 1.0.3)
++ Reverse lines (From 1.0.4)
++ Reverse text (From 1.0.4)
++ Reverse words (From 1.0.4)
 + Snakecase (From 1.0.3)
 + Sort lines (From 1.0.4)
 + Truncate lines number (From 1.0.4)
@@ -88,6 +91,8 @@ All features you will expect from an editor that is not just an editor...
 ### Images
 
 + Blur Filtering (From 1.0.3)
++ Difference (From 1.0.4)
++ Emphatize (From 1.0.4)
 + Extract blue channel (From 1.0.2)
 + Extract Cb [BT.601] (From 1.0.3)
 + Extract Cr [BT.601] (From 1.0.3)
@@ -114,6 +119,7 @@ All features you will expect from an editor that is not just an editor...
 + Negative Transformation (From 1.0.3)
 + Open Image (From 1.0.2)
 + Power Transformation (From 1.0.3)
++ Read QR Codes (From 1.0.4)
 + Rotate Image (From 1.0.2)
 + Save Image (From 1.0.2)
 + Show current image (From 1.0.4)
@@ -129,6 +135,8 @@ All features you will expect from an editor that is not just an editor...
 + Base 2 to base n (From 1.0.3)
 + Base a to base b (From 1.0.3)
 + Max of lines (From 1.0.0)
++ Mcd of lines (From 1.0.4)
++ Mcm of lines (From 1.0.4)
 + Min of lines (From 1.0.0)
 + Multiply lines (From 1.0.0)
 + Sum lines (From 1.0.0)

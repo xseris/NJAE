@@ -28,6 +28,7 @@ import application.crypto.classical.AffineUtils;
 import application.crypto.steganography.BaconianUtils;
 import application.hash.HashUtils;
 import application.history.DashboardHistoryUtils;
+import application.image.ImageInfoUtils;
 import application.math.ConversionMathUtils;
 import application.pojo.Password;
 import application.table.TableUtils;
@@ -150,6 +151,8 @@ public class Main extends Application {
 		final Menu processing = new Menu("Processing");
 		final MenuItem pointProcessing = new MenuItem("Point");
 		final MenuItem linearFilters = new MenuItem("Linear Filters");
+		final MenuItem qrCode = new MenuItem("QR Codes");
+		final MenuItem combine = new MenuItem("Combine");
 
 		general.getItems().addAll(menu11, notations, textFilters, textArrangemets);
 
@@ -176,7 +179,7 @@ public class Main extends Application {
 
 		web.getItems().add(page);
 
-		image.getItems().addAll(manage, rotate, extraction, imgHistory, processing);
+		image.getItems().addAll(manage, rotate, extraction, imgHistory, processing, qrCode, combine);
 		extraction.getItems().addAll(channel, grayscale, yuv, ycbcr);
 		processing.getItems().addAll(pointProcessing, linearFilters);
 
@@ -281,6 +284,8 @@ public class Main extends Application {
 		ycbcr.setOnAction(action -> putRemove(toolBox, ImageToolbars.yCbCrImageToolBar));
 		pointProcessing.setOnAction(action -> putRemove(toolBox, ImageToolbars.pointPocessingImageToolBar));
 		linearFilters.setOnAction(action -> putRemove(toolBox, ImageToolbars.linearFilterImageToolBar));
+		qrCode.setOnAction(action -> putRemove(toolBox, ImageToolbars.qrImageToolBar));
+		combine.setOnAction(action -> putRemove(toolBox, ImageToolbars.combineImageToolBar));
 
 		// Buttons Actions
 
@@ -364,6 +369,10 @@ public class Main extends Application {
 				tableBox.getChildren().clear();
 			}
 			tableBox.getChildren().add(TableUtils.generateCsvTable("test", 100, true, TextAreas.textArea.getText()));
+		});
+		
+		ImageButtons.info.setOnAction(action -> {
+			imageInfoTab.setContent(ImageInfoUtils.generateInfo(Tabs.imageTab.getContent()));
 		});
 
 		StegoButtons.encodeLatinBaconian.setOnAction(action -> {
