@@ -1,6 +1,6 @@
-# NJAE (1.0.4)
+# NJAE (1.0.5)
 
-NJAE is simply Not Just An Editor, beacause this is not just an editor...
+NJAE is simply Not Just An Editor, because this is not just an editor...
 
 ## Features
 
@@ -147,7 +147,9 @@ All features you will expect from an editor that is not just an editor...
 
 ### Sequences
 
++ Even Numbers (From 1.0.5)
 + Fibonacci (From 1.0.4)
++ Odd Numbers (From 1.0.5)
 
 ### Steganography
 

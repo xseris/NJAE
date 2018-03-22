@@ -160,6 +160,8 @@ public class Main extends Application {
 
 		final Menu sequences = new Menu("Sequences");
 		final MenuItem fibonacci = new MenuItem("Fibonacci");
+		final MenuItem even = new MenuItem("Even Numbers");
+		final MenuItem odd = new MenuItem("Odd Numbers");
 
 		general.getItems().addAll(menu11, notations, textFilters, textArrangemets);
 
@@ -190,7 +192,7 @@ public class Main extends Application {
 		extraction.getItems().addAll(channel, grayscale, yuv, ycbcr);
 		processing.getItems().addAll(pointProcessing, linearFilters);
 
-		sequences.getItems().add(fibonacci);
+		sequences.getItems().addAll(fibonacci, even, odd);
 
 		MenuBar menuBar = new MenuBar();
 
@@ -297,6 +299,8 @@ public class Main extends Application {
 		qrCode.setOnAction(action -> putRemove(toolBox, ImageToolbars.qrImageToolBar));
 		combine.setOnAction(action -> putRemove(toolBox, ImageToolbars.combineImageToolBar));
 		fibonacci.setOnAction(action -> putRemove(toolBox, SequenceToolbars.fibonacciToolbar));
+		even.setOnAction(action -> putRemove(toolBox, SequenceToolbars.evenToolbar));
+		odd.setOnAction(action -> putRemove(toolBox, SequenceToolbars.oddToolbar));
 
 		// Buttons Actions
 
