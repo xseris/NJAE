@@ -145,6 +145,10 @@ All features you will expect from an editor that is not just an editor...
 
 + Analyse password strength (From 1.0.0)
 
+### Sequences
+
++ Fibonacci (From 1.0.4)
+
 ### Steganography
 
 + Encode full Baconian (From 1.0.1)

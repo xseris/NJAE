@@ -11,6 +11,7 @@ import application.builder.buttons.FileButtons;
 import application.builder.buttons.HashButtons;
 import application.builder.buttons.ImageButtons;
 import application.builder.buttons.MathButtons;
+import application.builder.buttons.SequenceButtons;
 import application.builder.buttons.StegoButtons;
 import application.builder.fields.MathFields;
 import application.builder.labels.CurrentLabels;
@@ -24,6 +25,7 @@ import application.builder.toolbars.EncodingToolbars;
 import application.builder.toolbars.FileToolbars;
 import application.builder.toolbars.ImageToolbars;
 import application.builder.toolbars.MathToolbars;
+import application.builder.toolbars.SequenceToolbars;
 import application.crypto.classical.AffineUtils;
 import application.crypto.steganography.BaconianUtils;
 import application.hash.HashUtils;
@@ -67,11 +69,13 @@ public class Main extends Application {
 		FileButtons.init();
 		ImageButtons.init();
 		MathButtons.init();
+		SequenceButtons.init();
 		CryptoToolbars.init();
 		DashboardToolbars.init();
 		EncodingToolbars.init();
 		FileToolbars.init();
 		ImageToolbars.init();
+		SequenceToolbars.init();
 		Tabs.init();
 
 		primaryStage.setTitle("Not Just An Editor");
@@ -154,6 +158,9 @@ public class Main extends Application {
 		final MenuItem qrCode = new MenuItem("QR Codes");
 		final MenuItem combine = new MenuItem("Combine");
 
+		final Menu sequences = new Menu("Sequences");
+		final MenuItem fibonacci = new MenuItem("Fibonacci");
+
 		general.getItems().addAll(menu11, notations, textFilters, textArrangemets);
 
 		conversions.getItems().addAll(encodings, asciiTo, hexTo, binaryTo);
@@ -183,9 +190,12 @@ public class Main extends Application {
 		extraction.getItems().addAll(channel, grayscale, yuv, ycbcr);
 		processing.getItems().addAll(pointProcessing, linearFilters);
 
+		sequences.getItems().add(fibonacci);
+
 		MenuBar menuBar = new MenuBar();
 
-		menuBar.getMenus().addAll(general, conversions, math, hash, chart, file, security, table, crypto, web, image);
+		menuBar.getMenus().addAll(general, conversions, math, hash, chart, file, security, table, crypto, web, image,
+				sequences);
 
 		// Text Fields
 		TextField affineA = new TextField("3");
@@ -286,6 +296,7 @@ public class Main extends Application {
 		linearFilters.setOnAction(action -> putRemove(toolBox, ImageToolbars.linearFilterImageToolBar));
 		qrCode.setOnAction(action -> putRemove(toolBox, ImageToolbars.qrImageToolBar));
 		combine.setOnAction(action -> putRemove(toolBox, ImageToolbars.combineImageToolBar));
+		fibonacci.setOnAction(action -> putRemove(toolBox, SequenceToolbars.fibonacciToolbar));
 
 		// Buttons Actions
 
@@ -370,7 +381,7 @@ public class Main extends Application {
 			}
 			tableBox.getChildren().add(TableUtils.generateCsvTable("test", 100, true, TextAreas.textArea.getText()));
 		});
-		
+
 		ImageButtons.info.setOnAction(action -> {
 			imageInfoTab.setContent(ImageInfoUtils.generateInfo(Tabs.imageTab.getContent()));
 		});
