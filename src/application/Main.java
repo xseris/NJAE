@@ -162,6 +162,18 @@ public class Main extends Application {
 		final MenuItem fibonacci = new MenuItem("Fibonacci");
 		final MenuItem even = new MenuItem("Even Numbers");
 		final MenuItem odd = new MenuItem("Odd Numbers");
+		final Menu figurate = new Menu("Figurate Numbers");
+		final Menu twoD = new Menu("2-Dimensional");
+		final Menu threeD = new Menu("3-Dimensional");
+		final Menu twoDNotCentered = new Menu("Not Centered");
+		final Menu threeDNotCentered = new Menu("Not Centered");
+		final MenuItem square = new MenuItem("Square Numbers");
+		final MenuItem triangular = new MenuItem("Triangular Numbers");
+		final MenuItem hexagonal = new MenuItem("Hexagonal Numbers");
+		final MenuItem heptagonal = new MenuItem("Heptagonal Numbers");
+		final MenuItem tetrahedral = new MenuItem("Tetrahedral Numbers");
+		final MenuItem pentagonal = new MenuItem("Pentagonal Numbers");
+		final MenuItem octagonal = new MenuItem("Octagonal Numbers");
 
 		general.getItems().addAll(menu11, notations, textFilters, textArrangemets);
 
@@ -192,7 +204,12 @@ public class Main extends Application {
 		extraction.getItems().addAll(channel, grayscale, yuv, ycbcr);
 		processing.getItems().addAll(pointProcessing, linearFilters);
 
-		sequences.getItems().addAll(fibonacci, even, odd);
+		sequences.getItems().addAll(fibonacci, even, odd, figurate);
+		figurate.getItems().addAll(twoD, threeD);
+		twoD.getItems().add(twoDNotCentered);
+		twoDNotCentered.getItems().addAll(triangular, square, pentagonal, hexagonal, heptagonal, octagonal);
+		threeD.getItems().add(threeDNotCentered);
+		threeDNotCentered.getItems().add(tetrahedral);
 
 		MenuBar menuBar = new MenuBar();
 
@@ -301,6 +318,13 @@ public class Main extends Application {
 		fibonacci.setOnAction(action -> putRemove(toolBox, SequenceToolbars.fibonacciToolbar));
 		even.setOnAction(action -> putRemove(toolBox, SequenceToolbars.evenToolbar));
 		odd.setOnAction(action -> putRemove(toolBox, SequenceToolbars.oddToolbar));
+		square.setOnAction(action -> putRemove(toolBox, SequenceToolbars.squareToolbar));
+		triangular.setOnAction(action -> putRemove(toolBox, SequenceToolbars.triangularToolbar));
+		hexagonal.setOnAction(action -> putRemove(toolBox, SequenceToolbars.hexagonalToolbar));
+		heptagonal.setOnAction(action -> putRemove(toolBox, SequenceToolbars.heptagonalToolbar));
+		tetrahedral.setOnAction(action -> putRemove(toolBox, SequenceToolbars.tetrahedralToolbar));
+		pentagonal.setOnAction(action -> putRemove(toolBox, SequenceToolbars.pentagonalToolbar));
+		octagonal.setOnAction(action -> putRemove(toolBox, SequenceToolbars.octagonalToolbar));
 
 		// Buttons Actions
 

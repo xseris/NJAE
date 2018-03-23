@@ -149,7 +149,13 @@ All features you will expect from an editor that is not just an editor...
 
 + Even Numbers (From 1.0.5)
 + Fibonacci (From 1.0.4)
++ Heptagonal Numbers (From 1.0.5)
++ Hexagonal Numbers (From 1.0.5)
++ Octagonal Numbers (From 1.0.5)
 + Odd Numbers (From 1.0.5)
++ Square Numbers (From 1.0.5)
++ Tetrahedral Numbers (From 1.0.5)
++ Triangular Numbers (From 1.0.5)
 
 ### Steganography
 
