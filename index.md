@@ -147,10 +147,21 @@ All features you will expect from an editor that is not just an editor...
 
 ### Sequences
 
++ Centered Decagonal Numbers (From 1.0.5)
++ Centered Heptagonal Numbers (From 1.0.5)
++ Centered Hexagonal Numbers (From 1.0.5)
++ Centered Nonagonal Numbers (From 1.0.5)
++ Centered Octagonal Numbers (From 1.0.5)
++ Centered Pentagonal Numbers (From 1.0.5)
++ Centered Square Numbers (From 1.0.5)
++ Centered Triangular Numbers (From 1.0.5)
++ Decagonal Numbers (From 1.0.5)
++ Dodecagonal Numbers (From 1.0.5)
 + Even Numbers (From 1.0.5)
 + Fibonacci (From 1.0.4)
 + Heptagonal Numbers (From 1.0.5)
 + Hexagonal Numbers (From 1.0.5)
++ Nonagonal Numbers (From 1.0.5)
 + Octagonal Numbers (From 1.0.5)
 + Odd Numbers (From 1.0.5)
 + Square Numbers (From 1.0.5)

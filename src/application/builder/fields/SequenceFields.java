@@ -17,4 +17,14 @@ public class SequenceFields {
 	public static TextField decagonalX = new TextField();
 	public static TextField dodecagonalX = new TextField();
 
+	public static TextField centeredSquareX = new TextField();
+	public static TextField centeredTriangularX = new TextField();
+	public static TextField centeredHexagonalX = new TextField();
+	public static TextField centeredHeptagonalX = new TextField();
+	public static TextField centeredTetrahedralX = new TextField();
+	public static TextField centeredPentagonalX = new TextField();
+	public static TextField centeredOctagonalX = new TextField();
+	public static TextField centeredNonagonalX = new TextField();
+	public static TextField centeredDecagonalX = new TextField();
+
 }

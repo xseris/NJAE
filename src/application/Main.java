@@ -11,8 +11,9 @@ import application.builder.buttons.FileButtons;
 import application.builder.buttons.HashButtons;
 import application.builder.buttons.ImageButtons;
 import application.builder.buttons.MathButtons;
-import application.builder.buttons.SequenceButtons;
 import application.builder.buttons.StegoButtons;
+import application.builder.buttons.sequences.FigurativeSequenceButtons;
+import application.builder.buttons.sequences.SequenceButtons;
 import application.builder.fields.MathFields;
 import application.builder.labels.CurrentLabels;
 import application.builder.sliders.ImageSliders;
@@ -66,6 +67,7 @@ public class Main extends Application {
 		CryptoButtons.init();
 		DashboardButtons.init();
 		EncodingButtons.init();
+		FigurativeSequenceButtons.init();
 		FileButtons.init();
 		ImageButtons.init();
 		MathButtons.init();
@@ -166,6 +168,7 @@ public class Main extends Application {
 		final Menu twoD = new Menu("2-Dimensional");
 		final Menu threeD = new Menu("3-Dimensional");
 		final Menu twoDNotCentered = new Menu("Not Centered");
+		final Menu twoDCentered = new Menu("Centered");
 		final Menu threeDNotCentered = new Menu("Not Centered");
 		final MenuItem square = new MenuItem("Square Numbers");
 		final MenuItem triangular = new MenuItem("Triangular Numbers");
@@ -174,6 +177,18 @@ public class Main extends Application {
 		final MenuItem tetrahedral = new MenuItem("Tetrahedral Numbers");
 		final MenuItem pentagonal = new MenuItem("Pentagonal Numbers");
 		final MenuItem octagonal = new MenuItem("Octagonal Numbers");
+		final MenuItem nonagonal = new MenuItem("Nonagonal Numbers");
+		final MenuItem decagonal = new MenuItem("Decagonal Numbers");
+		final MenuItem dodecagonal = new MenuItem("Dodecagonal Numbers");
+		final MenuItem centeredSquare = new MenuItem("Centered Square Numbers");
+		final MenuItem centeredTriangular = new MenuItem("Centered Triangular Numbers");
+		final MenuItem centeredHexagonal = new MenuItem("Centered Hexagonal Numbers");
+		final MenuItem centeredHeptagonal = new MenuItem("Centered Heptagonal Numbers");
+		final MenuItem centeredTetrahedral = new MenuItem("Centered Tetrahedral Numbers");
+		final MenuItem centeredPentagonal = new MenuItem("Centered Pentagonal Numbers");
+		final MenuItem centeredOctagonal = new MenuItem("Centered Octagonal Numbers");
+		final MenuItem centeredNonagonal = new MenuItem("Centered Nonagonal Numbers");
+		final MenuItem centeredDecagonal = new MenuItem("Centered Decagonal Numbers");
 
 		general.getItems().addAll(menu11, notations, textFilters, textArrangemets);
 
@@ -206,8 +221,11 @@ public class Main extends Application {
 
 		sequences.getItems().addAll(fibonacci, even, odd, figurate);
 		figurate.getItems().addAll(twoD, threeD);
-		twoD.getItems().add(twoDNotCentered);
-		twoDNotCentered.getItems().addAll(triangular, square, pentagonal, hexagonal, heptagonal, octagonal);
+		twoD.getItems().addAll(twoDCentered, twoDNotCentered);
+		twoDCentered.getItems().addAll(centeredTriangular, centeredSquare, centeredPentagonal, centeredHexagonal,
+				centeredHeptagonal, centeredOctagonal, centeredNonagonal, centeredDecagonal);
+		twoDNotCentered.getItems().addAll(triangular, square, pentagonal, hexagonal, heptagonal, octagonal, nonagonal,
+				decagonal, dodecagonal);
 		threeD.getItems().add(threeDNotCentered);
 		threeDNotCentered.getItems().add(tetrahedral);
 
@@ -325,6 +343,17 @@ public class Main extends Application {
 		tetrahedral.setOnAction(action -> putRemove(toolBox, SequenceToolbars.tetrahedralToolbar));
 		pentagonal.setOnAction(action -> putRemove(toolBox, SequenceToolbars.pentagonalToolbar));
 		octagonal.setOnAction(action -> putRemove(toolBox, SequenceToolbars.octagonalToolbar));
+		nonagonal.setOnAction(action -> putRemove(toolBox, SequenceToolbars.nonagonalToolbar));
+		decagonal.setOnAction(action -> putRemove(toolBox, SequenceToolbars.decagonalToolbar));
+		dodecagonal.setOnAction(action -> putRemove(toolBox, SequenceToolbars.dodecagonalToolbar));
+		centeredTriangular.setOnAction(action -> putRemove(toolBox, SequenceToolbars.centeredTriangularToolbar));
+		centeredSquare.setOnAction(action -> putRemove(toolBox, SequenceToolbars.centeredSquareToolbar));
+		centeredPentagonal.setOnAction(action -> putRemove(toolBox, SequenceToolbars.centeredPentagonalToolbar));
+		centeredHexagonal.setOnAction(action -> putRemove(toolBox, SequenceToolbars.centeredHexagonalToolbar));
+		centeredHeptagonal.setOnAction(action -> putRemove(toolBox, SequenceToolbars.centeredHeptagonalToolbar));
+		centeredOctagonal.setOnAction(action -> putRemove(toolBox, SequenceToolbars.centeredOctagonalToolbar));
+		centeredNonagonal.setOnAction(action -> putRemove(toolBox, SequenceToolbars.centeredNonagonalToolbar));
+		centeredDecagonal.setOnAction(action -> putRemove(toolBox, SequenceToolbars.centeredDecagonalToolbar));
 
 		// Buttons Actions
 
