@@ -170,6 +170,7 @@ public class Main extends Application {
 		final Menu twoDNotCentered = new Menu("Not Centered");
 		final Menu twoDCentered = new Menu("Centered");
 		final Menu threeDNotCentered = new Menu("Not Centered");
+		final Menu threeDCentered = new Menu("Centered");
 		final MenuItem square = new MenuItem("Square Numbers");
 		final MenuItem triangular = new MenuItem("Triangular Numbers");
 		final MenuItem hexagonal = new MenuItem("Hexagonal Numbers");
@@ -189,6 +190,7 @@ public class Main extends Application {
 		final MenuItem centeredOctagonal = new MenuItem("Centered Octagonal Numbers");
 		final MenuItem centeredNonagonal = new MenuItem("Centered Nonagonal Numbers");
 		final MenuItem centeredDecagonal = new MenuItem("Centered Decagonal Numbers");
+		final MenuItem star = new MenuItem("Star Numbers");
 
 		general.getItems().addAll(menu11, notations, textFilters, textArrangemets);
 
@@ -223,11 +225,12 @@ public class Main extends Application {
 		figurate.getItems().addAll(twoD, threeD);
 		twoD.getItems().addAll(twoDCentered, twoDNotCentered);
 		twoDCentered.getItems().addAll(centeredTriangular, centeredSquare, centeredPentagonal, centeredHexagonal,
-				centeredHeptagonal, centeredOctagonal, centeredNonagonal, centeredDecagonal);
+				centeredHeptagonal, centeredOctagonal, centeredNonagonal, centeredDecagonal, star);
 		twoDNotCentered.getItems().addAll(triangular, square, pentagonal, hexagonal, heptagonal, octagonal, nonagonal,
 				decagonal, dodecagonal);
-		threeD.getItems().add(threeDNotCentered);
+		threeD.getItems().addAll(threeDCentered, threeDNotCentered);
 		threeDNotCentered.getItems().add(tetrahedral);
+		threeDCentered.getItems().add(centeredTetrahedral);
 
 		MenuBar menuBar = new MenuBar();
 
@@ -354,6 +357,8 @@ public class Main extends Application {
 		centeredOctagonal.setOnAction(action -> putRemove(toolBox, SequenceToolbars.centeredOctagonalToolbar));
 		centeredNonagonal.setOnAction(action -> putRemove(toolBox, SequenceToolbars.centeredNonagonalToolbar));
 		centeredDecagonal.setOnAction(action -> putRemove(toolBox, SequenceToolbars.centeredDecagonalToolbar));
+		star.setOnAction(action -> putRemove(toolBox, SequenceToolbars.starToolbar));
+		centeredTetrahedral.setOnAction(action -> putRemove(toolBox, SequenceToolbars.centeredTetrahedralToolbar));
 
 		// Buttons Actions
 

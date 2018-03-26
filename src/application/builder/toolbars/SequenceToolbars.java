@@ -93,6 +93,9 @@ public class SequenceToolbars {
 			FigurativeSequenceButtons.showCenteredDecagonal, new Separator(), new Label("Centered Decagonal (x):"),
 			SequenceFields.centeredDecagonalX, FigurativeSequenceButtons.getCenteredDecagonalX,
 			FigurativeSequenceButtons.getCenteredDecagonalTillX);
+	public static ToolBar starToolbar = new ToolBar(new Label("Star:"), FigurativeSequenceButtons.showStar,
+			new Separator(), new Label("Star (x):"), SequenceFields.starX, FigurativeSequenceButtons.getStarX,
+			FigurativeSequenceButtons.getStarTillX);
 
 	public static void init() {
 		fibonacciToolbar.setId("fibonacciToolbar");
@@ -118,6 +121,7 @@ public class SequenceToolbars {
 		centeredOctagonalToolbar.setId("octagonalToolbar");
 		centeredNonagonalToolbar.setId("nonagonalToolbar");
 		centeredDecagonalToolbar.setId("decagonalToolbar");
+		starToolbar.setId("starToolbar");
 
 	}
 }

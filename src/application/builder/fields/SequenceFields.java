@@ -26,5 +26,6 @@ public class SequenceFields {
 	public static TextField centeredOctagonalX = new TextField();
 	public static TextField centeredNonagonalX = new TextField();
 	public static TextField centeredDecagonalX = new TextField();
+	public static TextField starX = new TextField();
 
 }

@@ -2,12 +2,14 @@ package application.builder.buttons.sequences;
 
 import application.builder.fields.SequenceFields;
 import application.builder.texareas.TextAreas;
+import application.sequences.CenteredDecagonalUtils;
 import application.sequences.CenteredHeptagonalUtils;
 import application.sequences.CenteredHexagonalUtils;
 import application.sequences.CenteredNonagonalUtils;
 import application.sequences.CenteredOctagonalUtils;
 import application.sequences.CenteredPentagonalUtils;
 import application.sequences.CenteredSquareUtils;
+import application.sequences.CenteredTetrahedralUtils;
 import application.sequences.CenteredTriangularUtils;
 import application.sequences.DecagonalUtils;
 import application.sequences.DodecagonalUtils;
@@ -17,6 +19,7 @@ import application.sequences.NonagonalUtils;
 import application.sequences.OctagonalUtils;
 import application.sequences.PentagonalUtils;
 import application.sequences.SquareUtils;
+import application.sequences.StarUtils;
 import application.sequences.TetrahedralUtils;
 import application.sequences.TriangularUtils;
 import javafx.scene.control.Button;
@@ -98,6 +101,10 @@ public class FigurativeSequenceButtons {
 	public static Button showCenteredDecagonal = new Button("Show Formula");
 	public static Button getCenteredDecagonalX = new Button("Get nth element");
 	public static Button getCenteredDecagonalTillX = new Button("Get first n elements");
+
+	public static Button showStar = new Button("Show Formula");
+	public static Button getStarX = new Button("Get nth element");
+	public static Button getStarTillX = new Button("Get first n elements");
 
 	public static void init() {
 
@@ -185,13 +192,12 @@ public class FigurativeSequenceButtons {
 		getCenteredHeptagonalTillX.setOnAction(action -> TextAreas.textArea.setText(
 				CenteredHeptagonalUtils.getTillX(Integer.parseInt(SequenceFields.centeredHeptagonalX.getText()))));
 
-		// showCenteredTetrahedral
-		// .setOnAction(action ->
-		// TextAreas.textArea.setText(CenteredTetrahedralUtils.getFormula()));
-		// getCenteredTetrahedralX.setOnAction(action -> TextAreas.textArea.setText(
-		// CenteredTetrahedralUtils.getX(Integer.parseInt(SequenceFields.centeredTetrahedralX.getText()))));
-		// getCenteredTetrahedralTillX.setOnAction(action -> TextAreas.textArea.setText(
-		// CenteredTetrahedralUtils.getTillX(Integer.parseInt(SequenceFields.centeredTetrahedralX.getText()))));
+		showCenteredTetrahedral
+				.setOnAction(action -> TextAreas.textArea.setText(CenteredTetrahedralUtils.getFormula()));
+		getCenteredTetrahedralX.setOnAction(action -> TextAreas.textArea.setText(
+				CenteredTetrahedralUtils.getX(Integer.parseInt(SequenceFields.centeredTetrahedralX.getText()))));
+		getCenteredTetrahedralTillX.setOnAction(action -> TextAreas.textArea.setText(
+				CenteredTetrahedralUtils.getTillX(Integer.parseInt(SequenceFields.centeredTetrahedralX.getText()))));
 
 		showCenteredPentagonal.setOnAction(action -> TextAreas.textArea.setText(CenteredPentagonalUtils.getFormula()));
 		getCenteredPentagonalX.setOnAction(action -> TextAreas.textArea
@@ -211,12 +217,17 @@ public class FigurativeSequenceButtons {
 		getCenteredNonagonalTillX.setOnAction(action -> TextAreas.textArea.setText(
 				CenteredNonagonalUtils.getTillX(Integer.parseInt(SequenceFields.centeredNonagonalX.getText()))));
 
-		// showCenteredDecagonal.setOnAction(action ->
-		// TextAreas.textArea.setText(CenteredDecagonalUtils.getFormula()));
-		// getCenteredDecagonalX.setOnAction(action -> TextAreas.textArea
-		// .setText(CenteredDecagonalUtils.getX(Integer.parseInt(SequenceFields.centeredDecagonalX.getText()))));
-		// getCenteredDecagonalTillX.setOnAction(action -> TextAreas.textArea.setText(
-		// CenteredDecagonalUtils.getTillX(Integer.parseInt(SequenceFields.centeredDecagonalX.getText()))));
+		showCenteredDecagonal.setOnAction(action -> TextAreas.textArea.setText(CenteredDecagonalUtils.getFormula()));
+		getCenteredDecagonalX.setOnAction(action -> TextAreas.textArea
+				.setText(CenteredDecagonalUtils.getX(Integer.parseInt(SequenceFields.centeredDecagonalX.getText()))));
+		getCenteredDecagonalTillX.setOnAction(action -> TextAreas.textArea.setText(
+				CenteredDecagonalUtils.getTillX(Integer.parseInt(SequenceFields.centeredDecagonalX.getText()))));
+
+		showStar.setOnAction(action -> TextAreas.textArea.setText(StarUtils.getFormula()));
+		getStarX.setOnAction(
+				action -> TextAreas.textArea.setText(StarUtils.getX(Integer.parseInt(SequenceFields.starX.getText()))));
+		getStarTillX.setOnAction(action -> TextAreas.textArea
+				.setText(StarUtils.getTillX(Integer.parseInt(SequenceFields.starX.getText()))));
 	}
 
 }

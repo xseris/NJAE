@@ -154,6 +154,7 @@ All features you will expect from an editor that is not just an editor...
 + Centered Octagonal Numbers (From 1.0.5)
 + Centered Pentagonal Numbers (From 1.0.5)
 + Centered Square Numbers (From 1.0.5)
++ Centered Tetrahedral Numbers (From 1.0.5)
 + Centered Triangular Numbers (From 1.0.5)
 + Decagonal Numbers (From 1.0.5)
 + Dodecagonal Numbers (From 1.0.5)
@@ -165,6 +166,7 @@ All features you will expect from an editor that is not just an editor...
 + Octagonal Numbers (From 1.0.5)
 + Odd Numbers (From 1.0.5)
 + Square Numbers (From 1.0.5)
++ Star Numbers (From 1.0.5)
 + Tetrahedral Numbers (From 1.0.5)
 + Triangular Numbers (From 1.0.5)
 
