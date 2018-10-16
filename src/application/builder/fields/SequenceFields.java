@@ -4,6 +4,13 @@ import javafx.scene.control.TextField;
 
 public class SequenceFields {
 	public static TextField fibX = new TextField();
+	public static TextField jacobsthalX = new TextField();
+	public static TextField jacobsthalPellX = new TextField();
+	public static TextField lucasX = new TextField();
+	public static TextField padovanX = new TextField();
+	public static TextField pellX = new TextField();
+	public static TextField pellLucasX = new TextField();
+	public static TextField perrinX = new TextField();
 	public static TextField evenX = new TextField();
 	public static TextField oddX = new TextField();
 	public static TextField squareX = new TextField();

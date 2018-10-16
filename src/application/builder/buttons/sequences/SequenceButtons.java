@@ -2,19 +2,16 @@ package application.builder.buttons.sequences;
 
 import application.builder.fields.SequenceFields;
 import application.builder.texareas.TextAreas;
-import application.sequences.DecagonalUtils;
-import application.sequences.DodecagonalUtils;
 import application.sequences.EvenUtils;
 import application.sequences.FibonacciUtils;
-import application.sequences.HeptagonalUtils;
-import application.sequences.HexagonalUtils;
-import application.sequences.NonagonalUtils;
-import application.sequences.OctagonalUtils;
+import application.sequences.JacobsthalPellUtils;
+import application.sequences.JacobsthalUtils;
+import application.sequences.LucasUtils;
 import application.sequences.OddUtils;
-import application.sequences.PentagonalUtils;
-import application.sequences.SquareUtils;
-import application.sequences.TetrahedralUtils;
-import application.sequences.TriangularUtils;
+import application.sequences.PadovanUtils;
+import application.sequences.PellLucasUtils;
+import application.sequences.PellUtils;
+import application.sequences.PerrinUtils;
 import javafx.scene.control.Button;
 
 public class SequenceButtons {
@@ -30,6 +27,34 @@ public class SequenceButtons {
 	public static Button showOdd = new Button("Show Formula");
 	public static Button getOddX = new Button("Get nth element");
 	public static Button getOddTillX = new Button("Get first n elements");
+
+	public static Button showJacobsthal = new Button("Show Formula");
+	public static Button getJacobsthalX = new Button("Get nth element");
+	public static Button getJacobsthalTillX = new Button("Get first n elements");
+
+	public static Button showJacobsthalPell = new Button("Show Formula");
+	public static Button getJacobsthalPellX = new Button("Get nth element");
+	public static Button getJacobsthalPellTillX = new Button("Get first n elements");
+
+	public static Button showLucas = new Button("Show Formula");
+	public static Button getLucasX = new Button("Get nth element");
+	public static Button getLucasTillX = new Button("Get first n elements");
+
+	public static Button showPadovan = new Button("Show Formula");
+	public static Button getPadovanX = new Button("Get nth element");
+	public static Button getPadovanTillX = new Button("Get first n elements");
+
+	public static Button showPell = new Button("Show Formula");
+	public static Button getPellX = new Button("Get nth element");
+	public static Button getPellTillX = new Button("Get first n elements");
+
+	public static Button showPellLucas = new Button("Show Formula");
+	public static Button getPellLucasX = new Button("Get nth element");
+	public static Button getPellLucasTillX = new Button("Get first n elements");
+
+	public static Button showPerrin = new Button("Show Formula");
+	public static Button getPerrinX = new Button("Get nth element");
+	public static Button getPerrinTillX = new Button("Get first n elements");
 
 	public static void init() {
 		showFibonacci.setOnAction(action -> TextAreas.textArea.setText(FibonacciUtils.getFormula()));
@@ -49,6 +74,48 @@ public class SequenceButtons {
 				action -> TextAreas.textArea.setText(OddUtils.getX(Integer.parseInt(SequenceFields.oddX.getText()))));
 		getOddTillX.setOnAction(action -> TextAreas.textArea
 				.setText(OddUtils.getTillX(Integer.parseInt(SequenceFields.oddX.getText()))));
+
+		showJacobsthal.setOnAction(action -> TextAreas.textArea.setText(JacobsthalUtils.getFormula()));
+		getJacobsthalX.setOnAction(action -> TextAreas.textArea
+				.setText(JacobsthalUtils.getX(Integer.parseInt(SequenceFields.jacobsthalX.getText()))));
+		getJacobsthalTillX.setOnAction(action -> TextAreas.textArea
+				.setText(JacobsthalUtils.getTillX(Integer.parseInt(SequenceFields.jacobsthalX.getText()))));
+
+		showJacobsthalPell.setOnAction(action -> TextAreas.textArea.setText(JacobsthalPellUtils.getFormula()));
+		getJacobsthalPellX.setOnAction(action -> TextAreas.textArea
+				.setText(JacobsthalPellUtils.getX(Integer.parseInt(SequenceFields.jacobsthalPellX.getText()))));
+		getJacobsthalPellTillX.setOnAction(action -> TextAreas.textArea
+				.setText(JacobsthalPellUtils.getTillX(Integer.parseInt(SequenceFields.jacobsthalPellX.getText()))));
+
+		showLucas.setOnAction(action -> TextAreas.textArea.setText(LucasUtils.getFormula()));
+		getLucasX.setOnAction(action -> TextAreas.textArea
+				.setText(LucasUtils.getX(Integer.parseInt(SequenceFields.lucasX.getText()))));
+		getLucasTillX.setOnAction(action -> TextAreas.textArea
+				.setText(LucasUtils.getTillX(Integer.parseInt(SequenceFields.lucasX.getText()))));
+
+		showPadovan.setOnAction(action -> TextAreas.textArea.setText(PadovanUtils.getFormula()));
+		getPadovanX.setOnAction(action -> TextAreas.textArea
+				.setText(PadovanUtils.getX(Integer.parseInt(SequenceFields.padovanX.getText()))));
+		getPadovanTillX.setOnAction(action -> TextAreas.textArea
+				.setText(PadovanUtils.getTillX(Integer.parseInt(SequenceFields.padovanX.getText()))));
+
+		showPell.setOnAction(action -> TextAreas.textArea.setText(PellUtils.getFormula()));
+		getPellX.setOnAction(
+				action -> TextAreas.textArea.setText(PellUtils.getX(Integer.parseInt(SequenceFields.pellX.getText()))));
+		getPellTillX.setOnAction(action -> TextAreas.textArea
+				.setText(PellUtils.getTillX(Integer.parseInt(SequenceFields.pellX.getText()))));
+
+		showPellLucas.setOnAction(action -> TextAreas.textArea.setText(PellLucasUtils.getFormula()));
+		getPellLucasX.setOnAction(action -> TextAreas.textArea
+				.setText(PellLucasUtils.getX(Integer.parseInt(SequenceFields.pellLucasX.getText()))));
+		getPellLucasTillX.setOnAction(action -> TextAreas.textArea
+				.setText(PellLucasUtils.getTillX(Integer.parseInt(SequenceFields.pellLucasX.getText()))));
+
+		showPerrin.setOnAction(action -> TextAreas.textArea.setText(PerrinUtils.getFormula()));
+		getPerrinX.setOnAction(action -> TextAreas.textArea
+				.setText(PerrinUtils.getX(Integer.parseInt(SequenceFields.perrinX.getText()))));
+		getPerrinTillX.setOnAction(action -> TextAreas.textArea
+				.setText(PerrinUtils.getTillX(Integer.parseInt(SequenceFields.perrinX.getText()))));
 
 	}
 

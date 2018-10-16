@@ -11,6 +11,25 @@ public class SequenceToolbars {
 	public static ToolBar fibonacciToolbar = new ToolBar(new Label("Fibonacci:"), SequenceButtons.showFibonacci,
 			new Separator(), new Label("Fib (x):"), SequenceFields.fibX, SequenceButtons.getFibX,
 			SequenceButtons.getFibTillX);
+	public static ToolBar jacobsthalToolbar = new ToolBar(new Label("Jacobsthal:"), SequenceButtons.showJacobsthal,
+			new Separator(), new Label("Jacobsthal (x):"), SequenceFields.jacobsthalX, SequenceButtons.getJacobsthalX,
+			SequenceButtons.getJacobsthalTillX);
+	public static ToolBar jacobsthalPellToolbar = new ToolBar(new Label("Jacobsthal-Pell:"),
+			SequenceButtons.showJacobsthalPell, new Separator(), new Label("Jacobsthal-Pell (x):"),
+			SequenceFields.jacobsthalPellX, SequenceButtons.getJacobsthalPellX, SequenceButtons.getJacobsthalPellTillX);
+	public static ToolBar lucasToolbar = new ToolBar(new Label("Lucas:"), SequenceButtons.showLucas, new Separator(),
+			new Label("Lucas (x):"), SequenceFields.lucasX, SequenceButtons.getLucasX, SequenceButtons.getLucasTillX);
+	public static ToolBar padovanToolbar = new ToolBar(new Label("Padovan:"), SequenceButtons.showPadovan,
+			new Separator(), new Label("Padovan (x):"), SequenceFields.padovanX, SequenceButtons.getPadovanX,
+			SequenceButtons.getPadovanTillX);
+	public static ToolBar pellToolbar = new ToolBar(new Label("Pell:"), SequenceButtons.showPell, new Separator(),
+			new Label("Pell (x):"), SequenceFields.pellX, SequenceButtons.getPellX, SequenceButtons.getPellTillX);
+	public static ToolBar pellLucasToolbar = new ToolBar(new Label("Pell-Lucas:"), SequenceButtons.showPellLucas,
+			new Separator(), new Label("Pell-Lucas (x):"), SequenceFields.pellLucasX, SequenceButtons.getPellLucasX,
+			SequenceButtons.getPellLucasTillX);
+	public static ToolBar perrinToolbar = new ToolBar(new Label("Perrin:"), SequenceButtons.showPerrin, new Separator(),
+			new Label("Perrin (x):"), SequenceFields.perrinX, SequenceButtons.getPerrinX,
+			SequenceButtons.getPerrinTillX);
 
 	public static ToolBar evenToolbar = new ToolBar(new Label("Even:"), SequenceButtons.showEven, new Separator(),
 			new Label("Even (x):"), SequenceFields.evenX, SequenceButtons.getEvenX, SequenceButtons.getEvenTillX);
@@ -99,6 +118,13 @@ public class SequenceToolbars {
 
 	public static void init() {
 		fibonacciToolbar.setId("fibonacciToolbar");
+		jacobsthalToolbar.setId("jacobsthalToolbar");
+		jacobsthalPellToolbar.setId("jacobsthalPellToolbar");
+		lucasToolbar.setId("lucasToolbar");
+		padovanToolbar.setId("padovanToolbar");
+		pellToolbar.setId("pellToolbar");
+		pellLucasToolbar.setId("pellLucasToolbar");
+		perrinToolbar.setId("perrinToolbar");
 		evenToolbar.setId("evenToolbar");
 		oddToolbar.setId("oddToolbar");
 		squareToolbar.setId("squareToolbar");

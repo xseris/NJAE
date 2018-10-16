@@ -38,11 +38,8 @@ import application.table.TableUtils;
 import application.web.PageUtils;
 import javafx.application.Application;
 import javafx.geometry.Rectangle2D;
-import javafx.stage.Screen;
-import javafx.stage.Stage;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
@@ -56,6 +53,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.ToolBar;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.Screen;
+import javafx.stage.Stage;
 
 public class Main extends Application {
 
@@ -162,6 +161,13 @@ public class Main extends Application {
 
 		final Menu sequences = new Menu("Sequences");
 		final MenuItem fibonacci = new MenuItem("Fibonacci");
+		final MenuItem jacobsthal = new MenuItem("Jacobsthal");
+		final MenuItem jacobsthalPell = new MenuItem("Jacobsthal-Pell");
+		final MenuItem lucas = new MenuItem("Lucas");
+		final MenuItem padovan = new MenuItem("Padovan");
+		final MenuItem pell = new MenuItem("Pell");
+		final MenuItem pellLucas = new MenuItem("Pell-Lucas");
+		final MenuItem perrin = new MenuItem("Perrin");
 		final MenuItem even = new MenuItem("Even Numbers");
 		final MenuItem odd = new MenuItem("Odd Numbers");
 		final Menu figurate = new Menu("Figurate Numbers");
@@ -221,7 +227,8 @@ public class Main extends Application {
 		extraction.getItems().addAll(channel, grayscale, yuv, ycbcr);
 		processing.getItems().addAll(pointProcessing, linearFilters);
 
-		sequences.getItems().addAll(fibonacci, even, odd, figurate);
+		sequences.getItems().addAll(fibonacci, jacobsthal, jacobsthalPell, lucas, padovan, pell, pellLucas, perrin,
+				even, odd, figurate);
 		figurate.getItems().addAll(twoD, threeD);
 		twoD.getItems().addAll(twoDCentered, twoDNotCentered);
 		twoDCentered.getItems().addAll(centeredTriangular, centeredSquare, centeredPentagonal, centeredHexagonal,
@@ -337,6 +344,13 @@ public class Main extends Application {
 		qrCode.setOnAction(action -> putRemove(toolBox, ImageToolbars.qrImageToolBar));
 		combine.setOnAction(action -> putRemove(toolBox, ImageToolbars.combineImageToolBar));
 		fibonacci.setOnAction(action -> putRemove(toolBox, SequenceToolbars.fibonacciToolbar));
+		jacobsthal.setOnAction(action -> putRemove(toolBox, SequenceToolbars.jacobsthalToolbar));
+		jacobsthalPell.setOnAction(action -> putRemove(toolBox, SequenceToolbars.jacobsthalPellToolbar));
+		lucas.setOnAction(action -> putRemove(toolBox, SequenceToolbars.lucasToolbar));
+		padovan.setOnAction(action -> putRemove(toolBox, SequenceToolbars.padovanToolbar));
+		pell.setOnAction(action -> putRemove(toolBox, SequenceToolbars.pellToolbar));
+		pellLucas.setOnAction(action -> putRemove(toolBox, SequenceToolbars.pellLucasToolbar));
+		perrin.setOnAction(action -> putRemove(toolBox, SequenceToolbars.perrinToolbar));
 		even.setOnAction(action -> putRemove(toolBox, SequenceToolbars.evenToolbar));
 		odd.setOnAction(action -> putRemove(toolBox, SequenceToolbars.oddToolbar));
 		square.setOnAction(action -> putRemove(toolBox, SequenceToolbars.squareToolbar));
