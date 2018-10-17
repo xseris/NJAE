@@ -99,11 +99,13 @@ public class Main extends Application {
 		final MenuItem textFilters = new MenuItem("Filters");
 		final MenuItem textArrangemets = new MenuItem("Arrangements");
 
-		final Menu conversions = new Menu("Conversions");
-		final MenuItem encodings = new MenuItem("Encodings");
+		final Menu encodings = new Menu("Encodigs");
+		final MenuItem base64 = new MenuItem("Base64");
+		final MenuItem morse = new MenuItem("Morse");
 		final MenuItem asciiTo = new MenuItem("Ascii to");
 		final MenuItem hexTo = new MenuItem("Hex to");
 		final MenuItem binaryTo = new MenuItem("Binary to");
+		final MenuItem keyboardLayouts = new MenuItem("Keyboard Layouts");
 
 		final Menu math = new Menu("Math");
 		final MenuItem rowMath = new MenuItem("Row Math");
@@ -200,7 +202,7 @@ public class Main extends Application {
 
 		general.getItems().addAll(menu11, notations, textFilters, textArrangemets);
 
-		conversions.getItems().addAll(encodings, asciiTo, hexTo, binaryTo);
+		encodings.getItems().addAll(base64, morse, asciiTo, hexTo, binaryTo, keyboardLayouts);
 
 		math.getItems().addAll(rowMath, conversionMath);
 
@@ -241,7 +243,7 @@ public class Main extends Application {
 
 		MenuBar menuBar = new MenuBar();
 
-		menuBar.getMenus().addAll(general, conversions, math, hash, chart, file, security, table, crypto, web, image,
+		menuBar.getMenus().addAll(general, encodings, math, hash, chart, file, security, table, crypto, web, image,
 				sequences);
 
 		// Text Fields
@@ -308,10 +310,12 @@ public class Main extends Application {
 		notations.setOnAction(action -> putRemove(toolBox, DashboardToolbars.notationsToolBar));
 		textFilters.setOnAction(action -> putRemove(toolBox, DashboardToolbars.filteringToolBar));
 		textArrangemets.setOnAction(action -> putRemove(toolBox, DashboardToolbars.arrangingToolBar));
-		encodings.setOnAction(action -> putRemove(toolBox, EncodingToolbars.encodingToolBar));
+		base64.setOnAction(action -> putRemove(toolBox, EncodingToolbars.encodingToolBar));
+		morse.setOnAction(action -> putRemove(toolBox, EncodingToolbars.morseToolBar));
 		asciiTo.setOnAction(action -> putRemove(toolBox, EncodingToolbars.asciiToToolBar));
 		hexTo.setOnAction(action -> putRemove(toolBox, EncodingToolbars.hexToToolBar));
 		binaryTo.setOnAction(action -> putRemove(toolBox, EncodingToolbars.binaryToToolBar));
+		keyboardLayouts.setOnAction(action -> putRemove(toolBox, EncodingToolbars.keyboardToolBar));
 		rowMath.setOnAction(action -> putRemove(toolBox, MathToolbars.rowMathToolBar));
 		conversionMath.setOnAction(action -> putRemove(toolBox, MathToolbars.conversionMathToolBar));
 		generate.setOnAction(action -> putRemove(toolBox, hashToolBar));
