@@ -6,6 +6,7 @@ public class SequenceFields {
 	public static TextField fibX = new TextField();
 	public static TextField jacobsthalX = new TextField();
 	public static TextField jacobsthalPellX = new TextField();
+	public static TextField leonardoX = new TextField();
 	public static TextField lucasX = new TextField();
 	public static TextField padovanX = new TextField();
 	public static TextField pellX = new TextField();

@@ -6,6 +6,7 @@ import application.sequences.EvenUtils;
 import application.sequences.FibonacciUtils;
 import application.sequences.JacobsthalPellUtils;
 import application.sequences.JacobsthalUtils;
+import application.sequences.LeonardoUtils;
 import application.sequences.LucasUtils;
 import application.sequences.OddUtils;
 import application.sequences.PadovanUtils;
@@ -35,6 +36,10 @@ public class SequenceButtons {
 	public static Button showJacobsthalPell = new Button("Show Formula");
 	public static Button getJacobsthalPellX = new Button("Get nth element");
 	public static Button getJacobsthalPellTillX = new Button("Get first n elements");
+
+	public static Button showLeonardo = new Button("Show Formula");
+	public static Button getLeonardoX = new Button("Get nth element");
+	public static Button getLeonardoTillX = new Button("Get first n elements");
 
 	public static Button showLucas = new Button("Show Formula");
 	public static Button getLucasX = new Button("Get nth element");
@@ -86,6 +91,12 @@ public class SequenceButtons {
 				.setText(JacobsthalPellUtils.getX(Integer.parseInt(SequenceFields.jacobsthalPellX.getText()))));
 		getJacobsthalPellTillX.setOnAction(action -> TextAreas.textArea
 				.setText(JacobsthalPellUtils.getTillX(Integer.parseInt(SequenceFields.jacobsthalPellX.getText()))));
+
+		showLeonardo.setOnAction(action -> TextAreas.textArea.setText(LeonardoUtils.getFormula()));
+		getLeonardoX.setOnAction(action -> TextAreas.textArea
+				.setText(LeonardoUtils.getX(Integer.parseInt(SequenceFields.leonardoX.getText()))));
+		getLeonardoTillX.setOnAction(action -> TextAreas.textArea
+				.setText(LeonardoUtils.getTillX(Integer.parseInt(SequenceFields.leonardoX.getText()))));
 
 		showLucas.setOnAction(action -> TextAreas.textArea.setText(LucasUtils.getFormula()));
 		getLucasX.setOnAction(action -> TextAreas.textArea

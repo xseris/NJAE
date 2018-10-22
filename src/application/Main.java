@@ -165,6 +165,7 @@ public class Main extends Application {
 		final MenuItem fibonacci = new MenuItem("Fibonacci");
 		final MenuItem jacobsthal = new MenuItem("Jacobsthal");
 		final MenuItem jacobsthalPell = new MenuItem("Jacobsthal-Pell");
+		final MenuItem leonardo = new MenuItem("Leonardo");
 		final MenuItem lucas = new MenuItem("Lucas");
 		final MenuItem padovan = new MenuItem("Padovan");
 		final MenuItem pell = new MenuItem("Pell");
@@ -229,8 +230,8 @@ public class Main extends Application {
 		extraction.getItems().addAll(channel, grayscale, yuv, ycbcr);
 		processing.getItems().addAll(pointProcessing, linearFilters);
 
-		sequences.getItems().addAll(fibonacci, jacobsthal, jacobsthalPell, lucas, padovan, pell, pellLucas, perrin,
-				even, odd, figurate);
+		sequences.getItems().addAll(fibonacci, jacobsthal, jacobsthalPell, leonardo, lucas, padovan, pell, pellLucas,
+				perrin, even, odd, figurate);
 		figurate.getItems().addAll(twoD, threeD);
 		twoD.getItems().addAll(twoDCentered, twoDNotCentered);
 		twoDCentered.getItems().addAll(centeredTriangular, centeredSquare, centeredPentagonal, centeredHexagonal,
@@ -350,6 +351,7 @@ public class Main extends Application {
 		fibonacci.setOnAction(action -> putRemove(toolBox, SequenceToolbars.fibonacciToolbar));
 		jacobsthal.setOnAction(action -> putRemove(toolBox, SequenceToolbars.jacobsthalToolbar));
 		jacobsthalPell.setOnAction(action -> putRemove(toolBox, SequenceToolbars.jacobsthalPellToolbar));
+		leonardo.setOnAction(action -> putRemove(toolBox, SequenceToolbars.leonardoToolbar));
 		lucas.setOnAction(action -> putRemove(toolBox, SequenceToolbars.lucasToolbar));
 		padovan.setOnAction(action -> putRemove(toolBox, SequenceToolbars.padovanToolbar));
 		pell.setOnAction(action -> putRemove(toolBox, SequenceToolbars.pellToolbar));

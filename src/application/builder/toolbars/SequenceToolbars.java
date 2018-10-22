@@ -17,6 +17,9 @@ public class SequenceToolbars {
 	public static ToolBar jacobsthalPellToolbar = new ToolBar(new Label("Jacobsthal-Pell:"),
 			SequenceButtons.showJacobsthalPell, new Separator(), new Label("Jacobsthal-Pell (x):"),
 			SequenceFields.jacobsthalPellX, SequenceButtons.getJacobsthalPellX, SequenceButtons.getJacobsthalPellTillX);
+	public static ToolBar leonardoToolbar = new ToolBar(new Label("Leonardo:"), SequenceButtons.showLeonardo,
+			new Separator(), new Label("Leonardo (x):"), SequenceFields.leonardoX, SequenceButtons.getLeonardoX,
+			SequenceButtons.getLeonardoTillX);
 	public static ToolBar lucasToolbar = new ToolBar(new Label("Lucas:"), SequenceButtons.showLucas, new Separator(),
 			new Label("Lucas (x):"), SequenceFields.lucasX, SequenceButtons.getLucasX, SequenceButtons.getLucasTillX);
 	public static ToolBar padovanToolbar = new ToolBar(new Label("Padovan:"), SequenceButtons.showPadovan,
@@ -120,6 +123,7 @@ public class SequenceToolbars {
 		fibonacciToolbar.setId("fibonacciToolbar");
 		jacobsthalToolbar.setId("jacobsthalToolbar");
 		jacobsthalPellToolbar.setId("jacobsthalPellToolbar");
+		leonardoToolbar.setId("leonardoToolbar");
 		lucasToolbar.setId("lucasToolbar");
 		padovanToolbar.setId("padovanToolbar");
 		pellToolbar.setId("pellToolbar");

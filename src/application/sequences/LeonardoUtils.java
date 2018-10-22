@@ -2,20 +2,20 @@ package application.sequences;
 
 import java.math.BigInteger;
 
-public class LucasUtils {
+public class LeonardoUtils {
 
 	public static String getFormula() {
-		return "Lucas(x) = Lucas(x-1) + Lucas(x-2)\n\nwith: Lucas(0) = 2 and Lucas(1) = 1";
+		return "Leonardo(x) = Leonardo(x-1) + Leonardo(x-2) + 1\n\nwith: Leonardo(0) = 1 and Leonardo(1) = 1";
 	}
 
 	public static String getX(int n) {
 		if (n == 0) {
-			return "Lucas(0) = 2";
+			return "Leonardo(0) = 1";
 		}
 		if (n == 1) {
-			return "Lucas(1) = 1";
+			return "Leonardo(1) = 1";
 		} else {
-			return "Lucas(" + n + ") = " + String.valueOf(lucas(n - 2, new StringBuilder()));
+			return "Leonardo(" + n + ") = " + String.valueOf(lucas(n - 2, new StringBuilder()));
 		}
 	}
 
@@ -26,7 +26,7 @@ public class LucasUtils {
 	}
 
 	public static BigInteger lucas(int n, StringBuilder sb) {
-		sb.append("Lucas(0) = 2\nLucas(1) = 1\nLucas(2) = 3");
+		sb.append("Leonardo(0) = 1\nLeonardo(1) = 1\nLeonardo(2) = 3");
 		BigInteger one = BigInteger.ONE;
 		BigInteger two = BigInteger.valueOf(3);
 
@@ -36,10 +36,10 @@ public class LucasUtils {
 
 		BigInteger three;
 		for (int i = 0; i < n; i++) {
-			three = one.add(two);
+			three = one.add(two).add(BigInteger.ONE);
 			one = two;
 			two = three;
-			sb.append("\nLucas(" + (i + 3) + ") = " + String.valueOf(two));
+			sb.append("\nLeonardo(" + (i + 3) + ") = " + String.valueOf(two));
 		}
 		return two;
 	}
