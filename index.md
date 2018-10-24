@@ -1,4 +1,4 @@
-# NJAE (1.0.5)
+# NJAE (1.0.6)
 
 NJAE is simply Not Just An Editor, because this is not just an editor...
 
@@ -64,12 +64,20 @@ All features you will expect from an editor that is not just an editor...
 
 + ASCII to Binary (From 1.0.0)
 + ASCII to Hex (From 1.0.1)
++ AWERTY to  QUERTY (From 1.0.6)
++ AWERTY to  QWERTY (From 1.0.6)
 + Binary to Ascii (From 1.0.1)
 + Binary to Hex (From 1.0.1)
 + Encode Base64 (From 1.0.0)
 + Decode Base64 (From 1.0.0)
 + Hex to ASCII (From 1.0.1)
 + Hex to Binary (From 1.0.1)
++ Morse decoder (From 1.0.6)
++ Morse encoder (From 1.0.6)
++ QUERTY to  AWERTY (From 1.0.6)
++ QUERTY to  QWERTY (From 1.0.6)
++ QWERTY to  AWERTY (From 1.0.6)
++ QWERTY to  QUERTY (From 1.0.6)
 
 ### Files
 
@@ -162,9 +170,17 @@ All features you will expect from an editor that is not just an editor...
 + Fibonacci (From 1.0.4)
 + Heptagonal Numbers (From 1.0.5)
 + Hexagonal Numbers (From 1.0.5)
++ Jacobsthal Numbers (From 1.0.6)
++ Jacobsthal-Lucas Numbers (From 1.0.6)
++ Leonardo Numbers (From 1.0.6)
++ Lucas Numbers (From 1.0.6)
 + Nonagonal Numbers (From 1.0.5)
 + Octagonal Numbers (From 1.0.5)
 + Odd Numbers (From 1.0.5)
++ Padovan Numbers (From 1.0.6)
++ Pell Numbers (From 1.0.6)
++ Pell-Lucas Numbers (From 1.0.6)
++ Perrin Numbers (From 1.0.6)
 + Square Numbers (From 1.0.5)
 + Star Numbers (From 1.0.5)
 + Tetrahedral Numbers (From 1.0.5)
