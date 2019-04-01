@@ -47,5 +47,98 @@ public class ImageCombineUtils {
 		}
 		imageView.setImage(result);
 	}
+	
+	public static void xor(Node container) throws FileNotFoundException {
+		Pane contentPane = (Pane) container;
+		ImageView imageView = (ImageView) contentPane.getChildren().get(0);
+		Image originalImage = imageView.getImage();
+
+		FileChooser fileChooser = new FileChooser();
+		fileChooser.setTitle("Open Image to subtract");
+		fileChooser.getExtensionFilters().addAll(new ExtensionFilter("Image Files", "*.png", "*.jpg", "*.gif"));
+		File selectedFile = fileChooser.showOpenDialog(null);
+
+		FileInputStream toSubtract = new FileInputStream(selectedFile.getPath());
+		Image toSub = new Image(toSubtract);
+
+		PixelReader prOriginal = originalImage.getPixelReader();
+		PixelReader prToSub = toSub.getPixelReader();
+
+		int width = (int) originalImage.getWidth();
+		int height = (int) originalImage.getHeight();
+		WritableImage result = new WritableImage(width, height);
+		PixelWriter pw = result.getPixelWriter();
+		for (int x = 0; x < width; x++) {
+			for (int y = 0; y < height; y++) {
+				Color col1 = prOriginal.getColor(x, y);
+				Color col2 = prToSub.getColor(x, y);
+				pw.setColor(x, y, new Color(Math.abs((int)col1.getRed() ^ (int)col2.getRed()),
+						Math.abs((int)col1.getGreen() ^ (int)col2.getGreen()), Math.abs((int)col1.getBlue() ^ (int)col2.getBlue()), 1.0));
+			}
+		}
+		imageView.setImage(result);
+	}
+	
+	public static void and(Node container) throws FileNotFoundException {
+		Pane contentPane = (Pane) container;
+		ImageView imageView = (ImageView) contentPane.getChildren().get(0);
+		Image originalImage = imageView.getImage();
+
+		FileChooser fileChooser = new FileChooser();
+		fileChooser.setTitle("Open Image to subtract");
+		fileChooser.getExtensionFilters().addAll(new ExtensionFilter("Image Files", "*.png", "*.jpg", "*.gif"));
+		File selectedFile = fileChooser.showOpenDialog(null);
+
+		FileInputStream toSubtract = new FileInputStream(selectedFile.getPath());
+		Image toSub = new Image(toSubtract);
+
+		PixelReader prOriginal = originalImage.getPixelReader();
+		PixelReader prToSub = toSub.getPixelReader();
+
+		int width = (int) originalImage.getWidth();
+		int height = (int) originalImage.getHeight();
+		WritableImage result = new WritableImage(width, height);
+		PixelWriter pw = result.getPixelWriter();
+		for (int x = 0; x < width; x++) {
+			for (int y = 0; y < height; y++) {
+				Color col1 = prOriginal.getColor(x, y);
+				Color col2 = prToSub.getColor(x, y);
+				pw.setColor(x, y, new Color(Math.abs((int)col1.getRed() & (int)col2.getRed()),
+						Math.abs((int)col1.getGreen() & (int)col2.getGreen()), Math.abs((int)col1.getBlue() & (int)col2.getBlue()), 1.0));
+			}
+		}
+		imageView.setImage(result);
+	}
+	
+	public static void or(Node container) throws FileNotFoundException {
+		Pane contentPane = (Pane) container;
+		ImageView imageView = (ImageView) contentPane.getChildren().get(0);
+		Image originalImage = imageView.getImage();
+
+		FileChooser fileChooser = new FileChooser();
+		fileChooser.setTitle("Open Image to subtract");
+		fileChooser.getExtensionFilters().addAll(new ExtensionFilter("Image Files", "*.png", "*.jpg", "*.gif"));
+		File selectedFile = fileChooser.showOpenDialog(null);
+
+		FileInputStream toSubtract = new FileInputStream(selectedFile.getPath());
+		Image toSub = new Image(toSubtract);
+
+		PixelReader prOriginal = originalImage.getPixelReader();
+		PixelReader prToSub = toSub.getPixelReader();
+
+		int width = (int) originalImage.getWidth();
+		int height = (int) originalImage.getHeight();
+		WritableImage result = new WritableImage(width, height);
+		PixelWriter pw = result.getPixelWriter();
+		for (int x = 0; x < width; x++) {
+			for (int y = 0; y < height; y++) {
+				Color col1 = prOriginal.getColor(x, y);
+				Color col2 = prToSub.getColor(x, y);
+				pw.setColor(x, y, new Color(Math.abs((int)col1.getRed() | (int)col2.getRed()),
+						Math.abs((int)col1.getGreen() | (int)col2.getGreen()), Math.abs((int)col1.getBlue() | (int)col2.getBlue()), 1.0));
+			}
+		}
+		imageView.setImage(result);
+	}
 
 }

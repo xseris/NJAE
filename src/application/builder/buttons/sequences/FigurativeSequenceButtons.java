@@ -1,6 +1,7 @@
 package application.builder.buttons.sequences;
 
 import application.builder.fields.SequenceFields;
+import application.builder.tabs.Tabs;
 import application.builder.texareas.TextAreas;
 import application.sequences.CenteredDecagonalUtils;
 import application.sequences.CenteredHeptagonalUtils;
@@ -81,6 +82,8 @@ public class FigurativeSequenceButtons {
 	public static Button showCenteredHeptagonal = new Button("Show Formula");
 	public static Button getCenteredHeptagonalX = new Button("Get nth element");
 	public static Button getCenteredHeptagonalTillX = new Button("Get first n elements");
+	public static Button plotCenteredHeptagonal = new Button("Plot till");
+	public static Button appendCenteredHeptagonal = new Button("Append till");
 
 	public static Button showCenteredTetrahedral = new Button("Show Formula");
 	public static Button getCenteredTetrahedralX = new Button("Get nth element");
@@ -101,6 +104,8 @@ public class FigurativeSequenceButtons {
 	public static Button showCenteredDecagonal = new Button("Show Formula");
 	public static Button getCenteredDecagonalX = new Button("Get nth element");
 	public static Button getCenteredDecagonalTillX = new Button("Get first n elements");
+	public static Button plotCenteredDecagonal = new Button("Plot till");
+	public static Button appendCenteredDecagonal = new Button("Append till");
 
 	public static Button showStar = new Button("Show Formula");
 	public static Button getStarX = new Button("Get nth element");
@@ -191,6 +196,14 @@ public class FigurativeSequenceButtons {
 				.setText(CenteredHeptagonalUtils.getX(Integer.parseInt(SequenceFields.centeredHeptagonalX.getText()))));
 		getCenteredHeptagonalTillX.setOnAction(action -> TextAreas.textArea.setText(
 				CenteredHeptagonalUtils.getTillX(Integer.parseInt(SequenceFields.centeredHeptagonalX.getText()))));
+		plotCenteredHeptagonal.setOnAction(action -> {
+			Tabs.chartTab.setContent(
+					CenteredHeptagonalUtils.plot(Integer.parseInt(SequenceFields.centeredHeptagonalX.getText())));
+		});
+		appendCenteredHeptagonal.setOnAction(action -> {
+			Tabs.chartTab.setContent(
+					CenteredHeptagonalUtils.append(Integer.parseInt(SequenceFields.centeredHeptagonalX.getText())));
+		});
 
 		showCenteredTetrahedral
 				.setOnAction(action -> TextAreas.textArea.setText(CenteredTetrahedralUtils.getFormula()));
@@ -222,6 +235,14 @@ public class FigurativeSequenceButtons {
 				.setText(CenteredDecagonalUtils.getX(Integer.parseInt(SequenceFields.centeredDecagonalX.getText()))));
 		getCenteredDecagonalTillX.setOnAction(action -> TextAreas.textArea.setText(
 				CenteredDecagonalUtils.getTillX(Integer.parseInt(SequenceFields.centeredDecagonalX.getText()))));
+		plotCenteredDecagonal.setOnAction(action -> {
+			Tabs.chartTab.setContent(
+					CenteredDecagonalUtils.plot(Integer.parseInt(SequenceFields.centeredDecagonalX.getText())));
+		});
+		appendCenteredDecagonal.setOnAction(action -> {
+			Tabs.chartTab.setContent(
+					CenteredDecagonalUtils.append(Integer.parseInt(SequenceFields.centeredDecagonalX.getText())));
+		});
 
 		showStar.setOnAction(action -> TextAreas.textArea.setText(StarUtils.getFormula()));
 		getStarX.setOnAction(

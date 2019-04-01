@@ -8,6 +8,10 @@ import javafx.scene.control.Separator;
 import javafx.scene.control.ToolBar;
 
 public class SequenceToolbars {
+	public static ToolBar cullenToolbar = new ToolBar(new Label("Cullen:"), SequenceButtons.showCullen,
+			new Separator(), new Label("Cullen (x):"), SequenceFields.cullenX, SequenceButtons.getCullenX,
+			SequenceButtons.getCullenTillX,SequenceButtons.plotCullenTillX,
+			SequenceButtons.appendCullenTillX);
 	public static ToolBar fibonacciToolbar = new ToolBar(new Label("Fibonacci:"), SequenceButtons.showFibonacci,
 			new Separator(), new Label("Fib (x):"), SequenceFields.fibX, SequenceButtons.getFibX,
 			SequenceButtons.getFibTillX);
@@ -94,7 +98,8 @@ public class SequenceToolbars {
 	public static ToolBar centeredHeptagonalToolbar = new ToolBar(new Label("Centered Heptagonal:"),
 			FigurativeSequenceButtons.showCenteredHeptagonal, new Separator(), new Label("Centered Heptagonal (x):"),
 			SequenceFields.centeredHeptagonalX, FigurativeSequenceButtons.getCenteredHeptagonalX,
-			FigurativeSequenceButtons.getCenteredHeptagonalTillX);
+			FigurativeSequenceButtons.getCenteredHeptagonalTillX, FigurativeSequenceButtons.plotCenteredHeptagonal,
+			FigurativeSequenceButtons.appendCenteredHeptagonal);
 	public static ToolBar centeredTetrahedralToolbar = new ToolBar(new Label("Centered Tetrahedral:"),
 			FigurativeSequenceButtons.showCenteredTetrahedral, new Separator(), new Label("Centered Tetrahedral (x):"),
 			SequenceFields.centeredTetrahedralX, FigurativeSequenceButtons.getCenteredTetrahedralX,
@@ -114,12 +119,14 @@ public class SequenceToolbars {
 	public static ToolBar centeredDecagonalToolbar = new ToolBar(new Label("Centered Decagonal:"),
 			FigurativeSequenceButtons.showCenteredDecagonal, new Separator(), new Label("Centered Decagonal (x):"),
 			SequenceFields.centeredDecagonalX, FigurativeSequenceButtons.getCenteredDecagonalX,
-			FigurativeSequenceButtons.getCenteredDecagonalTillX);
+			FigurativeSequenceButtons.getCenteredDecagonalTillX, FigurativeSequenceButtons.plotCenteredDecagonal,
+			FigurativeSequenceButtons.appendCenteredDecagonal);
 	public static ToolBar starToolbar = new ToolBar(new Label("Star:"), FigurativeSequenceButtons.showStar,
 			new Separator(), new Label("Star (x):"), SequenceFields.starX, FigurativeSequenceButtons.getStarX,
 			FigurativeSequenceButtons.getStarTillX);
 
 	public static void init() {
+		cullenToolbar.setId("cullenToolbar");
 		fibonacciToolbar.setId("fibonacciToolbar");
 		jacobsthalToolbar.setId("jacobsthalToolbar");
 		jacobsthalPellToolbar.setId("jacobsthalPellToolbar");

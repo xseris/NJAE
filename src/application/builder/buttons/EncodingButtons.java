@@ -2,12 +2,15 @@ package application.builder.buttons;
 
 import java.util.Base64;
 
+import org.apache.commons.codec.binary.Base32;
+
 import application.builder.choiceboxes.EncodingChoices;
 import application.builder.fields.EncodingFields;
 import application.builder.texareas.TextAreas;
 import application.conversion.AsciiToUtils;
 import application.conversion.BinaryToUtils;
 import application.conversion.HexToUtils;
+import application.encoding.Base91;
 import application.encoding.KeyboardUtils;
 import application.encoding.MorseUtils;
 import application.history.DashboardHistoryUtils;
@@ -17,6 +20,12 @@ public class EncodingButtons {
 
 	public static Button encBase64 = new Button("Encode Base 64");
 	public static Button decBase64 = new Button("Decode Base 64");
+
+	public static Button encBase32 = new Button("Encode Base 32");
+	public static Button decBase32 = new Button("Decode Base 32");
+
+	public static Button encBase91 = new Button("Encode Base 91");
+	public static Button decBase91 = new Button("Decode Base 91");
 
 	public static Button encMorse = new Button("Encode Morse");
 	public static Button decMorse = new Button("Decode Morse");
@@ -39,6 +48,22 @@ public class EncodingButtons {
 		});
 		decBase64.setOnAction(action -> {
 			TextAreas.textArea.setText(new String(Base64.getDecoder().decode(TextAreas.textArea.getText().getBytes())));
+			DashboardHistoryUtils.updateDashboardHistroy(TextAreas.textArea.getText());
+		});
+		encBase32.setOnAction(action -> {
+			TextAreas.textArea.setText(new Base32().encodeAsString(TextAreas.textArea.getText().getBytes()));
+			DashboardHistoryUtils.updateDashboardHistroy(TextAreas.textArea.getText());
+		});
+		decBase32.setOnAction(action -> {
+			TextAreas.textArea.setText(new String(new Base32().decode(TextAreas.textArea.getText().getBytes())));
+			DashboardHistoryUtils.updateDashboardHistroy(TextAreas.textArea.getText());
+		});
+		encBase91.setOnAction(action -> {
+			TextAreas.textArea.setText(new String(Base91.encode(TextAreas.textArea.getText().getBytes())));
+			DashboardHistoryUtils.updateDashboardHistroy(TextAreas.textArea.getText());
+		});
+		decBase91.setOnAction(action -> {
+			TextAreas.textArea.setText(new String(Base91.decode(TextAreas.textArea.getText().getBytes())));
 			DashboardHistoryUtils.updateDashboardHistroy(TextAreas.textArea.getText());
 		});
 		encMorse.setOnAction(action -> {

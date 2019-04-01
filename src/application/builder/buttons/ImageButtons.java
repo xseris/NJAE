@@ -65,6 +65,9 @@ public class ImageButtons {
 	public static Button readQr = new Button("Read");
 
 	public static Button subtract = new Button("Subtract");
+	public static Button and = new Button("And");
+	public static Button or = new Button("Or");
+	public static Button xor = new Button("Xor");
 
 	public static void init() {
 
@@ -194,6 +197,33 @@ public class ImageButtons {
 		subtract.setOnAction(action -> {
 			try {
 				ImageCombineUtils.subtract((Tabs.imageTab.getContent()));
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			}
+			ImageHistoryUtils.updateImageHistroy(Tabs.imageTab.getContent());
+		});
+		
+		and.setOnAction(action -> {
+			try {
+				ImageCombineUtils.and((Tabs.imageTab.getContent()));
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			}
+			ImageHistoryUtils.updateImageHistroy(Tabs.imageTab.getContent());
+		});
+		
+		or.setOnAction(action -> {
+			try {
+				ImageCombineUtils.or((Tabs.imageTab.getContent()));
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			}
+			ImageHistoryUtils.updateImageHistroy(Tabs.imageTab.getContent());
+		});
+		
+		xor.setOnAction(action -> {
+			try {
+				ImageCombineUtils.xor((Tabs.imageTab.getContent()));
 			} catch (FileNotFoundException e) {
 				e.printStackTrace();
 			}

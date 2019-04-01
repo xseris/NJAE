@@ -7,6 +7,7 @@ import application.builder.buttons.ChartButtons;
 import application.builder.buttons.CryptoButtons;
 import application.builder.buttons.DashboardButtons;
 import application.builder.buttons.EncodingButtons;
+import application.builder.buttons.EsotericButtons;
 import application.builder.buttons.FileButtons;
 import application.builder.buttons.HashButtons;
 import application.builder.buttons.ImageButtons;
@@ -23,6 +24,7 @@ import application.builder.toolbars.ChartToolbars;
 import application.builder.toolbars.CryptoToolbars;
 import application.builder.toolbars.DashboardToolbars;
 import application.builder.toolbars.EncodingToolbars;
+import application.builder.toolbars.EsotericToolbars;
 import application.builder.toolbars.FileToolbars;
 import application.builder.toolbars.ImageToolbars;
 import application.builder.toolbars.MathToolbars;
@@ -77,6 +79,8 @@ public class Main extends Application {
 		FileToolbars.init();
 		ImageToolbars.init();
 		SequenceToolbars.init();
+		EsotericToolbars.init();
+		EsotericButtons.init();
 		Tabs.init();
 
 		primaryStage.setTitle("Not Just An Editor");
@@ -100,7 +104,7 @@ public class Main extends Application {
 		final MenuItem textArrangemets = new MenuItem("Arrangements");
 
 		final Menu encodings = new Menu("Encodigs");
-		final MenuItem base64 = new MenuItem("Base64");
+		final MenuItem base = new MenuItem("BaseN");
 		final MenuItem morse = new MenuItem("Morse");
 		final MenuItem asciiTo = new MenuItem("Ascii to");
 		final MenuItem hexTo = new MenuItem("Hex to");
@@ -135,11 +139,7 @@ public class Main extends Application {
 		final MenuItem atbah = new MenuItem("Atbah (Biblic cipher)");
 		final MenuItem atbash = new MenuItem("Atbash (Biblic cipher)");
 		final MenuItem affine = new MenuItem("Affine");
-		final Menu rotN = new Menu("Rot-N");
-		final MenuItem rot5 = new MenuItem("Rot-5");
-		final MenuItem rot13 = new MenuItem("Rot-13");
-		final MenuItem rot135 = new MenuItem("Rot-13.5");
-		final MenuItem rot47 = new MenuItem("Rot-47");
+		final MenuItem rotN = new MenuItem("Rot-N");
 		final Menu steganography = new Menu("Steganography");
 		final MenuItem baconian = new MenuItem("Baconian cipher (1605 A.D.)");
 
@@ -162,6 +162,7 @@ public class Main extends Application {
 		final MenuItem combine = new MenuItem("Combine");
 
 		final Menu sequences = new Menu("Sequences");
+		final MenuItem cullen = new MenuItem("Cullen");
 		final MenuItem fibonacci = new MenuItem("Fibonacci");
 		final MenuItem jacobsthal = new MenuItem("Jacobsthal");
 		final MenuItem jacobsthalPell = new MenuItem("Jacobsthal-Pell");
@@ -201,37 +202,40 @@ public class Main extends Application {
 		final MenuItem centeredDecagonal = new MenuItem("Centered Decagonal Numbers");
 		final MenuItem star = new MenuItem("Star Numbers");
 
+		final Menu esoteric = new Menu("Esoteric");
+		final Menu brainFamily = new Menu("BrainF*ck Family");
+		final MenuItem brainfuck = new MenuItem("BrainF**k");
+		final MenuItem pikalang = new MenuItem("Pikalang");
+		final MenuItem solbofuck = new MenuItem("Solbofuck");
+		final MenuItem alphuck = new MenuItem("Alphuck");
+		final MenuItem triplet = new MenuItem("Triplet");
+		final MenuItem colonoscopy = new MenuItem("Colonoscopy");
+		final Menu brainExtensions = new Menu("BrainF*ck Extensions");
+		final MenuItem brainfuck3 = new MenuItem("Brainfuck3+");
+		final MenuItem brainfuckFace = new MenuItem("( ͡° ͜ʖ ͡°)fuck");
+
+		esoteric.getItems().addAll(brainFamily);
+		brainFamily.getItems().addAll(alphuck, brainfuck, colonoscopy, pikalang, solbofuck, triplet, brainExtensions);
+		brainExtensions.getItems().addAll(brainfuck3, brainfuckFace);
 		general.getItems().addAll(menu11, notations, textFilters, textArrangemets);
-
-		encodings.getItems().addAll(base64, morse, asciiTo, hexTo, binaryTo, keyboardLayouts);
-
+		encodings.getItems().addAll(base, morse, asciiTo, hexTo, binaryTo, keyboardLayouts);
 		math.getItems().addAll(rowMath, conversionMath);
-
 		hash.getItems().add(generate);
-
 		chart.getItems().addAll(frequencies, histograms);
-
 		file.getItems().addAll(manageFiles, samplingFiles);
-
 		security.getItems().add(passwords);
-
 		table.getItems().add(importTable);
-
 		crypto.getItems().add(classical);
 		classical.getItems().addAll(albam, atbah, atbash, caesar, affine, rotN);
-		rotN.getItems().addAll(rot5, rot13, rot135, rot47);
-
 		crypto.getItems().add(steganography);
 		steganography.getItems().add(baconian);
-
 		web.getItems().add(page);
-
 		image.getItems().addAll(manage, rotate, extraction, imgHistory, processing, qrCode, combine);
 		extraction.getItems().addAll(channel, grayscale, yuv, ycbcr);
 		processing.getItems().addAll(pointProcessing, linearFilters);
 
-		sequences.getItems().addAll(fibonacci, jacobsthal, jacobsthalPell, leonardo, lucas, padovan, pell, pellLucas,
-				perrin, even, odd, figurate);
+		sequences.getItems().addAll(cullen, fibonacci, jacobsthal, jacobsthalPell, leonardo, lucas, padovan, pell,
+				pellLucas, perrin, even, odd, figurate);
 		figurate.getItems().addAll(twoD, threeD);
 		twoD.getItems().addAll(twoDCentered, twoDNotCentered);
 		twoDCentered.getItems().addAll(centeredTriangular, centeredSquare, centeredPentagonal, centeredHexagonal,
@@ -245,7 +249,7 @@ public class Main extends Application {
 		MenuBar menuBar = new MenuBar();
 
 		menuBar.getMenus().addAll(general, encodings, math, hash, chart, file, security, table, crypto, web, image,
-				sequences);
+				sequences, esoteric);
 
 		// Text Fields
 		TextField affineA = new TextField("3");
@@ -311,7 +315,7 @@ public class Main extends Application {
 		notations.setOnAction(action -> putRemove(toolBox, DashboardToolbars.notationsToolBar));
 		textFilters.setOnAction(action -> putRemove(toolBox, DashboardToolbars.filteringToolBar));
 		textArrangemets.setOnAction(action -> putRemove(toolBox, DashboardToolbars.arrangingToolBar));
-		base64.setOnAction(action -> putRemove(toolBox, EncodingToolbars.encodingToolBar));
+		base.setOnAction(action -> putRemove(toolBox, EncodingToolbars.encodingToolBar));
 		morse.setOnAction(action -> putRemove(toolBox, EncodingToolbars.morseToolBar));
 		asciiTo.setOnAction(action -> putRemove(toolBox, EncodingToolbars.asciiToToolBar));
 		hexTo.setOnAction(action -> putRemove(toolBox, EncodingToolbars.hexToToolBar));
@@ -330,10 +334,7 @@ public class Main extends Application {
 		albam.setOnAction(action -> putRemove(toolBox, CryptoToolbars.albamToolBar));
 		atbah.setOnAction(action -> putRemove(toolBox, CryptoToolbars.atbahToolBar));
 		atbash.setOnAction(action -> putRemove(toolBox, CryptoToolbars.atbashToolBar));
-		rot5.setOnAction(action -> putRemove(toolBox, CryptoToolbars.rot5ToolBar));
-		rot13.setOnAction(action -> putRemove(toolBox, CryptoToolbars.rot13ToolBar));
-		rot135.setOnAction(action -> putRemove(toolBox, CryptoToolbars.rot135ToolBar));
-		rot47.setOnAction(action -> putRemove(toolBox, CryptoToolbars.rot47ToolBar));
+		rotN.setOnAction(action -> putRemove(toolBox, CryptoToolbars.rotNToolBar));
 		baconian.setOnAction(action -> putRemove(toolBox, baconianToolBar));
 		affine.setOnAction(action -> putRemove(toolBox, affineToolBar));
 		page.setOnAction(action -> putRemove(toolBox, pageToolBar));
@@ -348,6 +349,7 @@ public class Main extends Application {
 		linearFilters.setOnAction(action -> putRemove(toolBox, ImageToolbars.linearFilterImageToolBar));
 		qrCode.setOnAction(action -> putRemove(toolBox, ImageToolbars.qrImageToolBar));
 		combine.setOnAction(action -> putRemove(toolBox, ImageToolbars.combineImageToolBar));
+		cullen.setOnAction(action -> putRemove(toolBox, SequenceToolbars.cullenToolbar));
 		fibonacci.setOnAction(action -> putRemove(toolBox, SequenceToolbars.fibonacciToolbar));
 		jacobsthal.setOnAction(action -> putRemove(toolBox, SequenceToolbars.jacobsthalToolbar));
 		jacobsthalPell.setOnAction(action -> putRemove(toolBox, SequenceToolbars.jacobsthalPellToolbar));
@@ -379,6 +381,14 @@ public class Main extends Application {
 		centeredDecagonal.setOnAction(action -> putRemove(toolBox, SequenceToolbars.centeredDecagonalToolbar));
 		star.setOnAction(action -> putRemove(toolBox, SequenceToolbars.starToolbar));
 		centeredTetrahedral.setOnAction(action -> putRemove(toolBox, SequenceToolbars.centeredTetrahedralToolbar));
+		brainfuck.setOnAction(action -> putRemove(toolBox, EsotericToolbars.brainfuckToolbar));
+		pikalang.setOnAction(action -> putRemove(toolBox, EsotericToolbars.pikalangToolbar));
+		solbofuck.setOnAction(action -> putRemove(toolBox, EsotericToolbars.solbofuckToolbar));
+		alphuck.setOnAction(action -> putRemove(toolBox, EsotericToolbars.alphuckToolbar));
+		triplet.setOnAction(action -> putRemove(toolBox, EsotericToolbars.tripletToolbar));
+		brainfuck3.setOnAction(action -> putRemove(toolBox, EsotericToolbars.brainfuck3Toolbar));
+		brainfuckFace.setOnAction(action -> putRemove(toolBox, EsotericToolbars.brainfuckFaceToolbar));
+		colonoscopy.setOnAction(action -> putRemove(toolBox, EsotericToolbars.colonoscopyToolbar));
 
 		// Buttons Actions
 

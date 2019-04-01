@@ -1,6 +1,12 @@
 package application.sequences;
 
 import java.math.BigInteger;
+import java.util.ArrayList;
+import java.util.List;
+
+import application.builder.tabs.Tabs;
+import application.graph.GraphUtils;
+import javafx.scene.chart.LineChart;
 
 public class CenteredHeptagonalUtils {
 
@@ -22,6 +28,25 @@ public class CenteredHeptagonalUtils {
 			sb.append(getX(i)).append("\n");
 		}
 		return sb.toString();
+	}
+
+	public static LineChart plot(int n) {
+		List<Long> data = new ArrayList<>();
+		for (int i = 0; i <= n; i++) {
+			data.add(((7L * i * i) - (7 * i) + 2) / 2);
+		}
+
+		return GraphUtils.generateSequenceChart(data, "Centered Heptagonal Numbers");
+	}
+
+	public static LineChart append(int n) {
+		List<Long> data = new ArrayList<>();
+		for (int i = 0; i <= n; i++) {
+			data.add(((7L * i * i) - (7 * i) + 2) / 2);
+		}
+		LineChart content = (LineChart) Tabs.chartTab.getContent();
+		return GraphUtils.addSerie(content, data, "Centered Heptagonal Numbers");
+
 	}
 
 }

@@ -1,15 +1,14 @@
 package application.graph;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import javafx.collections.ObservableList;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
+import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
-import javafx.scene.chart.XYChart.Data;
-import javafx.scene.paint.Color;
 
 public class GraphUtils {
 
@@ -124,5 +123,38 @@ public class GraphUtils {
 		bc.lookupAll(".default-color1.chart-bar").forEach(n -> n.setStyle("-fx-bar-fill: green;"));
 		bc.lookupAll(".default-color2.chart-bar").forEach(n -> n.setStyle("-fx-bar-fill: blue;"));
 		return bc;
+	}
+
+	public static LineChart generateSequenceChart(List<Long> data, String title) {
+		NumberAxis xAxis = new NumberAxis();
+		NumberAxis yAxis = new NumberAxis();
+		LineChart<Number, Number> lineChart = new LineChart<Number, Number>(xAxis, yAxis);
+		lineChart.setTitle("Sequences");
+		xAxis.setLabel("input");
+		yAxis.setLabel("output");
+
+		XYChart.Series series = new XYChart.Series();
+		series.setName(title);
+		int i = 0;
+		for (Long dt : data) {
+			series.getData().add(new XYChart.Data(i, dt));
+			i++;
+		}
+		lineChart.getData().add(series);
+		lineChart.autosize();
+		return lineChart;
+	}
+
+	public static LineChart addSerie(LineChart lineChart, List<Long> data, String title) {
+		XYChart.Series series = new XYChart.Series();
+		int i = 0;
+		for (Long dt : data) {
+			series.getData().add(new XYChart.Data(i, dt));
+			i++;
+		}
+		series.setName(title);
+		lineChart.getData().add(series);
+		lineChart.autosize();
+		return lineChart;
 	}
 }

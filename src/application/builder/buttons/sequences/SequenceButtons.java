@@ -1,7 +1,9 @@
 package application.builder.buttons.sequences;
 
 import application.builder.fields.SequenceFields;
+import application.builder.tabs.Tabs;
 import application.builder.texareas.TextAreas;
+import application.sequences.CullenUtils;
 import application.sequences.EvenUtils;
 import application.sequences.FibonacciUtils;
 import application.sequences.JacobsthalPellUtils;
@@ -16,6 +18,12 @@ import application.sequences.PerrinUtils;
 import javafx.scene.control.Button;
 
 public class SequenceButtons {
+
+	public static Button showCullen = new Button("Show Formula");
+	public static Button getCullenX = new Button("Get nth element");
+	public static Button getCullenTillX = new Button("Get first n elements");
+	public static Button plotCullenTillX = new Button("Plot till n");
+	public static Button appendCullenTillX = new Button("Append till n");
 
 	public static Button showFibonacci = new Button("Show Formula");
 	public static Button getFibX = new Button("Get nth element");
@@ -62,6 +70,18 @@ public class SequenceButtons {
 	public static Button getPerrinTillX = new Button("Get first n elements");
 
 	public static void init() {
+		showCullen.setOnAction(action -> TextAreas.textArea.setText(CullenUtils.getFormula()));
+		getCullenX.setOnAction(action -> TextAreas.textArea
+				.setText(CullenUtils.getX(Integer.parseInt(SequenceFields.cullenX.getText()))));
+		getCullenTillX.setOnAction(action -> TextAreas.textArea
+				.setText(CullenUtils.getTillX(Integer.parseInt(SequenceFields.cullenX.getText()))));
+		plotCullenTillX.setOnAction(action -> {
+			Tabs.chartTab.setContent(CullenUtils.plot(Integer.parseInt(SequenceFields.cullenX.getText())));
+		});
+		appendCullenTillX.setOnAction(action -> {
+			Tabs.chartTab.setContent(CullenUtils.append(Integer.parseInt(SequenceFields.cullenX.getText())));
+		});
+
 		showFibonacci.setOnAction(action -> TextAreas.textArea.setText(FibonacciUtils.getFormula()));
 		getFibX.setOnAction(action -> TextAreas.textArea
 				.setText(FibonacciUtils.getX(Integer.parseInt(SequenceFields.fibX.getText()))));

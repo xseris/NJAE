@@ -3,6 +3,7 @@ package application.builder.fields;
 import javafx.scene.control.TextField;
 
 public class SequenceFields {
+	public static TextField cullenX = new TextField();
 	public static TextField fibX = new TextField();
 	public static TextField jacobsthalX = new TextField();
 	public static TextField jacobsthalPellX = new TextField();

@@ -37,7 +37,8 @@ public class ImageToolbars {
 
 	public static ToolBar qrImageToolBar = new ToolBar(new Label("QR Code:"), ImageButtons.readQr);
 
-	public static ToolBar combineImageToolBar = new ToolBar(new Label("Combine: "), ImageButtons.subtract);
+	public static ToolBar combineImageToolBar = new ToolBar(new Label("Combine: "), ImageButtons.subtract,
+			ImageButtons.and, ImageButtons.or, ImageButtons.xor);
 
 	public static void init() {
 		manageImageToolBar.setId("manageImage");

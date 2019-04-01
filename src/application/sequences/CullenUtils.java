@@ -8,43 +8,43 @@ import application.builder.tabs.Tabs;
 import application.graph.GraphUtils;
 import javafx.scene.chart.LineChart;
 
-public class CenteredDecagonalUtils {
+public class CullenUtils {
 
 	public static String getFormula() {
-		return "Centered Octagonal(x) = 5 * x * (x + 1) + 1";
+		return "Cullen(x) = x * 2^x + 1";
 	}
 
 	public static String getX(int n) {
-		BigInteger num = BigInteger.valueOf(n);
-		return "Centered Octagonal(" + n + ") = " + String
-				.valueOf((num.multiply(BigInteger.valueOf(5)).multiply(num.add(BigInteger.ONE))).add(BigInteger.ONE));
+		return "Cullen(" + n + ") = " + String.valueOf(cullen(n));
 	}
 
 	public static String getTillX(int n) {
 		StringBuilder sb = new StringBuilder();
 		for (int i = 0; i <= n; i++) {
-			sb.append(getX(i)).append("\n");
+			sb.append("Cullen(" + i + ") = " + String.valueOf(cullen(i)) + "\n");
 		}
 		return sb.toString();
+	}
+
+	public static BigInteger cullen(int n) {
+		return BigInteger.valueOf(n).multiply(BigInteger.valueOf(2).pow(n)).add(BigInteger.ONE);
 	}
 
 	public static LineChart plot(int n) {
 		List<Long> data = new ArrayList<>();
 		for (int i = 0; i <= n; i++) {
-			data.add(5L * i * (i + 1) + 1);
+			data.add((long) (i * Math.pow(2, i) + 1));
 		}
-
-		return GraphUtils.generateSequenceChart(data, "Centered Decagonal Numbers");
+		return GraphUtils.generateSequenceChart(data, "Cullen Numbers");
 	}
 
 	public static LineChart append(int n) {
 		List<Long> data = new ArrayList<>();
 		for (int i = 0; i <= n; i++) {
-			data.add(5L * i * (i + 1) + 1);
+			data.add((long) (i * Math.pow(2, i) + 1));
 		}
 		LineChart content = (LineChart) Tabs.chartTab.getContent();
-		return GraphUtils.addSerie(content, data, "Centered Decagonal Numbers");
-
+		return GraphUtils.addSerie(content, data, "Cullen Numbers");
 	}
 
 }
