@@ -15,6 +15,7 @@ import javafx.scene.control.Button;
 public class EsotericButtons {
 
 	public static Button interpretBrainFuck = new Button("Interpret");
+	public static Button helloBrainfuck = new Button("Hello World!");
 
 	public static Button interpretPikalang = new Button("Interpret");
 	public static Button helloPikalang = new Button("Hello World!");
@@ -39,6 +40,10 @@ public class EsotericButtons {
 	public static void init() {
 		interpretBrainFuck.setOnAction(action -> {
 			TextAreas.textArea.setText(BrainfuckUtils.interpret(TextAreas.textArea.getText()));
+			DashboardHistoryUtils.updateDashboardHistroy(TextAreas.textArea.getText());
+		});
+		helloBrainfuck.setOnAction(action -> {
+			TextAreas.textArea.setText(BrainfuckUtils.helloWorld());
 			DashboardHistoryUtils.updateDashboardHistroy(TextAreas.textArea.getText());
 		});
 		interpretPikalang.setOnAction(action -> {

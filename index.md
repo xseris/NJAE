@@ -1,4 +1,4 @@
-# NJAE (1.0.6)
+# NJAE (1.0.7)
 
 NJAE is simply Not Just An Editor, because this is not just an editor...
 
@@ -79,6 +79,17 @@ All features you will expect from an editor that is not just an editor...
 + QWERTY to  AWERTY (From 1.0.6)
 + QWERTY to  QUERTY (From 1.0.6)
 
+### Esoteric
+
++ ( ͡° ͜ʖ ͡°)Fuck (From 1.0.7)
++ Alphuck (From 1.0.7)
++ Brainfuck (From 1.0.7)
++ Brainfuck3+ (From 1.0.7)
++ Colonoscopy (From 1.0.7)
++ Pikalang (From 1.0.7)
++ Solbofuck (From 1.0.7)
++ Triplet(From 1.0.7)
+
 ### Files
 
 + Head sampling (From 1.0.4)
@@ -99,6 +110,9 @@ All features you will expect from an editor that is not just an editor...
 ### Images
 
 + Blur Filtering (From 1.0.3)
++ Combine AND (From 1.0.7)
++ Combine OR (From 1.0.7)
++ Combine XOR (From 1.0.7)
 + Difference (From 1.0.4)
 + Emphatize (From 1.0.4)
 + Extract blue channel (From 1.0.2)
@@ -164,6 +178,7 @@ All features you will expect from an editor that is not just an editor...
 + Centered Square Numbers (From 1.0.5)
 + Centered Tetrahedral Numbers (From 1.0.5)
 + Centered Triangular Numbers (From 1.0.5)
++ Cullen Numbers (From 1.0.7)
 + Decagonal Numbers (From 1.0.5)
 + Dodecagonal Numbers (From 1.0.5)
 + Even Numbers (From 1.0.5)

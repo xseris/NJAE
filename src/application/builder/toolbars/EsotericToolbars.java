@@ -6,7 +6,8 @@ import javafx.scene.control.ToolBar;
 
 public class EsotericToolbars {
 
-	public static ToolBar brainfuckToolbar = new ToolBar(new Label("BrainF*ck:"), EsotericButtons.interpretBrainFuck);
+	public static ToolBar brainfuckToolbar = new ToolBar(new Label("BrainF*ck:"), EsotericButtons.interpretBrainFuck,
+			EsotericButtons.helloBrainfuck);
 	public static ToolBar pikalangToolbar = new ToolBar(new Label("Pikalang:"), EsotericButtons.interpretPikalang,
 			EsotericButtons.helloPikalang);
 	public static ToolBar solbofuckToolbar = new ToolBar(new Label("Solbofuck:"), EsotericButtons.interpretSolbofuck,

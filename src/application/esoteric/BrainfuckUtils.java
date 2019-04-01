@@ -53,4 +53,8 @@ public class BrainfuckUtils {
 		return ret.toString();
 	}
 
+	public static String helloWorld() {
+		return "++++++++[>++++[>++>+++>+++>+<<<<-]>+>+>->>+[<]<-]>>.>---.+++++++..+++.>>.<-.<.+++.------.--------.>>+.>++.";
+	}
+
 }
