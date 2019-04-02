@@ -2,7 +2,9 @@
 
 + Features -> https://xseris.github.io/NJAE/
 
-Runs with Java 8
+Runs with Java 8, 
+
+Easiest way to run is to import the maven project in yor favourite Java IDE. Feel free to make your jar from there or by maven...
 
 ### Some screenshots
 
