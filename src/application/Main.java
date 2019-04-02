@@ -204,18 +204,21 @@ public class Main extends Application {
 
 		final Menu esoteric = new Menu("Esoteric");
 		final Menu brainFamily = new Menu("BrainF*ck Family");
+		final MenuItem alphuck = new MenuItem("Alphuck");
+		final MenuItem blub = new MenuItem("Blub");
 		final MenuItem brainfuck = new MenuItem("BrainF**k");
+		final MenuItem colonoscopy = new MenuItem("Colonoscopy");
+		final MenuItem ook = new MenuItem("Ook!");
 		final MenuItem pikalang = new MenuItem("Pikalang");
 		final MenuItem solbofuck = new MenuItem("Solbofuck");
-		final MenuItem alphuck = new MenuItem("Alphuck");
 		final MenuItem triplet = new MenuItem("Triplet");
-		final MenuItem colonoscopy = new MenuItem("Colonoscopy");
 		final Menu brainExtensions = new Menu("BrainF*ck Extensions");
-		final MenuItem brainfuck3 = new MenuItem("Brainfuck3+");
 		final MenuItem brainfuckFace = new MenuItem("( ͡° ͜ʖ ͡°)fuck");
+		final MenuItem brainfuck3 = new MenuItem("Brainfuck3+");
 
 		esoteric.getItems().addAll(brainFamily);
-		brainFamily.getItems().addAll(alphuck, brainfuck, colonoscopy, pikalang, solbofuck, triplet, brainExtensions);
+		brainFamily.getItems().addAll(alphuck, blub, brainfuck, colonoscopy, ook, pikalang, solbofuck, triplet,
+				brainExtensions);
 		brainExtensions.getItems().addAll(brainfuck3, brainfuckFace);
 		general.getItems().addAll(menu11, notations, textFilters, textArrangemets);
 		encodings.getItems().addAll(base, morse, asciiTo, hexTo, binaryTo, keyboardLayouts);
@@ -389,6 +392,8 @@ public class Main extends Application {
 		brainfuck3.setOnAction(action -> putRemove(toolBox, EsotericToolbars.brainfuck3Toolbar));
 		brainfuckFace.setOnAction(action -> putRemove(toolBox, EsotericToolbars.brainfuckFaceToolbar));
 		colonoscopy.setOnAction(action -> putRemove(toolBox, EsotericToolbars.colonoscopyToolbar));
+		ook.setOnAction(action -> putRemove(toolBox, EsotericToolbars.ookToolbar));
+		blub.setOnAction(action -> putRemove(toolBox, EsotericToolbars.blubToolbar));
 
 		// Buttons Actions
 

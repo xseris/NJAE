@@ -22,6 +22,10 @@ public class EsotericToolbars {
 			EsotericButtons.interpretBrainfuck3);
 	public static ToolBar brainfuckFaceToolbar = new ToolBar(new Label("( ͡° ͜ʖ ͡°)fuck:"),
 			EsotericButtons.interpretBrainfuckFace, EsotericButtons.helloBrainfuckFace);
+	public static ToolBar ookToolbar = new ToolBar(new Label("Ook!"), EsotericButtons.interpretOok,
+			EsotericButtons.helloOok);
+	public static ToolBar blubToolbar = new ToolBar(new Label("Blub"), EsotericButtons.interpretBlub,
+			EsotericButtons.helloBlub);
 
 	public static void init() {
 		brainfuckToolbar.setId("brainfuckToolbar");
@@ -32,6 +36,8 @@ public class EsotericToolbars {
 		brainfuck3Toolbar.setId("brainfuck3Toolbar");
 		brainfuckFaceToolbar.setId("brainfuckFaceToolbar");
 		colonoscopyToolbar.setId("colonoscopyToolbar");
+		ookToolbar.setId("ookToolbar");
+		blubToolbar.setId("blubToolbar");
 	}
 
 }

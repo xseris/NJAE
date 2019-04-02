@@ -2,10 +2,12 @@ package application.builder.buttons;
 
 import application.builder.texareas.TextAreas;
 import application.esoteric.AlphuckUtils;
+import application.esoteric.BlubUtils;
 import application.esoteric.Brainfuck3Utils;
 import application.esoteric.BrainfuckFaceUtils;
 import application.esoteric.BrainfuckUtils;
 import application.esoteric.ColonoscopyUtils;
+import application.esoteric.OokUtils;
 import application.esoteric.PikalangUtils;
 import application.esoteric.SolbofuckUtils;
 import application.esoteric.TripletUtils;
@@ -36,6 +38,12 @@ public class EsotericButtons {
 
 	public static Button interpretBrainfuckFace = new Button("Interpret");
 	public static Button helloBrainfuckFace = new Button("Hello World!");
+
+	public static Button interpretOok = new Button("Interpret");
+	public static Button helloOok = new Button("Hello World!");
+
+	public static Button interpretBlub = new Button("Interpret");
+	public static Button helloBlub = new Button("Hello World!");
 
 	public static void init() {
 		interpretBrainFuck.setOnAction(action -> {
@@ -96,6 +104,22 @@ public class EsotericButtons {
 		});
 		helloColonoscopy.setOnAction(action -> {
 			TextAreas.textArea.setText(ColonoscopyUtils.helloWorld());
+			DashboardHistoryUtils.updateDashboardHistroy(TextAreas.textArea.getText());
+		});
+		interpretOok.setOnAction(action -> {
+			TextAreas.textArea.setText(OokUtils.interpret(TextAreas.textArea.getText()));
+			DashboardHistoryUtils.updateDashboardHistroy(TextAreas.textArea.getText());
+		});
+		helloOok.setOnAction(action -> {
+			TextAreas.textArea.setText(OokUtils.helloWorld());
+			DashboardHistoryUtils.updateDashboardHistroy(TextAreas.textArea.getText());
+		});
+		interpretBlub.setOnAction(action -> {
+			TextAreas.textArea.setText(BlubUtils.interpret(TextAreas.textArea.getText()));
+			DashboardHistoryUtils.updateDashboardHistroy(TextAreas.textArea.getText());
+		});
+		helloBlub.setOnAction(action -> {
+			TextAreas.textArea.setText(BlubUtils.helloWorld());
 			DashboardHistoryUtils.updateDashboardHistroy(TextAreas.textArea.getText());
 		});
 	}
