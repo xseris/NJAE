@@ -8,211 +8,213 @@ All features you will expect from an editor that is not just an editor...
 
 ### Charts
 
-+ Bigram frequency (From 1.0.0)
-+ Unigram frequency (From 1.0.0)
-+ Word frequency (From 1.0.0)
-+ Red histogram (From 1.0.3)
-+ Blue histogram (From 1.0.3)
-+ Green histogram (From 1.0.3)
-+ Full histogram (From 1.0.3)
++ Bigram frequency
++ Unigram frequency
++ Word frequency
++ Red histogram
++ Blue histogram
++ Green histogram
++ Full histogram
 
 ### Crypto
 
-+ Bruteforce Affine (From 1.0.1)
-+ Bruteforce Caesar (From 1.0.0)
-+ Encode Affine (From 1.0.1)
-+ Encode Albam (From 1.0.1)
-+ Encode Atbah (From 1.0.1)
-+ Encode Caesar (From 1.0.0)
-+ Encode Rot-5 (From 1.0.1)
-+ Encode Rot-13 (From 1.0.1)
-+ Encode Rot-13.5 (From 1.0.1)
-+ Encode Rot-47 (From 1.0.1)
-+ Encode Atbash (From 1.0.1)
-+ Decode Affine (From 1.0.1)
-+ Decode Albam (From 1.0.1)
-+ Decode Atbah (From 1.0.1)
-+ Decode Atbash (From 1.0.1)
-+ Decode Caesar (From 1.0.0)
-+ Decode Rot-5 (From 1.0.1)
-+ Decode Rot-13 (From 1.0.1)
-+ Decode Rot-13.5 (From 1.0.1)
-+ Decode Rot-47 (From 1.0.1)
++ Bruteforce Affine
++ Bruteforce Caesar
++ Encode Affine
++ Encode Albam
++ Encode Atbah
++ Encode Caesar
++ Encode Rot-5
++ Encode Rot-13
++ Encode Rot-13.5
++ Encode Rot-47
++ Encode Atbash
++ Decode Affine
++ Decode Albam
++ Decode Atbah
++ Decode Atbash
++ Decode Caesar
++ Decode Rot-5
++ Decode Rot-13
++ Decode Rot-13.5
++ Decode Rot-47
 
 ### Dashboard
 
-+ Camelcase (From 1.0.3)
-+ Capitalization (From 1.0.3)
-+ Grep (From 1.0.3)
-+ History (From 1.0.3)
-+ Kebabcase (From 1.0.3)
-+ Lowercase (From 1.0.3)
-+ Remove spaces (From 1.0.3)
-+ Replace regex (From 1.0.3)
-+ Reverse lines (From 1.0.4)
-+ Reverse text (From 1.0.4)
-+ Reverse words (From 1.0.4)
-+ Snakecase (From 1.0.3)
-+ Sort lines (From 1.0.4)
-+ Truncate lines number (From 1.0.4)
-+ Truncate lines by length (From 1.0.4)
-+ Truncate lines by words (From 1.0.4)
-+ Unique lines (From 1.0.4)
-+ Uppercase (From 1.0.3)
++ Camelcase
++ Capitalization
++ Grep
++ History
++ Kebabcase
++ Lowercase
++ Remove spaces
++ Replace regex
++ Reverse lines
++ Reverse text
++ Reverse words
++ Snakecase
++ Sort lines
++ Truncate lines number
++ Truncate lines by length
++ Truncate lines by words
++ Unique lines
++ Uppercase
 
 ### Encodings
 
-+ ASCII to Binary (From 1.0.0)
-+ ASCII to Hex (From 1.0.1)
-+ AWERTY to  QUERTY (From 1.0.6)
-+ AWERTY to  QWERTY (From 1.0.6)
-+ Binary to Ascii (From 1.0.1)
-+ Binary to Hex (From 1.0.1)
-+ Encode Base64 (From 1.0.0)
-+ Decode Base64 (From 1.0.0)
-+ Hex to ASCII (From 1.0.1)
-+ Hex to Binary (From 1.0.1)
-+ Morse decoder (From 1.0.6)
-+ Morse encoder (From 1.0.6)
-+ QUERTY to  AWERTY (From 1.0.6)
-+ QUERTY to  QWERTY (From 1.0.6)
-+ QWERTY to  AWERTY (From 1.0.6)
-+ QWERTY to  QUERTY (From 1.0.6)
++ ASCII to Binary
++ ASCII to Hex
++ AWERTY to  QUERTY
++ AWERTY to  QWERTY
++ Binary to Ascii
++ Binary to Hex
++ Encode Base64
++ Decode Base64
++ Hex to ASCII
++ Hex to Binary
++ Morse decoder
++ Morse encoder
++ QUERTY to  AWERTY
++ QUERTY to  QWERTY
++ QWERTY to  AWERTY
++ QWERTY to  QUERTY
 
 ### Esoteric
 
-+ ( ͡° ͜ʖ ͡°)Fuck (From 1.0.7)
-+ Alphuck (From 1.0.7)
-+ Brainfuck (From 1.0.7)
-+ Brainfuck3+ (From 1.0.7)
-+ Colonoscopy (From 1.0.7)
-+ Pikalang (From 1.0.7)
-+ Solbofuck (From 1.0.7)
-+ Triplet(From 1.0.7)
++ ( ͡° ͜ʖ ͡°)Fuck
++ Alphuck
++ Blub
++ Brainfuck
++ Brainfuck3+
++ Colonoscopy
++ Ook!
++ Pikalang
++ Solbofuck
++ Triplet
 
 ### Files
 
-+ Head sampling (From 1.0.4)
-+ Preload file (From 1.0.4)
-+ Random lines by words (From 1.0.4)
-+ Read text files (From 1.0.0)
-+ Save text files (From 1.0.3)
-+ Show current file (From 1.0.4)
-+ Tail lines by words (From 1.0.4)
++ Head sampling
++ Preload file
++ Random lines by words
++ Read text files
++ Save text files
++ Show current file
++ Tail lines by words
 
 ### Hash
 
-+ Generate MD5 (From 1.0.1)
-+ Generate SHA-1 (From 1.0.0)
-+ Generate SHA-256 (From 1.0.1)
-+ Generate SHA-512 (From 1.0.1)
++ Generate MD5
++ Generate SHA-1
++ Generate SHA-256
++ Generate SHA-512
 
 ### Images
 
-+ Blur Filtering (From 1.0.3)
-+ Combine AND (From 1.0.7)
-+ Combine OR (From 1.0.7)
-+ Combine XOR (From 1.0.7)
-+ Difference (From 1.0.4)
-+ Emphatize (From 1.0.4)
-+ Extract blue channel (From 1.0.2)
-+ Extract Cb [BT.601] (From 1.0.3)
-+ Extract Cr [BT.601] (From 1.0.3)
-+ Extract green channel (From 1.0.2)
-+ Extract red channel (From 1.0.2)
-+ Extract U [BT.601] (From 1.0.3)
-+ Extract V [BT.601] (From 1.0.3)
-+ Extract Y [BT.601] (From 1.0.3)
-+ Get from URL (From 1.0.2)
-+ Grayscale average (From 1.0.2)
-+ Grayscale decomposition (From 1.0.2)
-+ Grayscale desaturation (From 1.0.2)
-+ Grayscale luminescence (From 1.0.2)
-+ Grayscale single channel (From 1.0.2)
-+ History (From 1.0.2)
-+ Info file name (From 1.0.3)
-+ Info file size (From 1.0.3)
-+ Info file path  (From 1.0.3)
-+ Info height (From 1.0.3)
-+ Info pixels (From 1.0.3)
-+ Info size (From 1.0.3)
-+ Info width (From 1.0.3)
-+ Logarithmic Transformation (From 1.0.3)
-+ Negative Transformation (From 1.0.3)
-+ Open Image (From 1.0.2)
-+ Power Transformation (From 1.0.3)
-+ Read QR Codes (From 1.0.4)
-+ Rotate Image (From 1.0.2)
-+ Save Image (From 1.0.2)
-+ Show current image (From 1.0.4)
-+ Thresholding (From 1.0.3)
-+ Zoom Image (From 1.0.2)
++ Blur Filtering
++ Combine AND
++ Combine OR
++ Combine XOR
++ Difference
++ Emphatize
++ Extract blue channel
++ Extract Cb [BT.601]
++ Extract Cr [BT.601]
++ Extract green channel
++ Extract red channel
++ Extract U [BT.601]
++ Extract V [BT.601]
++ Extract Y [BT.601]
++ Get from URL
++ Grayscale average
++ Grayscale decomposition
++ Grayscale desaturation
++ Grayscale luminescence
++ Grayscale single channel
++ History
++ Info file name
++ Info file size
++ Info file path 
++ Info height
++ Info pixels
++ Info size
++ Info width
++ Logarithmic Transformation
++ Negative Transformation
++ Open Image
++ Power Transformation
++ Read QR Codes
++ Rotate Image
++ Save Image
++ Show current image
++ Thresholding
++ Zoom Image
 
 ### Math
 
-+ Average of lines (From 1.0.4)
-+ Base 10 to base 2 (From 1.0.3)
-+ Base 10 to base n (From 1.0.3)
-+ Base 2 to base 10 (From 1.0.3)
-+ Base 2 to base n (From 1.0.3)
-+ Base a to base b (From 1.0.3)
-+ Max of lines (From 1.0.0)
-+ Mcd of lines (From 1.0.4)
-+ Mcm of lines (From 1.0.4)
-+ Min of lines (From 1.0.0)
-+ Multiply lines (From 1.0.0)
-+ Sum lines (From 1.0.0)
++ Average of lines
++ Base 10 to base 2
++ Base 10 to base n
++ Base 2 to base 10
++ Base 2 to base n
++ Base a to base b
++ Max of lines
++ Mcd of lines
++ Mcm of lines
++ Min of lines
++ Multiply lines
++ Sum lines
 
 ### Password
 
-+ Analyse password strength (From 1.0.0)
++ Analyse password strength
 
 ### Sequences
 
-+ Centered Decagonal Numbers (From 1.0.5)
-+ Centered Heptagonal Numbers (From 1.0.5)
-+ Centered Hexagonal Numbers (From 1.0.5)
-+ Centered Nonagonal Numbers (From 1.0.5)
-+ Centered Octagonal Numbers (From 1.0.5)
-+ Centered Pentagonal Numbers (From 1.0.5)
-+ Centered Square Numbers (From 1.0.5)
-+ Centered Tetrahedral Numbers (From 1.0.5)
-+ Centered Triangular Numbers (From 1.0.5)
-+ Cullen Numbers (From 1.0.7)
-+ Decagonal Numbers (From 1.0.5)
-+ Dodecagonal Numbers (From 1.0.5)
-+ Even Numbers (From 1.0.5)
-+ Fibonacci (From 1.0.4)
-+ Heptagonal Numbers (From 1.0.5)
-+ Hexagonal Numbers (From 1.0.5)
-+ Jacobsthal Numbers (From 1.0.6)
-+ Jacobsthal-Lucas Numbers (From 1.0.6)
-+ Leonardo Numbers (From 1.0.6)
-+ Lucas Numbers (From 1.0.6)
-+ Nonagonal Numbers (From 1.0.5)
-+ Octagonal Numbers (From 1.0.5)
-+ Odd Numbers (From 1.0.5)
-+ Padovan Numbers (From 1.0.6)
-+ Pell Numbers (From 1.0.6)
-+ Pell-Lucas Numbers (From 1.0.6)
-+ Perrin Numbers (From 1.0.6)
-+ Square Numbers (From 1.0.5)
-+ Star Numbers (From 1.0.5)
-+ Tetrahedral Numbers (From 1.0.5)
-+ Triangular Numbers (From 1.0.5)
++ Centered Decagonal Numbers
++ Centered Heptagonal Numbers
++ Centered Hexagonal Numbers
++ Centered Nonagonal Numbers
++ Centered Octagonal Numbers
++ Centered Pentagonal Numbers
++ Centered Square Numbers
++ Centered Tetrahedral Numbers
++ Centered Triangular Numbers
++ Cullen Numbers
++ Decagonal Numbers
++ Dodecagonal Numbers
++ Even Numbers
++ Fibonacci
++ Heptagonal Numbers
++ Hexagonal Numbers
++ Jacobsthal Numbers
++ Jacobsthal-Lucas Numbers
++ Leonardo Numbers
++ Lucas Numbers
++ Nonagonal Numbers
++ Octagonal Numbers
++ Odd Numbers
++ Padovan Numbers
++ Pell Numbers
++ Pell-Lucas Numbers
++ Perrin Numbers
++ Square Numbers
++ Star Numbers
++ Tetrahedral Numbers
++ Triangular Numbers
 
 ### Steganography
 
-+ Encode full Baconian (From 1.0.1)
-+ Encode latin Baconian (From 1.0.1)
-+ Decode full Baconian (From 1.0.1)
-+ Decode latin Baconian (From 1.0.1)
++ Encode full Baconian
++ Encode latin Baconian
++ Decode full Baconian
++ Decode latin Baconian
 
 ### Tables
 
-+ CSV to table (From 1.0.0)
++ CSV to table
 
 ### Web
 
-+ Extract comments (From 1.0.0)
-+ Get page source (From 1.0.0)
++ Extract comments
++ Get page source

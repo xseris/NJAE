@@ -4,7 +4,7 @@
 
 Runs with Java 8, 
 
-Easiest way to run is to import the maven project in yor favourite Java IDE. Feel free to make your jar from there or by maven...
+Easiest way to run is to import the maven project in your favourite Java IDE. Feel free to make your jar from there or by maven...
 
 ### Some screenshots
 
