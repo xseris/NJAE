@@ -29,8 +29,8 @@ import application.builder.toolbars.FileToolbars;
 import application.builder.toolbars.ImageToolbars;
 import application.builder.toolbars.MathToolbars;
 import application.builder.toolbars.SequenceToolbars;
+import application.builder.toolbars.StegoToolbars;
 import application.crypto.classical.AffineUtils;
-import application.crypto.steganography.BaconianUtils;
 import application.hash.HashUtils;
 import application.history.DashboardHistoryUtils;
 import application.image.ImageInfoUtils;
@@ -72,8 +72,10 @@ public class Main extends Application {
 		FileButtons.init();
 		ImageButtons.init();
 		MathButtons.init();
+		StegoButtons.init();
 		SequenceButtons.init();
 		CryptoToolbars.init();
+		StegoToolbars.init();
 		DashboardToolbars.init();
 		EncodingToolbars.init();
 		FileToolbars.init();
@@ -142,6 +144,7 @@ public class Main extends Application {
 		final MenuItem rotN = new MenuItem("Rot-N");
 		final Menu steganography = new Menu("Steganography");
 		final MenuItem baconian = new MenuItem("Baconian cipher (1605 A.D.)");
+		final MenuItem textStego = new MenuItem("Text Steganography");
 
 		final Menu web = new Menu("Web");
 		final MenuItem page = new MenuItem("Page");
@@ -231,7 +234,7 @@ public class Main extends Application {
 		crypto.getItems().add(classical);
 		classical.getItems().addAll(albam, atbah, atbash, caesar, affine, rotN);
 		crypto.getItems().add(steganography);
-		steganography.getItems().add(baconian);
+		steganography.getItems().addAll(baconian, textStego);
 		web.getItems().add(page);
 		image.getItems().addAll(manage, rotate, extraction, imgHistory, processing, qrCode, combine);
 		extraction.getItems().addAll(channel, grayscale, yuv, ycbcr);
@@ -268,9 +271,6 @@ public class Main extends Application {
 				CryptoButtons.decodeAffine, CryptoButtons.bruteForceAffine, new Separator(), new Label("a = "), affineA,
 				new Label("b = "), affineB);
 
-		ToolBar baconianToolBar = new ToolBar(new Label("Latin Baconian:"), StegoButtons.encodeLatinBaconian,
-				StegoButtons.decodeLatinBaconian, new Separator(), new Label("Full Baconian:"),
-				StegoButtons.encodeFullBaconian, StegoButtons.decodeFullBaconian);
 		ToolBar pageToolBar = new ToolBar(new Label("Page:"), getSource, extractComments);
 
 		MathToolbars.rowMathToolBar.setId("rowMath");
@@ -282,7 +282,6 @@ public class Main extends Application {
 		tableToolBar.setId("table");
 
 		affineToolBar.setId("affine");
-		baconianToolBar.setId("baconian");
 		pageToolBar.setId("page");
 
 		VBox toolBox = new VBox();
@@ -338,7 +337,7 @@ public class Main extends Application {
 		atbah.setOnAction(action -> putRemove(toolBox, CryptoToolbars.atbahToolBar));
 		atbash.setOnAction(action -> putRemove(toolBox, CryptoToolbars.atbashToolBar));
 		rotN.setOnAction(action -> putRemove(toolBox, CryptoToolbars.rotNToolBar));
-		baconian.setOnAction(action -> putRemove(toolBox, baconianToolBar));
+		baconian.setOnAction(action -> putRemove(toolBox, StegoToolbars.baconianToolBar));
 		affine.setOnAction(action -> putRemove(toolBox, affineToolBar));
 		page.setOnAction(action -> putRemove(toolBox, pageToolBar));
 		manage.setOnAction(action -> putRemove(toolBox, ImageToolbars.manageImageToolBar));
@@ -394,6 +393,7 @@ public class Main extends Application {
 		colonoscopy.setOnAction(action -> putRemove(toolBox, EsotericToolbars.colonoscopyToolbar));
 		ook.setOnAction(action -> putRemove(toolBox, EsotericToolbars.ookToolbar));
 		blub.setOnAction(action -> putRemove(toolBox, EsotericToolbars.blubToolbar));
+		textStego.setOnAction(action -> putRemove(toolBox, StegoToolbars.textStegoToolBar));
 
 		// Buttons Actions
 
@@ -483,15 +483,6 @@ public class Main extends Application {
 			imageInfoTab.setContent(ImageInfoUtils.generateInfo(Tabs.imageTab.getContent()));
 		});
 
-		StegoButtons.encodeLatinBaconian.setOnAction(action -> {
-			TextAreas.textArea.setText(BaconianUtils.encodeLatin(TextAreas.textArea.getText()));
-			DashboardHistoryUtils.updateDashboardHistroy(TextAreas.textArea.getText());
-		});
-		StegoButtons.decodeLatinBaconian.setOnAction(action -> {
-			TextAreas.textArea.setText(BaconianUtils.decodeLatin(TextAreas.textArea.getText()));
-			DashboardHistoryUtils.updateDashboardHistroy(TextAreas.textArea.getText());
-		});
-
 		CryptoButtons.encodeAffine.setOnAction(action -> {
 			TextAreas.textArea.setText(AffineUtils.encode(Integer.parseInt(affineA.getText()),
 					Integer.parseInt(affineB.getText()), TextAreas.textArea.getText()));
@@ -504,15 +495,6 @@ public class Main extends Application {
 		});
 		CryptoButtons.bruteForceAffine.setOnAction(action -> {
 			TextAreas.textArea.setText(AffineUtils.bruteforce(TextAreas.textArea.getText()));
-			DashboardHistoryUtils.updateDashboardHistroy(TextAreas.textArea.getText());
-		});
-
-		StegoButtons.encodeFullBaconian.setOnAction(action -> {
-			TextAreas.textArea.setText(BaconianUtils.encodeFull(TextAreas.textArea.getText()));
-			DashboardHistoryUtils.updateDashboardHistroy(TextAreas.textArea.getText());
-		});
-		StegoButtons.decodeFullBaconian.setOnAction(action -> {
-			TextAreas.textArea.setText(BaconianUtils.decodeFull(TextAreas.textArea.getText()));
 			DashboardHistoryUtils.updateDashboardHistroy(TextAreas.textArea.getText());
 		});
 

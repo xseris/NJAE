@@ -1,4 +1,4 @@
-# NJAE (1.0.7)
+# NJAE
 
 NJAE is simply Not Just An Editor, because this is not just an editor...
 
@@ -205,10 +205,17 @@ All features you will expect from an editor that is not just an editor...
 
 ### Steganography
 
-+ Encode full Baconian
-+ Encode latin Baconian
 + Decode full Baconian
 + Decode latin Baconian
++ Encode full Baconian
++ Encode latin Baconian
++ Extract capital chars
++ Extract first char of each paragraph
++ Extract first char of each phrase
++ Extract first char of each word
++ Extract first word of each paragraph
++ Extract first word of each phrase
++ Extract lower case chars
 
 ### Tables
 
